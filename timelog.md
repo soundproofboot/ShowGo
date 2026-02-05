@@ -16,3 +16,10 @@
   - Debug issues
   - Add ability to search for user by first/last name, id
   - Improve results table
+
+## Week 3
+
+- Configure log4j in projects and learn basic usage
+- Configure jUnit in projects and write tests, understand assertions and how to run in IntelliJ
+- Add logs and tests to last weeks activities
+- Use log4J and jUnit to solve Advent of Code problem
