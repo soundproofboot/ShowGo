@@ -23,3 +23,7 @@
 - Configure jUnit in projects and write tests, understand assertions and how to run in IntelliJ
 - Add logs and tests to last weeks activities
 - Use log4J and jUnit to solve Advent of Code problem
+
+## Week 4
+- Update README.md
+- Create userStories.md and MVP / Future Development user stories
