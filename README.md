@@ -31,3 +31,8 @@ My indie project will be for venues, artists, and concert goers to find each oth
 * Unit Testing
     * JUnit
 * IDE: IntelliJ IDEA
+
+### Design
+
+* [User Stories](DesignDocuments/userStories.md)
+* [Screen Design](DesignDocuments/screens.md)

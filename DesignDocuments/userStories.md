@@ -13,6 +13,13 @@ As a registered user, I want to log in so I can create or view pages for live mu
 #### Password Reset
 As a registered user, I want to be able to be able to reset my password if I forget it.
 
+### General
+
+#### Register Venue
+As a user, I want to be able to create a new venue that I manage so that I can schedule events.
+#### Register Performer
+As a user, I want to be able to create a new performer that I manage so I can be connected to venue events.
+
 ### Concertgoer Functionality
 
 #### Find Shows By Location
@@ -26,7 +33,7 @@ As a concertgoer, I want to be able to follow venues so I can easily see upcomin
 #### Follow Performers
 As a concertgoer, I want to be able to follow performers so I can easily see upcoming performances.
 
-### Host Functionality
+### Venue Functionality
 #### Create Events
 As a venue, I want to be able to create new events with date, time, and performers.
 #### Update Events
