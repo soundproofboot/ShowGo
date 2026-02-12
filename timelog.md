@@ -27,3 +27,6 @@
 ## Week 4
 - Update README.md
 - Create userStories.md and MVP / Future Development user stories
+- Create project plan with GitHub project, issues for completed and upcoming work
+- Create Figma wireframes for user stories, export and link in screens.md
+- 
