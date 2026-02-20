@@ -33,10 +33,10 @@ My indie project will be for venues, artists, and concert goers to find each oth
 * IDE: IntelliJ IDEA
 
 ### Design
-
+#### Database Design
+![Database ERD](DesignDocuments/showGoERD.svg)
 * [User Stories](DesignDocuments/userStories.md)
 * [Screen Design](DesignDocuments/screens.md)
-
 [Project Plan](https://github.com/users/soundproofboot/projects/2/views/1)
 
 [Time Log](timelog.md)
