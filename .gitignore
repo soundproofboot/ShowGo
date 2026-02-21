@@ -39,3 +39,5 @@ build/
 .DS_Store
 
 ## TODO Remember to git ignore sensitive files and log files ##
+/logs
+src/test/resources/database.properties
