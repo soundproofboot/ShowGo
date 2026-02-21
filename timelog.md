@@ -29,4 +29,9 @@
 - Create userStories.md and MVP / Future Development user stories
 - Create project plan with GitHub project, issues for completed and upcoming work
 - Create Figma wireframes for user stories, export and link in screens.md
-- 
+
+## Week 5
+- Learn about setting up associations in Hibernate
+- Create ERD with limited known properties for indie project
+- Set up database connectivity, logging, orm, testing in indie project
+- Set up basic pages and servlets to test web app loading in browser correctly and ability to read from database
