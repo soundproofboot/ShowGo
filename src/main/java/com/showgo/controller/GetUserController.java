@@ -11,21 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * TODO make it do anything else or remove if this page is static
- * set up home page servlet to test it's working
+ * get a user
  */
 @WebServlet(
-        urlPatterns = { "/otherPage"}
+        urlPatterns = { "/getUser"}
 )
-public class OtherPage extends HttpServlet {
+public class GetUserController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         UserDao userDao = new UserDao();
         req.setAttribute("user", userDao.getById(1));
-        req.setAttribute("title", "Other Page");
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/otherPage.jsp");
+        req.setAttribute("title", "Get User");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/getUser.jsp");
         dispatcher.forward(req, resp);
     }
 }
