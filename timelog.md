@@ -35,3 +35,9 @@
 - Create ERD with limited known properties for indie project
 - Set up database connectivity, logging, orm, testing in indie project
 - Set up basic pages and servlets to test web app loading in browser correctly and ability to read from database
+
+## Week 6
+- Set up elastic beanstalk and database on AWS with week 2 exercise
+- Connect to AWS database via IntelliJ and run script to load data
+- Update config in week 2 exercise to use aws connection in main hibernate config
+- Set up elastic beanstalk for indie project
