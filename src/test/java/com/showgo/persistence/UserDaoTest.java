@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class UserDaoTest {
-    GenericDao dao;
+    GenericDao<User> dao;
     private final Logger logger = LogManager.getLogger(this.getClass());
 
     /**
@@ -23,7 +23,7 @@ public class UserDaoTest {
      */
     @BeforeEach
     void setUp() {
-        dao = new GenericDao(User.class);
+        dao = new GenericDao<>(User.class);
 
         logger.debug("setup runs in UserDaoTest");
         Database database = Database.getInstance();
