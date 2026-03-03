@@ -41,3 +41,7 @@
 - Connect to AWS database via IntelliJ and run script to load data
 - Update config in week 2 exercise to use aws connection in main hibernate config
 - Set up elastic beanstalk for indie project
+
+## Week 7
+- Set up AWS Cognito for weekly exercise
+- Refactor indie project to use GenericDao, add tests for User
