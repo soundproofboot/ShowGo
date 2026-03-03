@@ -1,14 +1,17 @@
 package com.showgo.entity;
 
+import com.showgo.persistence.Identifiable;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
+
+import java.util.Objects;
 
 /**
  * The type User.
  */
 @Entity(name = "User")
 @Table(name = "user")
-public class User {
+public class User implements Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
@@ -73,5 +76,17 @@ public class User {
     @Override
     public String toString() {
         return "User{" + "id=" + id + ", username=" + username + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && Objects.equals(username, user.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username);
     }
 }
