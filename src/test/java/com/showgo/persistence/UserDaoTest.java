@@ -46,13 +46,23 @@ public class UserDaoTest {
     }
 
     @Test
+    void insertSuccess() {
+        User testUser = new User("testUsername");
+        int insertedId = dao.insert(testUser);
+        assertNotEquals(0, insertedId);
+
+        User insertedUser = dao.getById(insertedId);
+        assertEquals(testUser, insertedUser);
+    }
+
+    @Test
     void updateSuccess() {
         String newUsername = "testUsername";
         User userToUpdate = (User) dao.getById(1);
         userToUpdate.setUsername(newUsername);
         dao.update(userToUpdate);
         User retrievedUser = (User) dao.getById(1);
-        assertEquals(userToUpdate, retrievedUser);
+        assertEquals(newUsername, retrievedUser.getUsername());
     }
 
     @Test

@@ -32,8 +32,7 @@ public class User implements Identifiable {
      * @param id       the id
      * @param username the username
      */
-    public User(int id, String username) {
-        this.id = id;
+    public User(String username) {
         this.username = username;
     }
 

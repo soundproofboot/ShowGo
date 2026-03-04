@@ -5,9 +5,9 @@
 <hibernate-configuration>
     <session-factory>
 <!--     local url       -->
-<!--        <property name="connection.url">jdbc:mysql://localhost:3306/showgo</property>-->
+        <property name="connection.url">jdbc:mysql://localhost:3306/showgo</property>
 <!--    aws url    -->
-        <property name="connection.url">jdbc:mysql://awseb-e-nx6pd4qmgr-stack-awsebrdsdatabase-sl3xcftvcj5h.ct6quauce9i5.us-east-2.rds.amazonaws.com:3306/showgo</property>
+<!--        <property name="connection.url">jdbc:mysql://awseb-e-nx6pd4qmgr-stack-awsebrdsdatabase-sl3xcftvcj5h.ct6quauce9i5.us-east-2.rds.amazonaws.com:3306/showgo</property>-->
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 
 <!--   local db credentials     -->
