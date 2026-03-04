@@ -1,7 +1,9 @@
 package com.showgo.controller;
 
+import com.showgo.entity.Performer;
 import com.showgo.entity.User;
 import com.showgo.persistence.GenericDao;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,20 +13,20 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * get a user
+ * Get all performers
  */
 @WebServlet(
-        urlPatterns = { "/getAllUsers"}
+        urlPatterns = { "/getAllPerformers"}
 )
-public class GetUserController extends HttpServlet {
+public class GetPerformersController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        GenericDao<Performer> dao = new GenericDao<>(Performer.class);
+        req.setAttribute("allPerformers",  dao.getAll());
+        req.setAttribute("title", "Get Performers");
 
-        GenericDao<User> dao = new GenericDao<>(User.class);
-        req.setAttribute("allUsers", dao.getAll());
-        req.setAttribute("title", "Get User");
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/getAllUsers.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/getAllPerformers.jsp");
         dispatcher.forward(req, resp);
     }
 }

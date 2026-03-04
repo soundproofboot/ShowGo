@@ -2,7 +2,8 @@
 <c:import url="head.jsp" />
 <html>
 <body>
+    <h1>Home</h1>
     <a href="getAllUsers">Get all users</a>
-    <h2>Test Home Page</h2>
+    <a href="getAllPerformers">Get all performers</a>
 </body>
 </html>
