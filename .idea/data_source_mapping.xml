@@ -2,6 +2,6 @@
 <project version="4">
   <component name="DataSourcePerFileMappings">
     <file url="file://$PROJECT_DIR$/DBA/showgo_localhost-2026_03_03_19_39_36-dump.sql" value="7927be52-c7d8-4456-bf13-39c674a2d539" />
-    <file url="file://$PROJECT_DIR$/src/test/resources/cleandb.sql" value="7927be52-c7d8-4456-bf13-39c674a2d539" />
+    <file url="file://$PROJECT_DIR$/src/test/resources/cleandb.sql" value="9839459b-ec8d-4d39-b579-d8764bd289c5" />
   </component>
 </project>

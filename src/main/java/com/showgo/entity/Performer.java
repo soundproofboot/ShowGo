@@ -4,7 +4,9 @@ import com.showgo.persistence.Identifiable;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Reperesents the Performer table
@@ -19,6 +21,9 @@ public class Performer implements Identifiable {
 
     @Column(name = "name")
     private String name;
+
+    @OneToMany(mappedBy = "performer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<PerformerFollow> followers = new HashSet<>();
 
     /**
      * Instantiates a new Performer.

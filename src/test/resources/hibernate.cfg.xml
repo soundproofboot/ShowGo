@@ -18,6 +18,7 @@
 
         <mapping class="com.showgo.entity.User" />
         <mapping class="com.showgo.entity.Performer" />
+        <mapping class="com.showgo.entity.PerformerFollow" />
     </session-factory>
 
 </hibernate-configuration>

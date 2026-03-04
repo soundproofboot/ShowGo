@@ -4,7 +4,9 @@ import com.showgo.persistence.Identifiable;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * The type User.
@@ -20,6 +22,8 @@ public class User implements Identifiable {
     @Column(name = "username")
     private String username;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<PerformerFollow> performerFollows = new HashSet<>();
     /**
      * Instantiates a new User.
      */

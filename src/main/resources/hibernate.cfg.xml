@@ -11,11 +11,11 @@
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 
 <!--   local db credentials     -->
-<!--        <property name="connection.username">root</property>-->
-<!--        <property name="connection.password">root</property>-->
+        <property name="connection.username">root</property>
+        <property name="connection.password">root</property>
 <!--    aws db credentials    -->
-        <property name="connection.username">student</property>
-        <property name="connection.password">studentpassword</property>
+<!--        <property name="connection.username">student</property>-->
+<!--        <property name="connection.password">studentpassword</property>-->
 
         <property name="hibernate.c3p0.min_size">5</property>
         <property name="hibernate.c3p0.max_size">20</property>
@@ -25,6 +25,7 @@
 
         <mapping class="com.showgo.entity.User" />
         <mapping class="com.showgo.entity.Performer" />
+        <mapping class="com.showgo.entity.PerformerFollow" />
     </session-factory>
 
 </hibernate-configuration>
