@@ -20,6 +20,7 @@
         <mapping class="com.showgo.entity.Performer" />
         <mapping class="com.showgo.entity.PerformerFollow" />
         <mapping class="com.showgo.entity.Venue" />
+        <mapping class="com.showgo.entity.VenueFollow" />
     </session-factory>
 
 </hibernate-configuration>

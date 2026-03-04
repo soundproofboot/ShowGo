@@ -25,6 +25,10 @@ public class User implements Identifiable {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<PerformerFollow> performerFollows = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<VenueFollow> venueFollows = new HashSet<>();
+
     /**
      * Instantiates a new User.
      */
@@ -123,6 +127,35 @@ public class User implements Identifiable {
                 performerFollow.setUser(null);
             }
         }
+    }
+
+    /**
+     * Gets venue follows.
+     *
+     * @return the venue follows
+     */
+    public Set<VenueFollow> getVenueFollows() {
+        return venueFollows;
+    }
+
+    /**
+     * Sets venue follows.
+     *
+     * @param venueFollows the venue follows
+     */
+    public void setVenueFollows(Set<VenueFollow> venueFollows) {
+        this.venueFollows = venueFollows;
+    }
+
+    /**
+     * Follow venue
+     *
+     * @param venue the venue to follow
+     */
+    public void addVenueFollow(Venue venue) {
+        VenueFollow venueFollow = new VenueFollow(this, venue);
+        venueFollows.add(venueFollow);
+        venue.getFollowers().add(venueFollow);
     }
 
     @Override

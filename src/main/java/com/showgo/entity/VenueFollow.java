@@ -4,11 +4,11 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
- * Join table representing performers followed by a user
+ * Join table representing venues followed by a user
  */
-@Entity(name = "PerformerFollow")
-@Table(name = "performer_follow")
-public class PerformerFollow {
+@Entity(name = "VenueFollow")
+@Table(name = "venue_follow")
+public class VenueFollow {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
@@ -21,24 +21,24 @@ public class PerformerFollow {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "performer_id", referencedColumnName = "id")
-    private Performer performer;
+    @JoinColumn(name = "venue_id", referencedColumnName = "id")
+    private Venue venue;
 
     /**
-     * Instantiates a new Performer follow.
+     * Instantiates a new Venue follow.
      */
-    public PerformerFollow() {
+    public VenueFollow() {
     }
 
     /**
-     * Instantiates a new Performer follow.
+     * Instantiates a new Venue follow.
      *
-     * @param user      the user
-     * @param performer the performer
+     * @param user  the user
+     * @param venue the venue
      */
-    public PerformerFollow(User user, Performer performer) {
+    public VenueFollow(User user, Venue venue) {
         this.user = user;
-        this.performer = performer;
+        this.venue = venue;
     }
 
     /**
@@ -78,29 +78,29 @@ public class PerformerFollow {
     }
 
     /**
-     * Gets performer.
+     * Gets venue.
      *
-     * @return the performer
+     * @return the venue
      */
-    public Performer getPerformer() {
-        return performer;
+    public Venue getVenue() {
+        return venue;
     }
 
     /**
-     * Sets performer.
+     * Sets venue.
      *
-     * @param performer the performer
+     * @param venue the venue
      */
-    public void setPerformer(Performer performer) {
-        this.performer = performer;
+    public void setVenue(Venue venue) {
+        this.venue = venue;
     }
 
     @Override
     public String toString() {
-        return "PerformerFollow{" +
+        return "VenueFollow{" +
                 "id=" + id +
 //                ", user=" + user +
-                ", performer=" + performer +
+                ", venue=" + venue +
                 '}';
     }
 }
