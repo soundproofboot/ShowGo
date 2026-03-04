@@ -24,4 +24,44 @@ public class PerformerFollow {
     @JoinColumn(name = "performer_id", referencedColumnName = "id")
     private Performer performer;
 
+    public PerformerFollow() {
+    }
+
+    public PerformerFollow(User user, Performer performer) {
+        this.user = user;
+        this.performer = performer;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Performer getPerformer() {
+        return performer;
+    }
+
+    public void setPerformer(Performer performer) {
+        this.performer = performer;
+    }
+
+    @Override
+    public String toString() {
+        return "PerformerFollow{" +
+                "id=" + id +
+//                ", user=" + user +
+                ", performer=" + performer +
+                '}';
+    }
 }

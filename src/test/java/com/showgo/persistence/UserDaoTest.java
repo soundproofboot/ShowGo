@@ -35,6 +35,8 @@ public class UserDaoTest {
         logger.debug("getById runs in UserDaoTest");
         User retrievedUser = (User) dao.getById(1);
         logger.debug(retrievedUser);
+        logger.debug("log performer follows");
+        logger.debug(retrievedUser.getPerformerFollows());
         assertEquals("user1", retrievedUser.getUsername());
     }
 

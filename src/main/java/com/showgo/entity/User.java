@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
@@ -33,7 +34,6 @@ public class User implements Identifiable {
     /**
      * Instantiates a new User.
      *
-     * @param id       the id
      * @param username the username
      */
     public User(String username) {
@@ -76,9 +76,62 @@ public class User implements Identifiable {
         this.id = id;
     }
 
+    /**
+     * Gets performer follows
+     *
+     * @return PerformerFollows related to this user
+     */
+    public Set<PerformerFollow> getPerformerFollows() {
+        return performerFollows;
+    }
+
+    /**
+     * Sets performer follows
+     *
+     * @param performerFollows associated with this user
+     */
+    public void setPerformerFollows(Set<PerformerFollow> performerFollows) {
+        this.performerFollows = performerFollows;
+    }
+
+    /**
+     * Follow performer
+     *
+     * @param performer the performer to follow
+     */
+    public void addPerformerFollow(Performer performer) {
+        PerformerFollow performerFollow = new PerformerFollow(this, performer);
+        performerFollows.add(performerFollow);
+        performer.getFollowers().add(performerFollow);
+    }
+
+    /**
+     * Remove a performer follow
+     *
+     * @param performer the performer to stop following
+     */
+    public void removePerformerFollow(Performer performer) {
+        for (Iterator<PerformerFollow> iterator = performerFollows.iterator();
+             iterator.hasNext(); ) {
+            PerformerFollow performerFollow = iterator.next();
+
+            if (performerFollow.getPerformer().equals(performer) &&
+                    performerFollow.getUser().equals(this) ) {
+                iterator.remove();
+                performerFollow.getPerformer().getFollowers().remove(performerFollow);
+                performerFollow.setPerformer(null);
+                performerFollow.setUser(null);
+            }
+        }
+    }
+
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", username=" + username + '}';
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", performerFollows=" + performerFollows +
+                '}';
     }
 
     @Override

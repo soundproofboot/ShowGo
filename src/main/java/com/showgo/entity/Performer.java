@@ -72,6 +72,35 @@ public class Performer implements Identifiable {
         this.name = name;
     }
 
+    /**
+     * Gets followers
+     *
+     * @return PerformerFollows related to this performer
+     */
+    public Set<PerformerFollow> getFollowers() {
+        return followers;
+    }
+
+    /**
+     * Sets followers
+     *
+     * @param followers PerformerFollows related to this performer
+     */
+    public void setFollowers(Set<PerformerFollow> followers) {
+        this.followers = followers;
+    }
+
+    /**
+     * Add follower
+     *
+     * @param user the follower to add
+     */
+    public void addFollower(User user) {
+        PerformerFollow performerFollow = new PerformerFollow(user, this);
+        followers.add(performerFollow);
+        user.getPerformerFollows().add(performerFollow);
+    }
+
     @Override
     public String toString() {
         return "Performer{" +
