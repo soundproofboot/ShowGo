@@ -14,7 +14,7 @@ import java.io.IOException;
  * get a user
  */
 @WebServlet(
-        urlPatterns = { "/getUser"}
+        urlPatterns = { "/getAllUsers"}
 )
 public class GetUserController extends HttpServlet {
 
@@ -23,8 +23,9 @@ public class GetUserController extends HttpServlet {
 
         GenericDao<User> dao = new GenericDao<>(User.class);
         req.setAttribute("user", dao.getById(1));
+        req.setAttribute("allUsers", dao.getAll());
         req.setAttribute("title", "Get User");
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/getUser.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/getAllUsers.jsp");
         dispatcher.forward(req, resp);
     }
 }

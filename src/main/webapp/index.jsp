@@ -2,7 +2,7 @@
 <c:import url="head.jsp" />
 <html>
 <body>
-    <a href="getUser">Read user from db</a>
+    <a href="getAllUsers">Get all users</a>
     <h2>Test Home Page</h2>
 </body>
 </html>

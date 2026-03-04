@@ -23,10 +23,10 @@ DROP TABLE IF EXISTS `performer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `performer` (
-                             `id` int NOT NULL AUTO_INCREMENT,
-                             `name` varchar(100) DEFAULT NULL,
-                             PRIMARY KEY (`id`),
-                             UNIQUE KEY `name` (`name`)
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -48,14 +48,14 @@ DROP TABLE IF EXISTS `performer_follow`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `performer_follow` (
-                                    `id` int NOT NULL AUTO_INCREMENT,
-                                    `performer_id` int NOT NULL,
-                                    `user_id` int NOT NULL,
-                                    PRIMARY KEY (`id`),
-                                    KEY `performer_follow_performer_id_fk` (`performer_id`),
-                                    KEY `performer_follow_user_id_fk` (`user_id`),
-                                    CONSTRAINT `performer_follow_performer_id_fk` FOREIGN KEY (`performer_id`) REFERENCES `performer` (`id`),
-                                    CONSTRAINT `performer_follow_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+  `id` int NOT NULL AUTO_INCREMENT,
+  `performer_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `performer_follow_performer_id_fk` (`performer_id`),
+  KEY `performer_follow_user_id_fk` (`user_id`),
+  CONSTRAINT `performer_follow_performer_id_fk` FOREIGN KEY (`performer_id`) REFERENCES `performer` (`id`),
+  CONSTRAINT `performer_follow_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -77,9 +77,9 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
-                        `id` int NOT NULL AUTO_INCREMENT,
-                        `username` varchar(45) DEFAULT NULL,
-                        PRIMARY KEY (`id`)
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -89,7 +89,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'user1'),(2,'user2'),(3,'user3');
+INSERT INTO `user` VALUES (1,'user1'),(2,'user2'),(3,'user3'),(4,'testUsername');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
