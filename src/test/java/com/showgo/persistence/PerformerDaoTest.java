@@ -4,6 +4,7 @@ import com.showgo.entity.Performer;
 import com.showgo.testUtils.Database;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,6 +24,15 @@ public class PerformerDaoTest {
     @BeforeEach
     void setUp() {
         dao = new GenericDao<>(Performer.class);
+        Database database = Database.getInstance();
+        database.runSQL("cleandb.sql");
+    }
+
+    /**
+     * Run cleandb.sql after all tests run to return testdb to initial state
+     */
+    @AfterEach
+    void tearDown() {
         Database database = Database.getInstance();
         database.runSQL("cleandb.sql");
     }

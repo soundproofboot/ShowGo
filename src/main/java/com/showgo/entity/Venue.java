@@ -1,5 +1,6 @@
 package com.showgo.entity;
 
+import com.showgo.persistence.Identifiable;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -10,7 +11,7 @@ import java.util.Objects;
  */
 @Entity(name = "Venue")
 @Table(name = "venue")
-public class Venue {
+public class Venue implements Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")

@@ -4,6 +4,7 @@ import com.showgo.entity.User;
 import com.showgo.testUtils.Database;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,13 +31,18 @@ public class UserDaoTest {
         database.runSQL("cleandb.sql");
     }
 
+    /**
+     * Run cleandb.sql after all tests run to return testdb to initial state
+     */
+    @AfterEach
+    void tearDown() {
+        Database database = Database.getInstance();
+        database.runSQL("cleandb.sql");
+    }
+
     @Test
     void getById() {
-        logger.debug("getById runs in UserDaoTest");
         User retrievedUser = (User) dao.getById(1);
-        logger.debug(retrievedUser);
-        logger.debug("log performer follows");
-        logger.debug(retrievedUser.getPerformerFollows());
         assertEquals("user1", retrievedUser.getUsername());
     }
 
@@ -85,4 +91,12 @@ public class UserDaoTest {
         List<User> users = dao.getByPropertyLike("username", "user");
         assertEquals(3, users.size());
     }
+
+//    TODO follow a performer
+//    follow a venue
+//    remove a performer follow
+//    remove a venue follow
+//    add event interest
+//    remove event interest
+
 }
