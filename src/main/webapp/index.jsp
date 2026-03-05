@@ -2,8 +2,7 @@
 <c:import url="head.jsp" />
 <html>
 <body>
+    <c:import url="nav.jsp" />
     <h1>Home</h1>
-    <a href="getAllUsers">Get all users</a>
-    <a href="getAllPerformers">Get all performers</a>
 </body>
 </html>
