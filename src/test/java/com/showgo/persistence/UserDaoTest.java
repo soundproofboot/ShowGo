@@ -1,5 +1,6 @@
 package com.showgo.persistence;
 
+import com.showgo.entity.Performer;
 import com.showgo.entity.User;
 import com.showgo.testUtils.Database;
 import org.apache.logging.log4j.LogManager;
@@ -19,7 +20,7 @@ public class UserDaoTest {
 
     /**
      * Run set up tasks before each test:
-     * 1. execute sql which deletes everything from the table and inserts records)
+     * 1. execute SQL which deletes everything from the table and inserts records
      * 2. Create any objects needed in the tests
      */
     @BeforeEach
@@ -32,7 +33,7 @@ public class UserDaoTest {
     }
 
     /**
-     * Run cleandb.sql after all tests run to return testdb to initial state
+     * Run cleandb.sql after all tests run to return test db to initial state
      */
     @AfterEach
     void tearDown() {
@@ -42,7 +43,7 @@ public class UserDaoTest {
 
     @Test
     void getById() {
-        User retrievedUser = (User) dao.getById(1);
+        User retrievedUser = dao.getById(1);
         assertEquals("user1", retrievedUser.getUsername());
     }
 
@@ -66,16 +67,16 @@ public class UserDaoTest {
     @Test
     void updateSuccess() {
         String newUsername = "testUsername";
-        User userToUpdate = (User) dao.getById(1);
+        User userToUpdate = dao.getById(1);
         userToUpdate.setUsername(newUsername);
         dao.update(userToUpdate);
-        User retrievedUser = (User) dao.getById(1);
+        User retrievedUser = dao.getById(1);
         assertEquals(newUsername, retrievedUser.getUsername());
     }
 
     @Test
     void deleteSuccess() {
-        dao.delete((User) dao.getById(1));
+        dao.delete(dao.getById(1));
         assertNull(dao.getById(1));
     }
 
@@ -93,6 +94,23 @@ public class UserDaoTest {
     }
 
 //    TODO follow a performer
+//    user3 does not follow performer 3 in clean test db
+    @Test
+    void performerFollowSuccess() {
+        User testUser = dao.getById(3);
+        int initialPerformerFollowsSize = testUser.getPerformerFollows().size();
+
+        GenericDao<Performer> performerDao = new GenericDao<>(Performer.class);
+        Performer performerToFollow = performerDao.getById(3);
+
+        testUser.addPerformerFollow(performerToFollow);
+        dao.update(testUser);
+
+        User userAfterUpdate = dao.getById(testUser.getId());
+        int afterUpdatePerformerFollowsSize = userAfterUpdate.getPerformerFollows().size();
+
+        assertEquals(initialPerformerFollowsSize + 1, afterUpdatePerformerFollowsSize);
+    }
 //    follow a venue
 //    remove a performer follow
 //    remove a venue follow
