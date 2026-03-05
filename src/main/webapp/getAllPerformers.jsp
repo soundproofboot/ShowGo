@@ -3,6 +3,7 @@
 
 <html>
     <body>
+        <c:import url="nav.jsp" />
         <h1>All performers and the users that follow them</h1>
         <c:forEach items = "${allPerformers}" var="performer">
             <h2>name: ${performer.name}</h2>
