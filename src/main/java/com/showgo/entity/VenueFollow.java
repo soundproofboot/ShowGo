@@ -14,12 +14,10 @@ public class VenueFollow {
     @GenericGenerator(name = "native", strategy = "native")
     private int id;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "venue_id", referencedColumnName = "id")
     private Venue venue;
