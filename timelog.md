@@ -45,3 +45,9 @@
 ## Week 7
 - Set up AWS Cognito for weekly exercise
 - Refactor indie project to use GenericDao, add tests for User
+- Create nav.jsp
+- Create new tables for Performer, Venue, association with User
+- Write additional tests for each table
+- Peer Review with Matt Cherry
+- New page to read performers, update getAllusers to read performer/venue follows
+- Submit Checkpoint 2
