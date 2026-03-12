@@ -78,17 +78,24 @@ public class Auth extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        logger.debug("doGet in Auth");
         String authCode = req.getParameter("code");
-        String userName = null;
+        logger.debug("authCode");
+        logger.debug(authCode);
+        String cognitoId = null;
 
         if (authCode == null) {
+            logger.debug("authCode is null, throw ServletException");
             throw new ServletException();
         } else {
             HttpRequest authRequest = buildAuthRequest(authCode);
             try {
                 TokenResponse tokenResponse = getToken(authRequest);
-                userName = validate(tokenResponse);
-                req.setAttribute("userName", userName);
+                cognitoId = validate(tokenResponse);
+                ServletContext context = getServletContext();
+//                TODO right now setting cognitoId, need to change this to create new user in db on sign up or pull user from db if existing
+                context.setAttribute("cognitoId", cognitoId);
+//                req.setAttribute("user", user);
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);
                 throw new ServletException();
@@ -100,9 +107,11 @@ public class Auth extends HttpServlet {
             }
         }
 
-//        TODO redirect to another page to check attribute set or update index
-        RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
-        dispatcher.forward(req, resp);
+//        TODO currently redirecting to index which reads cognitoId
+//        TODO where does this go - user home, like a dashboard?
+//        RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
+//        dispatcher.forward(req, resp);
+        resp.sendRedirect("index.jsp");
     }
 
     /**
@@ -169,8 +178,9 @@ public class Auth extends HttpServlet {
         String jwtSignature = jwt.getSignature();
         logger.debug("here's the jwtSignature? " + jwtSignature);
         String userName = jwt.getClaim("cognito:username").asString();
+        String email = jwt.getClaim("email").asString();
         logger.debug("here's the username: " + userName);
-
+        logger.debug("here's the email: " + email);
         logger.debug("here are all the available claims: " + jwt.getClaims());
 
 //        TODO what do I do with this
