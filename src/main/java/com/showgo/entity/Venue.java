@@ -117,11 +117,11 @@ public class Venue implements Identifiable {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Venue venue = (Venue) o;
-        return id == venue.id && Objects.equals(name, venue.name);
+        return Objects.equals(name, venue.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(name);
     }
 }

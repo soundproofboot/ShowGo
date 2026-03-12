@@ -3,6 +3,8 @@ package com.showgo.entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.Objects;
+
 /**
  * Join table representing venues followed by a user
  */
@@ -91,6 +93,18 @@ public class VenueFollow {
      */
     public void setVenue(Venue venue) {
         this.venue = venue;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        VenueFollow that = (VenueFollow) o;
+        return Objects.equals(user, that.user) && Objects.equals(venue, that.venue);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(user, venue);
     }
 
     @Override

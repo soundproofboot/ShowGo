@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Join table representing performers followed by a user
@@ -93,6 +94,18 @@ public class PerformerFollow implements Serializable {
      */
     public void setPerformer(Performer performer) {
         this.performer = performer;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        PerformerFollow that = (PerformerFollow) o;
+        return Objects.equals(user, that.user) && Objects.equals(performer, that.performer);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(user, performer);
     }
 
     @Override

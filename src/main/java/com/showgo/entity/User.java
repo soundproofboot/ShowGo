@@ -98,36 +98,6 @@ public class User implements Identifiable {
         this.performerFollows = performerFollows;
     }
 
-    /**
-     * Follow performer
-     *
-     * @param performer the performer to follow
-     */
-    public void addPerformerFollow(Performer performer) {
-        PerformerFollow performerFollow = new PerformerFollow(this, performer);
-        performerFollows.add(performerFollow);
-        performer.getFollowers().add(performerFollow);
-    }
-
-    /**
-     * Remove a performer follow
-     *
-     * @param performer the performer to stop following
-     */
-    public void removePerformerFollow(Performer performer) {
-        for (Iterator<PerformerFollow> iterator = performerFollows.iterator();
-             iterator.hasNext(); ) {
-            PerformerFollow performerFollow = iterator.next();
-
-            if (performerFollow.getPerformer().equals(performer) &&
-                    performerFollow.getUser().equals(this) ) {
-                iterator.remove();
-                performerFollow.getPerformer().getFollowers().remove(performerFollow);
-                performerFollow.setPerformer(null);
-                performerFollow.setUser(null);
-            }
-        }
-    }
 
     /**
      * Gets venue follows.
@@ -148,6 +118,47 @@ public class User implements Identifiable {
     }
 
     /**
+     * Follow performer
+     *
+     * @param performer the performer to follow
+     */
+    public void addPerformerFollow(Performer performer) {
+        PerformerFollow performerFollow = new PerformerFollow(this, performer);
+        performerFollows.add(performerFollow);
+        performer.getFollowers().add(performerFollow);
+    }
+
+    /**
+     * Remove a performer follow
+     *
+     * @param performer the performer to stop following
+     */
+    public void removePerformerFollow(Performer performer) {
+        System.out.println("performerFollows size before: " + performerFollows.size());
+        System.out.println("Looking for performer: " + performer.getName());
+
+        for (Iterator<PerformerFollow> iterator = performerFollows.iterator();
+             iterator.hasNext(); ) {
+            PerformerFollow performerFollow = iterator.next();
+
+            System.out.println("Checking PerformerFollow id=" + performerFollow.getId()
+                    + " performer=" + performerFollow.getPerformer().getName()
+                    + " user=" + performerFollow.getUser().getId());
+            if (performerFollow.getPerformer().equals(performer) &&
+                    performerFollow.getUser().equals(this) ) {
+                System.out.println("Match found - removing");
+                iterator.remove();
+                System.out.println("followers size before remove: " + performerFollow.getPerformer().getFollowers().size());
+                performerFollow.getPerformer().getFollowers().remove(performerFollow);
+                System.out.println("followers size after remove: " + performerFollow.getPerformer().getFollowers().size());
+                performerFollow.setPerformer(null);
+                performerFollow.setUser(null);
+            }
+        }
+        System.out.println("performerFollows size after: " + performerFollows.size());
+    }
+
+    /**
      * Follow venue
      *
      * @param venue the venue to follow
@@ -156,6 +167,39 @@ public class User implements Identifiable {
         VenueFollow venueFollow = new VenueFollow(this, venue);
         venueFollows.add(venueFollow);
         venue.getFollowers().add(venueFollow);
+    }
+
+    /**
+     * Remove a venue follow
+     *
+     * @param venue the venue to stop following
+     */
+    public void removeVenueFollow(Venue venue) {
+        System.out.println("venueFollows size before: " + venueFollows.size());
+        System.out.println("Looking for venue: " + venue.getName());
+
+        for (Iterator<VenueFollow> iterator = venueFollows.iterator();
+             iterator.hasNext(); ) {
+            VenueFollow venueFollow = iterator.next();
+
+            System.out.println("Checking VenueFollow id=" + venueFollow.getId()
+                    + " venue=" + venueFollow.getVenue().getName()
+                    + " user=" + venueFollow.getUser().getId());
+            System.out.println("venue equals: " + venueFollow.getVenue().equals(venue));
+            System.out.println("user equals: " + venueFollow.getUser().equals(this));
+
+            if (venueFollow.getVenue().equals(venue) &&
+                    venueFollow.getUser().equals(this)) {
+                System.out.println("Match found - removing");
+                iterator.remove();
+                System.out.println("followers size before remove: " + venueFollow.getVenue().getFollowers().size());
+                venueFollow.getVenue().getFollowers().remove(venueFollow);
+                System.out.println("followers size after remove: " + venueFollow.getVenue().getFollowers().size());
+                venueFollow.setVenue(null);
+                venueFollow.setUser(null);
+            }
+        }
+        System.out.println("venueFollows size after: " + venueFollows.size());
     }
 
     @Override
@@ -171,11 +215,11 @@ public class User implements Identifiable {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && Objects.equals(username, user.username);
+        return Objects.equals(username, user.username);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username);
+        return Objects.hash(username);
     }
 }
