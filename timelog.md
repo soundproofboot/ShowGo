@@ -51,3 +51,8 @@
 - Peer Review with Matt Cherry
 - New page to read performers, update getAllusers to read performer/venue follows
 - Submit Checkpoint 2
+
+## Week 8
+- Use RoboPOJO plugin and set up request/tests in two projects with Swagger and SWAPI APIs
+- Set up User Pool for ShowGo and configure auth in app
+- Create error page and configure in web.xml
