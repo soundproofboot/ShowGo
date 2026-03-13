@@ -83,16 +83,16 @@ public class Auth extends HttpServlet {
         logger.debug("authCode");
         logger.debug(authCode);
         String cognitoId = null;
+        ServletContext context = getServletContext();
 
         if (authCode == null) {
-            logger.debug("authCode is null, throw ServletException");
-            throw new ServletException();
+            logger.debug("authCode is null - set cognitoId in context to null and forward to home page?");
+            context.setAttribute("cognitoId", null);
         } else {
             HttpRequest authRequest = buildAuthRequest(authCode);
             try {
                 TokenResponse tokenResponse = getToken(authRequest);
                 cognitoId = validate(tokenResponse);
-                ServletContext context = getServletContext();
 //                TODO right now setting cognitoId, need to change this to create new user in db on sign up or pull user from db if existing
                 context.setAttribute("cognitoId", cognitoId);
 //                req.setAttribute("user", user);
