@@ -56,3 +56,4 @@
 - Use RoboPOJO plugin and set up request/tests in two projects with Swagger and SWAPI APIs
 - Set up User Pool for ShowGo and configure auth in app
 - Create error page and configure in web.xml
+- Add Logout servlet and update Auth servlet to handle incoming request with no code param
