@@ -1,6 +1,7 @@
 package com.showgo.persistence;
 
 import com.showgo.entity.Event;
+import com.showgo.entity.Performer;
 import com.showgo.entity.Venue;
 import com.showgo.testUtils.Database;
 import org.apache.logging.log4j.LogManager;
@@ -97,5 +98,40 @@ public class EventDaoTest {
     void getByPropertyLike() {
         List<Event> events = dao.getByPropertyLike("title", "event");
         assertEquals(3, events.size());
+    }
+
+    @Test
+    void addPerformerToEvent() {
+//        event3 does not have performer1 in lineup
+        Event testEvent = dao.getById(3);
+        int initialEventLineupSize = testEvent.getPerformers().size();
+
+        GenericDao<Performer> performerDao = new GenericDao<>(Performer.class);
+        Performer performerToAdd = performerDao.getById(1);
+
+        testEvent.addEventPerformer(performerToAdd);
+        dao.update(testEvent);
+
+        Event eventAfterUpdate = dao.getById(3);
+        int lineupSizeAfterUpdate = eventAfterUpdate.getPerformers().size();
+
+        assertEquals(initialEventLineupSize + 1, lineupSizeAfterUpdate);
+    }
+
+    @Test
+    void removePerformerFromEvent() {
+        Event testEvent = dao.getById(1);
+        int initialEventLineupSize = testEvent.getPerformers().size();
+
+        GenericDao<Performer> performerDao = new GenericDao<>(Performer.class);
+        Performer performerToRemove = performerDao.getById(1);
+
+        testEvent.removeEventPerformer(performerToRemove);
+        dao.update(testEvent);
+
+        Event eventAfterUpdate = dao.getById(1);
+        int lineupSizeAfterUpdate = eventAfterUpdate.getPerformers().size();
+
+        assertEquals(initialEventLineupSize - 1, lineupSizeAfterUpdate);
     }
 }

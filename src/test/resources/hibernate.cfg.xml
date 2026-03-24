@@ -22,6 +22,7 @@
         <mapping class="com.showgo.entity.Venue" />
         <mapping class="com.showgo.entity.VenueFollow" />
         <mapping class="com.showgo.entity.Event" />
+        <mapping class="com.showgo.entity.EventPerformer" />
 
     </session-factory>
 

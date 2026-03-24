@@ -25,6 +25,8 @@ public class Performer implements Identifiable {
     @OneToMany(mappedBy = "performer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<PerformerFollow> followers = new HashSet<>();
 
+    @OneToMany(mappedBy = "performer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<EventPerformer> events = new HashSet<>();
     /**
      * Instantiates a new Performer.
      */
@@ -88,6 +90,14 @@ public class Performer implements Identifiable {
      */
     public void setFollowers(Set<PerformerFollow> followers) {
         this.followers = followers;
+    }
+
+    public Set<EventPerformer> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<EventPerformer> events) {
+        this.events = events;
     }
 
     /**
