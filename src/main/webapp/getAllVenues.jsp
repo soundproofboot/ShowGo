@@ -16,7 +16,15 @@
         <p>events</p>
         <ul>
             <c:forEach items="${venue.events}" var="event">
-                <li>${event.title}</li>
+                <li>
+                        <h3>${event.title}</h3>
+                        <p>lineup</p>
+                        <ul>
+                            <c:forEach items="${event.performers}" var="eventPerformer">
+                                <li>${eventPerformer.performer.name}</li>
+                            </c:forEach>
+                        </ul>
+                </li>
             </c:forEach>
         </ul>
     </c:forEach>
