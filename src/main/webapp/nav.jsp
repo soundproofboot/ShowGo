@@ -5,6 +5,7 @@
     <a href="getAllUsers">Get all users</a> ||
     <a href="getAllPerformers">Get all performers</a> ||
     <a href="getAllVenues">Get all venues</a> ||
+    <a href="getAllEvents">Get all events</a> ||
     <c:choose>
         <c:when test="${empty cognitoId}">
             <a href="login">Log in</a> ||

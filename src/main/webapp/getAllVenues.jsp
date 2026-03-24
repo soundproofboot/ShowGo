@@ -13,6 +13,12 @@
                 <li>${follow.user.username}</li>
             </c:forEach>
         </ul>
+        <p>events</p>
+        <ul>
+            <c:forEach items="${venue.events}" var="event">
+                <li>${event.title}</li>
+            </c:forEach>
+        </ul>
     </c:forEach>
 </body>
 </html>
