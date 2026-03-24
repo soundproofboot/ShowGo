@@ -21,6 +21,8 @@
         <mapping class="com.showgo.entity.PerformerFollow" />
         <mapping class="com.showgo.entity.Venue" />
         <mapping class="com.showgo.entity.VenueFollow" />
+        <mapping class="com.showgo.entity.Event" />
+
     </session-factory>
 
 </hibernate-configuration>

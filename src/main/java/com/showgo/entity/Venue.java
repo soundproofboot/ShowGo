@@ -4,9 +4,7 @@ import com.showgo.persistence.Identifiable;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Represents the venue table
@@ -24,6 +22,9 @@ public class Venue implements Identifiable {
 
     @OneToMany(mappedBy = "venue", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<VenueFollow> followers = new HashSet<>();
+
+    @OneToMany(mappedBy = "venue", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Event> events = new ArrayList<>();
 
     /**
      * Instantiates a new Venue.
@@ -94,6 +95,14 @@ public class Venue implements Identifiable {
         this.followers = followers;
     }
 
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
     /**
      * Add follower
      *
@@ -103,6 +112,25 @@ public class Venue implements Identifiable {
         VenueFollow venueFollow = new VenueFollow(user, this);
         followers.add(venueFollow);
         user.getVenueFollows().add(venueFollow);
+    }
+
+    /**
+     * Add event
+     * @param event the event
+     */
+    public void addEvent(Event event) {
+        events.add(event);
+        event.setVenue(this);
+    }
+
+    /**
+     * Remove event
+     *
+     * @param event the event
+     */
+    public void removeEvent(Event event) {
+        events.remove(event);
+        event.setVenue(null);
     }
 
     @Override

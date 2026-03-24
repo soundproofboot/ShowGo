@@ -1,5 +1,6 @@
 package com.showgo.persistence;
 
+import com.showgo.entity.Event;
 import com.showgo.entity.User;
 import com.showgo.entity.Venue;
 import com.showgo.testUtils.Database;
@@ -88,5 +89,41 @@ public class VenueDaoTest {
     void getByPropertyLike() {
         List<Venue> venues = dao.getByPropertyLike("name", "venue");
         assertEquals(3, venues.size());
+    }
+
+//    create a new event for venue1
+    @Test
+    void addEventSuccess() {
+        Venue testVenue = dao.getById(1);
+        int initialEventCount = testVenue.getEvents().size();
+
+        Event testEvent = new Event("event4", testVenue);
+        testVenue.addEvent(testEvent);
+        dao.update(testVenue);
+
+        Venue updatedVenue = dao.getById(1);
+        int updatedEventCount = updatedVenue.getEvents().size();
+
+        assertEquals(initialEventCount + 1, updatedEventCount);
+    }
+
+//    remove an existing event
+    @Test
+    void removeEventSuccess() {
+        Venue testVenue = dao.getById(1);
+        int initialEventCount = testVenue.getEvents().size();
+
+        logger.debug(testVenue);
+        GenericDao<Event> eventDao = new GenericDao<>(Event.class);
+        Event eventToRemove = (Event) eventDao.getById(1);
+        logger.debug(eventToRemove);
+
+        testVenue.removeEvent(eventToRemove);
+
+        dao.update(testVenue);
+
+        Venue updatedVenue = dao.getById(1);
+        int updatedEventCount = updatedVenue.getEvents().size();
+        assertEquals(initialEventCount - 1, updatedEventCount);
     }
 }
