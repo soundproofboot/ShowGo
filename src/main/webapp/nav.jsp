@@ -4,6 +4,7 @@
     <a href="index.jsp">Home</a> ||
     <a href="getAllUsers">Get all users</a> ||
     <a href="getAllPerformers">Get all performers</a> ||
+    <a href="getAllVenues">Get all venues</a> ||
     <c:choose>
         <c:when test="${empty cognitoId}">
             <a href="login">Log in</a> ||

@@ -1,6 +1,6 @@
 package com.showgo.controller;
 
-import com.showgo.entity.Performer;
+import com.showgo.entity.Venue;
 import com.showgo.persistence.GenericDao;
 
 import javax.servlet.RequestDispatcher;
@@ -12,20 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Get all performers
+ * Get all venues and users following them
  */
 @WebServlet(
-        urlPatterns = { "/getAllPerformers"}
+        urlPatterns = { "/getAllVenues"}
 )
-public class GetPerformersController extends HttpServlet {
+public class GetVenueController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        GenericDao<Performer> dao = new GenericDao<>(Performer.class);
-        req.setAttribute("allPerformers",  dao.getAll());
-        req.setAttribute("title", "Get Performers");
+        GenericDao<Venue> dao = new GenericDao<>(Venue.class);
+        req.setAttribute("allVenues", dao.getAll());
+        req.setAttribute("title", "Get Venues");
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/getAllPerformers.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/getAllVenues.jsp");
         dispatcher.forward(req, resp);
     }
 }
