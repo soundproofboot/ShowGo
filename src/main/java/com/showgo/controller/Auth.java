@@ -89,10 +89,16 @@ public class Auth extends HttpServlet {
             logger.debug("authCode is null - set cognitoId in context to null and forward to home page?");
             context.setAttribute("cognitoId", null);
         } else {
+            logger.debug("in else of doGet - authCode must exist");
             HttpRequest authRequest = buildAuthRequest(authCode);
+            logger.debug(authRequest);
             try {
+                logger.debug("in try block");
                 TokenResponse tokenResponse = getToken(authRequest);
+                logger.debug("tokenResponse");
+                logger.debug(tokenResponse);
                 cognitoId = validate(tokenResponse);
+                logger.debug("cognitoId : " + cognitoId);
 //                TODO right now setting cognitoId, need to change this to create new user in db on sign up or pull user from db if existing
                 context.setAttribute("cognitoId", cognitoId);
 //                req.setAttribute("user", user);
@@ -103,6 +109,7 @@ public class Auth extends HttpServlet {
                 logger.error("Error getting token from Cognito oauth url " + e.getMessage(), e);
                 throw new ServletException();
             } catch (Exception e) {
+                logger.error("Error getting or validating the token: " + e.getMessage(), e);
                 throw new ServletException();
             }
         }
@@ -139,6 +146,8 @@ public class Auth extends HttpServlet {
     }
 
     private String validate(TokenResponse tokenResponse) throws IOException, ServletException {
+        logger.debug("validate method runs");
+        logger.debug("receives tokenResponse: " + tokenResponse);
         ObjectMapper mapper = new ObjectMapper();
         CognitoTokenHeader tokenHeader = mapper.readValue(CognitoJWTParser.getHeader(tokenResponse.getIdToken()).toString(), CognitoTokenHeader.class);
 
@@ -153,7 +162,9 @@ public class Auth extends HttpServlet {
         // Create a public key
         PublicKey publicKey = null;
         try {
+            logger.debug("in try block to create publicKey");
             publicKey = KeyFactory.getInstance("RSA").generatePublic(new RSAPublicKeySpec(modulus, exponent));
+            logger.debug(publicKey);
         } catch (InvalidKeySpecException e) {
             logger.error("Invalid Key Error " + e.getMessage(), e);
             throw new ServletException();
