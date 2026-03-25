@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.33, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: showgo_test
+-- Host: 127.0.0.1    Database: showgo
 -- ------------------------------------------------------
 -- Server version	8.0.33
 
@@ -135,6 +135,9 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
                         `id` int NOT NULL AUTO_INCREMENT,
                         `username` varchar(45) DEFAULT NULL,
+                        `city` varchar(100) NOT NULL,
+                        `state` char(2) NOT NULL,
+                        `email` varchar(100) NOT NULL,
                         PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -145,7 +148,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'user1'),(2,'user2'),(3,'user3');
+INSERT INTO `user` VALUES (1,'user1','Madison','WI','user1@email.com'),(2,'user2','Milwaukee','WI','user2@email.com'),(3,'user3','Chicago','IL','user3@email.com');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,6 +162,8 @@ DROP TABLE IF EXISTS `venue`;
 CREATE TABLE `venue` (
                          `id` int NOT NULL AUTO_INCREMENT,
                          `name` varchar(100) NOT NULL,
+                         `city` varchar(100) NOT NULL,
+                         `state` char(2) DEFAULT NULL,
                          PRIMARY KEY (`id`),
                          UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -170,7 +175,7 @@ CREATE TABLE `venue` (
 
 LOCK TABLES `venue` WRITE;
 /*!40000 ALTER TABLE `venue` DISABLE KEYS */;
-INSERT INTO `venue` VALUES (1,'venue1'),(2,'venue2'),(3,'venue3');
+INSERT INTO `venue` VALUES (1,'venue1','Madison','WI'),(2,'venue2','Milwaukee','WI'),(3,'venue3','Chicago','IL');
 /*!40000 ALTER TABLE `venue` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,4 +217,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-03-24 12:57:11
+-- Dump completed on 2026-03-24 20:05:50

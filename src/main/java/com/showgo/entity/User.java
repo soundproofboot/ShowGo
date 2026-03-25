@@ -23,6 +23,15 @@ public class User implements Identifiable {
     @Column(name = "username")
     private String username;
 
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "state")
+    private String state;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<PerformerFollow> performerFollows = new HashSet<>();
 
@@ -39,9 +48,15 @@ public class User implements Identifiable {
      * Instantiates a new User.
      *
      * @param username the username
+     * @param email    the email
+     * @param city     the city
+     * @param state    the state
      */
-    public User(String username) {
+    public User(String username, String email, String city, String state) {
         this.username = username;
+        this.email = email;
+        this.city = city;
+        this.state = state;
     }
 
     /**
@@ -72,12 +87,66 @@ public class User implements Identifiable {
     }
 
     /**
+     * Gets city.
+     *
+     * @return the city
+     */
+    public String getCity() {
+        return city;
+    }
+
+    /**
+     * Sets city.
+     *
+     * @param city the city
+     */
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    /**
      * Sets id.
      *
      * @param id the id
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * Gets email.
+     *
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * Sets email.
+     *
+     * @param email the email
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * Gets state.
+     *
+     * @return the state
+     */
+    public String getState() {
+        return state;
+    }
+
+    /**
+     * Sets state.
+     *
+     * @param state the state
+     */
+    public void setState(String state) {
+        this.state = state;
     }
 
     /**
@@ -207,7 +276,12 @@ public class User implements Identifiable {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", performerFollows=" + performerFollows +
+                ", email='" + email + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+//                TODO are these causing an issue?
+//                ", performerFollows=" + performerFollows +
+//                ", venueFollows=" + venueFollows +
                 '}';
     }
 

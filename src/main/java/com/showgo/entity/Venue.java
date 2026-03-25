@@ -26,19 +26,22 @@ public class Venue implements Identifiable {
     @OneToMany(mappedBy = "venue", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Event> events = new ArrayList<>();
 
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "state")
+    private String state;
+
     /**
      * Instantiates a new Venue.
      */
     public Venue() {
     }
 
-    /**
-     * Instantiates a new Venue.
-     *
-     * @param name the name
-     */
-    public Venue(String name) {
+    public Venue(String name, String city, String state) {
         this.name = name;
+        this.city = city;
+        this.state = state;
     }
 
     /**
@@ -78,6 +81,42 @@ public class Venue implements Identifiable {
     }
 
     /**
+     * Gets city.
+     *
+     * @return the city
+     */
+    public String getCity() {
+        return city;
+    }
+
+    /**
+     * Sets city.
+     *
+     * @param city the city
+     */
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    /**
+     * Gets state.
+     *
+     * @return the state
+     */
+    public String getState() {
+        return state;
+    }
+
+    /**
+     * Sets state.
+     *
+     * @param state the state
+     */
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    /**
      * Gets followers
      *
      * @return VenueFollows related to this venue
@@ -95,10 +134,20 @@ public class Venue implements Identifiable {
         this.followers = followers;
     }
 
+    /**
+     * Gets events.
+     *
+     * @return the events
+     */
     public List<Event> getEvents() {
         return events;
     }
 
+    /**
+     * Sets events.
+     *
+     * @param events the events
+     */
     public void setEvents(List<Event> events) {
         this.events = events;
     }
@@ -116,6 +165,7 @@ public class Venue implements Identifiable {
 
     /**
      * Add event
+     *
      * @param event the event
      */
     public void addEvent(Event event) {
@@ -138,6 +188,8 @@ public class Venue implements Identifiable {
         return "Venue{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
                 '}';
     }
 

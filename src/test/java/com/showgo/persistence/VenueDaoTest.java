@@ -54,7 +54,7 @@ public class VenueDaoTest {
 
     @Test
     void insertSuccess() {
-        Venue testVenue = new Venue("testVenue");
+        Venue testVenue = new Venue("testVenue", "testCity", "AA");
         int insertedId = dao.insert(testVenue);
         assertNotEquals(0, insertedId);
 
