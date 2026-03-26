@@ -89,7 +89,6 @@ public class Auth extends HttpServlet {
 
         if (authCode == null) {
             logger.debug("authCode is null - set cognitoId in context to null and forward to home page?");
-            context.setAttribute("cognitoUser", null);
             context.setAttribute("user", null);
         } else {
             logger.debug("in else of doGet - authCode must exist");
@@ -103,7 +102,6 @@ public class Auth extends HttpServlet {
                 cognitoUser = validate(tokenResponse);
                 logger.debug("cognitoId : " + cognitoUser);
 //                TODO right now setting cognitoUser, need to change this to create new user in db on sign up or pull user from db if existing
-                context.setAttribute("cognitoUser", cognitoUser);
 
                 GenericDao<User> userDao = new GenericDao<>(User.class);
                 List<User> users = (List<User>) userDao.getByPropertyEqual("cognitoId", cognitoUser.getCognitoId());

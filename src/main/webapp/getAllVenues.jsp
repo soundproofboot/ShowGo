@@ -4,7 +4,7 @@
 <html>
 <body>
     <c:import url="nav.jsp" />
-    <h1>All venues and the users that follow them</h1>
+    <h1>All venues, users that follow them, events they are hosting</h1>
     <c:forEach items="${allVenues}" var="venue">
         <h2>name: ${venue.name}</h2>
         <p>followers</p>

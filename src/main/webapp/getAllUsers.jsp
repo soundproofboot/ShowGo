@@ -6,6 +6,7 @@
     <h1>All users and performers they follow</h1>
     <c:forEach items = "${allUsers}" var="user">
         <h2>username: ${user.username}</h2>
+        <h3>${user.city}, ${user.state}</h3>
         <p>Performers followed</p>
         <ul>
             <c:forEach items = "${user.performerFollows}" var="performerFollow">
