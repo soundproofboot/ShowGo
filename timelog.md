@@ -57,3 +57,14 @@
 - Set up User Pool for ShowGo and configure auth in app
 - Create error page and configure in web.xml
 - Add Logout servlet and update Auth servlet to handle incoming request with no code param
+
+## Week 9
+- Activity exercise setting up web service with Jersey
+- First team meeting with Matt, Tim, Katie
+- Create endpoint to get all venues and associated events, follows
+- Create Event entity and associate with Venue, tests
+- Create page to list all events and venues hosting/performers
+- Create EventPerformer join table for event lineups
+- Add city/state/cognito_id to User
+- Update Auth to check for existing user with cognito_id, set in servlet context
+- Submit Checkpoint 3
