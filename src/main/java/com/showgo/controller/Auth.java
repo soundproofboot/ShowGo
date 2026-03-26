@@ -6,6 +6,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.showgo.auth.*;
+import com.showgo.entity.User;
+import com.showgo.persistence.GenericDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.commons.io.*;
@@ -82,12 +84,13 @@ public class Auth extends HttpServlet {
         String authCode = req.getParameter("code");
         logger.debug("authCode");
         logger.debug(authCode);
-        String cognitoId = null;
+        CognitoUser cognitoUser = null;
         ServletContext context = getServletContext();
 
         if (authCode == null) {
             logger.debug("authCode is null - set cognitoId in context to null and forward to home page?");
-            context.setAttribute("cognitoId", null);
+            context.setAttribute("cognitoUser", null);
+            context.setAttribute("user", null);
         } else {
             logger.debug("in else of doGet - authCode must exist");
             HttpRequest authRequest = buildAuthRequest(authCode);
@@ -97,11 +100,23 @@ public class Auth extends HttpServlet {
                 TokenResponse tokenResponse = getToken(authRequest);
                 logger.debug("tokenResponse");
                 logger.debug(tokenResponse);
-                cognitoId = validate(tokenResponse);
-                logger.debug("cognitoId : " + cognitoId);
-//                TODO right now setting cognitoId, need to change this to create new user in db on sign up or pull user from db if existing
-                context.setAttribute("cognitoId", cognitoId);
-//                req.setAttribute("user", user);
+                cognitoUser = validate(tokenResponse);
+                logger.debug("cognitoId : " + cognitoUser);
+//                TODO right now setting cognitoUser, need to change this to create new user in db on sign up or pull user from db if existing
+                context.setAttribute("cognitoUser", cognitoUser);
+
+                GenericDao<User> userDao = new GenericDao<>(User.class);
+                List<User> users = (List<User>) userDao.getByPropertyEqual("cognitoId", cognitoUser.getCognitoId());
+                logger.debug("look for user in DB");
+                if (users != null && users.size() == 1) {
+                    logger.debug("found user: ");
+                    logger.debug(users.get(0));
+                    context.setAttribute("user", users.get(0));
+                } else {
+                    logger.debug("no user in db, create one");
+                    User newUser = new User("fakeUserName", "fakeCognitoId", "fakeEmail", "fakeCity", "AA");
+                    userDao.insert(newUser);
+                }
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);
                 throw new ServletException();
@@ -145,7 +160,7 @@ public class Auth extends HttpServlet {
         return tokenResponse;
     }
 
-    private String validate(TokenResponse tokenResponse) throws IOException, ServletException {
+    private CognitoUser validate(TokenResponse tokenResponse) throws IOException, ServletException {
         logger.debug("validate method runs");
         logger.debug("receives tokenResponse: " + tokenResponse);
         ObjectMapper mapper = new ObjectMapper();
@@ -188,16 +203,16 @@ public class Auth extends HttpServlet {
         DecodedJWT jwt = verifier.verify(tokenResponse.getIdToken());
         String jwtSignature = jwt.getSignature();
         logger.debug("here's the jwtSignature? " + jwtSignature);
-        String userName = jwt.getClaim("cognito:username").asString();
+        String cognitoId = jwt.getClaim("cognito:username").asString();
         String email = jwt.getClaim("email").asString();
-        logger.debug("here's the username: " + userName);
+        logger.debug("here's the username: " + cognitoId);
         logger.debug("here's the email: " + email);
         logger.debug("here are all the available claims: " + jwt.getClaims());
 
 //        TODO what do I do with this
         // for now, I'm just returning username for display back to the browser
-
-        return userName;
+        CognitoUser cognitoUser = new CognitoUser(cognitoId, email);
+        return cognitoUser;
     }
 
     /** Create the auth url and use it to build the request.

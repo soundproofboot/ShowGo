@@ -23,6 +23,9 @@ public class User implements Identifiable {
     @Column(name = "username")
     private String username;
 
+    @Column(name = "cognito_id")
+    private String cognitoId;
+
     @Column(name = "email")
     private String email;
 
@@ -52,8 +55,9 @@ public class User implements Identifiable {
      * @param city     the city
      * @param state    the state
      */
-    public User(String username, String email, String city, String state) {
+    public User(String username, String cognitoId, String email, String city, String state) {
         this.username = username;
+        this.cognitoId = cognitoId;
         this.email = email;
         this.city = city;
         this.state = state;
@@ -95,11 +99,21 @@ public class User implements Identifiable {
         return city;
     }
 
+    public String getCognitoId() {
+        return cognitoId;
+    }
+
+    public void setCognitoId(String cognitoId) {
+        this.cognitoId = cognitoId;
+    }
+
     /**
      * Sets city.
      *
      * @param city the city
      */
+
+
     public void setCity(String city) {
         this.city = city;
     }
@@ -276,6 +290,7 @@ public class User implements Identifiable {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
+                ", cognito_id='" + cognitoId + '\'' +
                 ", email='" + email + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +

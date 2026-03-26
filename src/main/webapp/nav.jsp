@@ -6,13 +6,24 @@
     <a href="getAllPerformers">Get all performers</a> ||
     <a href="getAllVenues">Get all venues</a> ||
     <a href="getAllEvents">Get all events</a> ||
+    <br />
     <c:choose>
-        <c:when test="${empty cognitoId}">
+        <c:when test="${empty cognitoUser.cognitoId}">
             <a href="login">Log in</a> ||
         </c:when>
         <c:otherwise>
-            <span>user: ${cognitoId}</span> ||
+            <span>user: ${cognitoUser.email}</span> ||
             <a href="logout">Log Out</a>
+        </c:otherwise>
+    </c:choose>
+    <br>
+    <c:choose>
+        <c:when test="${empty user}">
+            <p>user is empty</p>
+        </c:when>
+        <c:otherwise>
+            <p>user is not empty</p>
+            <p>${user.username}</p>
         </c:otherwise>
     </c:choose>
 </nav>
