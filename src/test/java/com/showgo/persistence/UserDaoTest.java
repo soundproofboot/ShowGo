@@ -28,6 +28,7 @@ public class UserDaoTest {
      */
     @BeforeEach
     void setUp() {
+        logger.debug("setUp for UserDaoTest");
         dao = new GenericDao<>(User.class);
         Database database = Database.getInstance();
         database.runSQL("cleandb.sql");
@@ -38,6 +39,7 @@ public class UserDaoTest {
      */
     @AfterEach
     void tearDown() {
+        logger.debug("tearDown for UserDaoTest");
         Database database = Database.getInstance();
         database.runSQL("cleandb.sql");
     }
@@ -57,12 +59,24 @@ public class UserDaoTest {
 
     @Test
     void insertSuccess() {
+        logger.debug("insertSuccess");
         User testUser = new User("testUsername", "testCognitoId", "testUser@email.com", "testCity", "AA");
         int insertedId = dao.insert(testUser);
         assertNotEquals(0, insertedId);
 
         User insertedUser = dao.getById(insertedId);
         assertEquals(testUser, insertedUser);
+    }
+
+    @Test
+    void createFromCognito() {
+//        create with only email and cognitoId returned from aws
+        User newUser = new User(null, "abc123", "email@email.com", null, null);
+        int insertedId = dao.insert(newUser);
+        assertNotEquals(0, insertedId);
+
+        User insertedUser = dao.getById(insertedId);
+        assertEquals(newUser, insertedUser);
     }
 
     @Test
