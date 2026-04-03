@@ -135,8 +135,8 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
                         `id` int NOT NULL AUTO_INCREMENT,
                         `username` varchar(45) DEFAULT NULL,
-                        `city` varchar(100) NOT NULL,
-                        `state` char(2) NOT NULL,
+                        `city` varchar(100) DEFAULT NULL,
+                        `state` char(2) DEFAULT NULL,
                         `email` varchar(100) NOT NULL,
                         `cognito_id` varchar(100) NOT NULL,
                         PRIMARY KEY (`id`)
@@ -218,4 +218,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-03-25 11:45:07
+-- Dump completed on 2026-04-03 11:59:57
