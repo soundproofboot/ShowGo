@@ -102,7 +102,6 @@ public class Auth extends HttpServlet {
                 logger.debug(tokenResponse);
                 cognitoUser = validate(tokenResponse);
                 logger.debug("cognitoId : " + cognitoUser);
-//                TODO right now setting cognitoUser, need to change this to create new user in db on sign up or pull user from db if existing
 
                 GenericDao<User> userDao = new GenericDao<>(User.class);
                 List<User> users = (List<User>) userDao.getByPropertyEqual("cognitoId", cognitoUser.getCognitoId());
@@ -113,8 +112,9 @@ public class Auth extends HttpServlet {
                     session.setAttribute("user", users.get(0));
                 } else {
                     logger.debug("no user in db, create one");
-                    User newUser = new User("fakeUserName", "fakeCognitoId", "fakeEmail", "fakeCity", "AA");
+                    User newUser = new User(null, cognitoUser.getCognitoId(), cognitoUser.getEmail(), null, null);
                     userDao.insert(newUser);
+                    session.setAttribute("user", newUser);
                 }
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);
@@ -132,7 +132,7 @@ public class Auth extends HttpServlet {
 //        TODO where does this go - user home, like a dashboard?
 //        RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
 //        dispatcher.forward(req, resp);
-        resp.sendRedirect("index.jsp");
+        resp.sendRedirect("dashboard.jsp");
     }
 
     /**
@@ -196,6 +196,7 @@ public class Auth extends HttpServlet {
         JWTVerifier verifier = JWT.require(algorithm)
                 .withIssuer(iss)
                 .withClaim("token_use", "id") // make sure you're verifying id token
+                .acceptLeeway(60)
                 .build();
 
         // Verify the token
