@@ -13,7 +13,7 @@
         <title>${title}</title>
     </c:when>
     <c:otherwise>
-        <title>TITLE NOT SET</title>
+        <title>ShowGo</title>
     </c:otherwise>
 </c:choose>
 </head>

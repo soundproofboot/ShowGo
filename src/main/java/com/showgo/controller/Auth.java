@@ -128,10 +128,6 @@ public class Auth extends HttpServlet {
             }
         }
 
-//        TODO currently redirecting to index which reads cognitoId
-//        TODO where does this go - user home, like a dashboard?
-//        RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
-//        dispatcher.forward(req, resp);
         resp.sendRedirect("dashboard.jsp");
     }
 
