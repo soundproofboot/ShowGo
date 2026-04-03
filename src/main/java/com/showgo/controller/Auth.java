@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.math.BigInteger;
 import java.net.URI;
@@ -85,11 +86,11 @@ public class Auth extends HttpServlet {
         logger.debug("authCode");
         logger.debug(authCode);
         CognitoUser cognitoUser = null;
-        ServletContext context = getServletContext();
+        HttpSession session = req.getSession();
 
         if (authCode == null) {
             logger.debug("authCode is null - set cognitoId in context to null and forward to home page?");
-            context.setAttribute("user", null);
+            session.setAttribute("user", null);
         } else {
             logger.debug("in else of doGet - authCode must exist");
             HttpRequest authRequest = buildAuthRequest(authCode);
@@ -109,7 +110,7 @@ public class Auth extends HttpServlet {
                 if (users != null && users.size() == 1) {
                     logger.debug("found user: ");
                     logger.debug(users.get(0));
-                    context.setAttribute("user", users.get(0));
+                    session.setAttribute("user", users.get(0));
                 } else {
                     logger.debug("no user in db, create one");
                     User newUser = new User("fakeUserName", "fakeCognitoId", "fakeEmail", "fakeCity", "AA");
