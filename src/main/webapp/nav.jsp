@@ -10,6 +10,7 @@
     <c:choose>
         <c:when test="${empty user}">
             <a href="login">Log in</a>
+            <a href="signup">Sign up</a>
         </c:when>
         <c:otherwise>
             <p>Hello ${user.username}</p>
