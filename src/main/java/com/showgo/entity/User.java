@@ -4,10 +4,7 @@ import com.showgo.persistence.Identifiable;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * The type User.
@@ -41,6 +38,12 @@ public class User implements Identifiable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<VenueFollow> venueFollows = new HashSet<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Venue> venues = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Performer> performers = new ArrayList<>();
+
     /**
      * Instantiates a new User.
      */
@@ -50,10 +53,11 @@ public class User implements Identifiable {
     /**
      * Instantiates a new User.
      *
-     * @param username the username
-     * @param email    the email
-     * @param city     the city
-     * @param state    the state
+     * @param username  the username
+     * @param cognitoId the cognito id
+     * @param email     the email
+     * @param city      the city
+     * @param state     the state
      */
     public User(String username, String cognitoId, String email, String city, String state) {
         this.username = username;
@@ -99,21 +103,30 @@ public class User implements Identifiable {
         return city;
     }
 
+    /**
+     * Gets cognito id.
+     *
+     * @return the cognito id
+     */
     public String getCognitoId() {
         return cognitoId;
     }
 
+    /**
+     * Sets cognito id.
+     *
+     * @param cognitoId the cognito id
+     */
     public void setCognitoId(String cognitoId) {
         this.cognitoId = cognitoId;
     }
+
 
     /**
      * Sets city.
      *
      * @param city the city
      */
-
-
     public void setCity(String city) {
         this.city = city;
     }
@@ -201,6 +214,42 @@ public class User implements Identifiable {
     }
 
     /**
+     * Gets venues.
+     *
+     * @return the venues
+     */
+    public List<Venue> getVenues() {
+        return venues;
+    }
+
+    /**
+     * Sets venues.
+     *
+     * @param venues the venues
+     */
+    public void setVenues(List<Venue> venues) {
+        this.venues = venues;
+    }
+
+    /**
+     * Gets performers.
+     *
+     * @return the performers
+     */
+    public List<Performer> getPerformers() {
+        return performers;
+    }
+
+    /**
+     * Sets performers.
+     *
+     * @param performers the performers
+     */
+    public void setPerformers(List<Performer> performers) {
+        this.performers = performers;
+    }
+
+    /**
      * Follow performer
      *
      * @param performer the performer to follow
@@ -283,6 +332,46 @@ public class User implements Identifiable {
             }
         }
         System.out.println("venueFollows size after: " + venueFollows.size());
+    }
+
+    /**
+     * Add venue.
+     *
+     * @param venue the venue this user will manage
+     */
+    public void addVenue(Venue venue) {
+        venues.add(venue);
+        venue.setUser(this);
+    }
+
+    /**
+     * Remove venue.
+     *
+     * @param venue the venue this user will no longer manage
+     */
+    public void removeVenue(Venue venue) {
+        venues.remove(venue);
+        venue.setUser(null);
+    }
+
+    /**
+     * Add performer.
+     *
+     * @param performer the performer this user will manage
+     */
+    public void addPerformer(Performer performer) {
+        performers.add(performer);
+        performer.setUser(this);
+    }
+
+    /**
+     * Remove performer.
+     *
+     * @param performer the performer this user will no longer manage
+     */
+    public void removePerformer(Performer performer) {
+        performers.remove(performer);
+        performer.setUser(null);
     }
 
     @Override

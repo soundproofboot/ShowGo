@@ -81,8 +81,11 @@ DROP TABLE IF EXISTS `performer`;
 CREATE TABLE `performer` (
                              `id` int NOT NULL AUTO_INCREMENT,
                              `name` varchar(100) DEFAULT NULL,
+                             `user_id` int NOT NULL,
                              PRIMARY KEY (`id`),
-                             UNIQUE KEY `name` (`name`)
+                             UNIQUE KEY `name` (`name`),
+                             KEY `performer_user_id_fk` (`user_id`),
+                             CONSTRAINT `performer_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -92,7 +95,7 @@ CREATE TABLE `performer` (
 
 LOCK TABLES `performer` WRITE;
 /*!40000 ALTER TABLE `performer` DISABLE KEYS */;
-INSERT INTO `performer` VALUES (1,'performer1'),(2,'performer2'),(3,'performer3');
+INSERT INTO `performer` VALUES (1,'performer1',1),(2,'performer2',2),(3,'performer3',3);
 /*!40000 ALTER TABLE `performer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,12 +165,15 @@ DROP TABLE IF EXISTS `venue`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `venue` (
                          `id` int NOT NULL AUTO_INCREMENT,
+                         `user_id` int NOT NULL,
                          `name` varchar(100) NOT NULL,
                          `city` varchar(100) NOT NULL,
                          `state` char(2) DEFAULT NULL,
                          PRIMARY KEY (`id`),
-                         UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+                         UNIQUE KEY `name` (`name`),
+                         KEY `venue_user_id_fk` (`user_id`),
+                         CONSTRAINT `venue_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -176,7 +182,7 @@ CREATE TABLE `venue` (
 
 LOCK TABLES `venue` WRITE;
 /*!40000 ALTER TABLE `venue` DISABLE KEYS */;
-INSERT INTO `venue` VALUES (1,'venue1','Madison','WI'),(2,'venue2','Milwaukee','WI'),(3,'venue3','Chicago','IL');
+INSERT INTO `venue` VALUES (1,1,'venue1','Madison','WI'),(2,2,'venue2','Milwaukee','WI'),(3,3,'venue3','Chicago','IL');
 /*!40000 ALTER TABLE `venue` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -218,4 +224,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-04-03 11:59:57
+-- Dump completed on 2026-04-03 18:00:07

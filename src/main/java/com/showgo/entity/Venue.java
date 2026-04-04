@@ -32,16 +32,37 @@ public class Venue implements Identifiable {
     @Column(name = "state")
     private String state;
 
+    @ManyToOne
+    private User user;
+
     /**
      * Instantiates a new Venue.
      */
     public Venue() {
     }
 
-    public Venue(String name, String city, String state) {
+
+    /**
+     * Instantiates a new Venue.
+     *
+     * @param name  the name
+     * @param city  the city
+     * @param state the state
+     * @param user the user that manages this venue
+     */
+    public Venue(String name, String city, String state, User user) {
         this.name = name;
         this.city = city;
         this.state = state;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     /**
@@ -190,6 +211,7 @@ public class Venue implements Identifiable {
                 ", name='" + name + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
+                ", manager=" + user + '\'' +
                 '}';
     }
 

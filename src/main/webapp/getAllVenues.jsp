@@ -7,6 +7,7 @@
     <h1>All venues, users that follow them, events they are hosting</h1>
     <c:forEach items="${allVenues}" var="venue">
         <h2>name: ${venue.name}</h2>
+        <p>manager: ${venue.user.username}</p>
         <p>followers</p>
         <ul>
             <c:forEach items="${venue.followers}" var="follow">

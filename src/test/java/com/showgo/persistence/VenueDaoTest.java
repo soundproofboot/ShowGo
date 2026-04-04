@@ -54,7 +54,12 @@ public class VenueDaoTest {
 
     @Test
     void insertSuccess() {
-        Venue testVenue = new Venue("testVenue", "testCity", "AA");
+        GenericDao<User> userDao = new GenericDao<>(User.class);
+        User manager = userDao.getById(1);
+
+        logger.debug("venue manager - {}", manager);
+
+        Venue testVenue = new Venue("testVenue", "testCity", "AA", manager);
         int insertedId = dao.insert(testVenue);
         assertNotEquals(0, insertedId);
 

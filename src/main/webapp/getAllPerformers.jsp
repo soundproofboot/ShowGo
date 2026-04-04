@@ -7,6 +7,7 @@
         <h1>All performers and the users that follow them</h1>
         <c:forEach items = "${allPerformers}" var="performer">
             <h2>name: ${performer.name}</h2>
+            <p>manager: ${performer.user.username}</p>
             <p>followers</p>
             <ul>
                 <c:forEach items = "${performer.followers}" var="follow">

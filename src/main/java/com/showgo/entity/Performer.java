@@ -27,6 +27,10 @@ public class Performer implements Identifiable {
 
     @OneToMany(mappedBy = "performer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<EventPerformer> events = new HashSet<>();
+
+    @ManyToOne
+    private User user;
+
     /**
      * Instantiates a new Performer.
      */
@@ -37,9 +41,19 @@ public class Performer implements Identifiable {
      * Instantiates a new Performer.
      *
      * @param name the name
+     * @param user the user that manages this performer
      */
-    public Performer(String name) {
+    public Performer(String name, User user) {
         this.name = name;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -116,6 +130,7 @@ public class Performer implements Identifiable {
         return "Performer{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", manager=" + user + '\'' +
                 '}';
     }
 

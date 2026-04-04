@@ -1,6 +1,7 @@
 package com.showgo.persistence;
 
 import com.showgo.entity.Performer;
+import com.showgo.entity.User;
 import com.showgo.testUtils.Database;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -53,7 +54,11 @@ public class PerformerDaoTest {
 
     @Test
     void insertSuccess() {
-        Performer testPerformer = new Performer("testPerformerName");
+        GenericDao<User> userDao = new GenericDao<>(User.class);
+        User manager = userDao.getById(1);
+        logger.debug("performer manager - {}", manager);
+
+        Performer testPerformer = new Performer("testPerformerName", manager);
         int insertedId = dao.insert(testPerformer);
         assertNotEquals(0, insertedId);
 
