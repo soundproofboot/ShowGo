@@ -68,3 +68,18 @@
 - Add city/state/cognito_id to User
 - Update Auth to check for existing user with cognito_id, set in servlet context
 - Submit Checkpoint 3
+- 
+# Week 10
+- Git branching activities
+- Team project work 
+  - Set up db tables and create cleanDB.sql with sample data
+  - Add log4j properties and set up logging in project
+  - Set up project for testing
+  - Create new route for delete coffee ship by id
+- Indie project work 
+  - Create new use in DB when cognito account created
+  - Refactor Auth to store user in Sessions instead of Servlet Context
+  - Add cognito signup route
+  - Create user dashboard, add form to get full user info after signup
+  - Add city and state to venue
+  - Establish relationship between User and Venue/Performer (which user owns that Venue/Performer)
