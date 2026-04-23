@@ -83,3 +83,12 @@
   - Create user dashboard, add form to get full user info after signup
   - Add city and state to venue
   - Establish relationship between User and Venue/Performer (which user owns that Venue/Performer)
+
+# Week 11
+- Team Project
+
+# Week 12
+- Team Project
+
+# Week 13
+- TBD

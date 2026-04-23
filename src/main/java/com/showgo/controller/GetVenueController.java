@@ -15,7 +15,7 @@ import java.io.IOException;
  * Get all venues and users following them
  */
 @WebServlet(
-        urlPatterns = { "/getAllVenues"}
+        urlPatterns = { "/venues"}
 )
 public class GetVenueController extends HttpServlet {
 

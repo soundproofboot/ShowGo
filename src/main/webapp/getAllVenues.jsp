@@ -1,12 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="head.jsp" />
+<c:set var="context" value="${pageContext.request.contextPath}" />
 
 <html>
 <body>
     <c:import url="nav.jsp" />
     <h1>All venues, users that follow them, events they are hosting</h1>
     <c:forEach items="${allVenues}" var="venue">
-        <h2>name: ${venue.name}</h2>
+        <h2><a href="${context}/venues/${venue.id}">${venue.name}</a></h2>
         <p>manager: ${venue.user.username}</p>
         <p>followers</p>
         <ul>

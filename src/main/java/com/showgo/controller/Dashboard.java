@@ -1,5 +1,7 @@
 package com.showgo.controller;
 
+import com.showgo.entity.User;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,7 +23,8 @@ public class Dashboard extends HttpServlet {
         HttpSession session = req.getSession();
         if (session.getAttribute("user") != null) {
             System.out.println("there is a user in session");
-            System.out.println(session.getAttribute("user"));
+            User user = (User) session.getAttribute("user");
+            System.out.println(user);
 
         } else {
             System.out.println("there is not a user in session");

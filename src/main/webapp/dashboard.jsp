@@ -30,6 +30,9 @@
                     <h3>Upcoming events</h3>
                     <p>...list events user followed order by most recent</p>
                     <h3>Venues you follow</h3>
+                    <c:forEach items="${user.venues}" var="venue">
+                        <h4>${venue.name}</h4>
+                    </c:forEach>
                     <p>...list venues user followed</p>
                     <h3>Performers you follow</h3>
                     <p>...list performers user followed</p>

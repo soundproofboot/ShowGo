@@ -15,7 +15,7 @@ import java.io.IOException;
  * Get all events and related venue
  */
 @WebServlet(
-        urlPatterns = { "/getAllEvents" }
+        urlPatterns = { "/events" }
 )
 public class GetEventController extends HttpServlet {
 

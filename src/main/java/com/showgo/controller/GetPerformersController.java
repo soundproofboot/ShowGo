@@ -15,7 +15,7 @@ import java.io.IOException;
  * Get all performers
  */
 @WebServlet(
-        urlPatterns = { "/getAllPerformers"}
+        urlPatterns = { "/performers"}
 )
 public class GetPerformersController extends HttpServlet {
 
