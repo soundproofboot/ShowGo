@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="head.jsp" />
+<c:set var="context" value="${pageContext.request.contextPath}" />
+
 <html>
 <script>console.log('can I just write javascript like this')</script>
 <body>
@@ -8,13 +10,13 @@
     <c:choose>
 <%--        redirect to home page if not logged in--%>
         <c:when test="${empty user}">
-            <c:redirect url="index.jsp"></c:redirect>
+            <c:redirect url="${context}/index.jsp"></c:redirect>
         </c:when>
         <c:otherwise>
             <c:choose>
                 <c:when test="${empty user.username}">
                     <p>need to provide info</p>
-                    <form action="newUserData" method="POST">
+                    <form action="${context}/newUserData" method="POST">
                         <label for="username">Username</label>
                         <input type="text" name="username" id="username" required>
                         <label for="city">City</label>

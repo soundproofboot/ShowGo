@@ -91,4 +91,8 @@
 - Team Project
 
 # Week 13
-- TBD
+- Set up venues/:id
+- Set up performers/:id
+- Set up users/:username
+- Fix nav link context issue
+- Set up venue search by city state and showing local venues by default if logged in
