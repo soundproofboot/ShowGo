@@ -134,4 +134,5 @@ public class EventDaoTest {
 
         assertEquals(initialEventLineupSize - 1, lineupSizeAfterUpdate);
     }
+//    TODO test for getEventsByCityState
 }

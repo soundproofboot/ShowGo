@@ -133,12 +133,5 @@ public class VenueDaoTest {
 //        assertEquals(initialEventCount - 1, updatedEventCount);
     }
 
-//    TODO write a real test
-    @Test
-    void getVenueByCityState() {
-        List<Venue> venues = dao.getByCityState("Madison", "WI");
-        System.out.println(venues);
-//        assertEquals("Madison", venues.get(0).getCity());
-//        assertEquals("WI", venues.get(0).getState());
-    }
+//    TODO write a test for getVenueByCityState
 }

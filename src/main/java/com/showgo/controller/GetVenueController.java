@@ -1,8 +1,7 @@
 package com.showgo.controller;
 
 import com.showgo.entity.User;
-import com.showgo.entity.Venue;
-import com.showgo.persistence.GenericDao;
+import com.showgo.persistence.VenueDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,7 +22,7 @@ public class GetVenueController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        GenericDao<Venue> dao = new GenericDao<>(Venue.class);
+        VenueDao dao = new VenueDao();
         String city = req.getParameter("city");
         String state = req.getParameter("state");
 
@@ -38,7 +37,7 @@ public class GetVenueController extends HttpServlet {
         req.setAttribute("citySearched", city);
         req.setAttribute("stateSearched", state);
 
-        req.setAttribute("allVenues", dao.getByCityState(city, state));
+        req.setAttribute("allVenues", dao.getVenuesByCityState(city, state));
         if (city == null || state == null) {
             req.setAttribute("title", "Venue Search");
         } else {

@@ -139,20 +139,4 @@ public class GenericDao<T extends Identifiable> {
 
         return list;
     }
-
-    public List<T> getByCityState(String city, String state) {
-        Session session = getSession();
-        HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<T> query = builder.createQuery(type);
-        Root<T> root = query.from(type);
-        query.select(root)
-                .where(builder.and(
-                        builder.equal(root.get("city"), city),
-                        builder.equal(root.get("state"), state)
-                ));
-        List<T> list = session.createQuery(query).getResultList();
-        session.close();
-
-        return list;
-    }
 }
