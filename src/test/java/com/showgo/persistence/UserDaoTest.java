@@ -1,9 +1,6 @@
 package com.showgo.persistence;
 
-import com.showgo.entity.Performer;
-import com.showgo.entity.PerformerFollow;
-import com.showgo.entity.User;
-import com.showgo.entity.Venue;
+import com.showgo.entity.*;
 import com.showgo.testUtils.Database;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -198,7 +194,24 @@ public class UserDaoTest {
 //
 //        assertEquals(initialVenueFollowSize - 1, afterUpdateVenueFollowsSize);
     }
-
+//
+//    @Test
+//    void addEventInterestSuccess() {
+//        User testUser = dao.getById(1);
+//        int initialEventInterestsSize = testUser.getEventInterests().size();
+//
+//        GenericDao<Event> eventDao = new GenericDao<>(Event.class);
+//        Event eventToAdd = eventDao.getById(3);
+//
+//        testUser.addEventInterest(eventToAdd);
+//        dao.update(testUser);
+//
+//        User userAfterUpdate = dao.getById(testUser.getId());
+//        int afterUpdateEventInterestSize = userAfterUpdate.getEventInterests().size();
+//
+//        assertEquals(initialEventInterestsSize + 1, afterUpdateEventInterestSize);
+//
+//    }
 
 //    TODO ADDITIONAL TESTS
 //    follow a venue

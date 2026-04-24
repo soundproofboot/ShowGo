@@ -30,6 +30,7 @@
         <mapping class="com.showgo.entity.VenueFollow" />
         <mapping class="com.showgo.entity.Event" />
         <mapping class="com.showgo.entity.EventPerformer" />
+        <mapping class="com.showgo.entity.EventInterest" />
     </session-factory>
 
 </hibernate-configuration>

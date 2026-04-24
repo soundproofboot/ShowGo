@@ -29,6 +29,9 @@ public class Event implements Identifiable {
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<EventPerformer> performers = new HashSet<>();
 
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<EventInterest> eventInterests = new HashSet<>();
+
     /**
      * Instantiates a new Event.
      */
@@ -113,12 +116,22 @@ public class Event implements Identifiable {
         this.performers = performers;
     }
 
+    /**
+     * Add event performer.
+     *
+     * @param performer the performer
+     */
     public void addEventPerformer(Performer performer) {
         EventPerformer eventPerformer = new EventPerformer(this, performer);
         performers.add(eventPerformer);
         performer.getEvents().add(eventPerformer);
     }
 
+    /**
+     * Remove event performer.
+     *
+     * @param performer the performer
+     */
     public void removeEventPerformer(Performer performer) {
         for (Iterator<EventPerformer> iterator = performers.iterator(); iterator.hasNext(); ) {
             EventPerformer eventPerformer = iterator.next();
@@ -129,6 +142,24 @@ public class Event implements Identifiable {
                 eventPerformer.setPerformer(null);
             }
         }
+    }
+
+    /**
+     * Gets event interests.
+     *
+     * @return the event interests
+     */
+    public Set<EventInterest> getEventInterests() {
+        return eventInterests;
+    }
+
+    /**
+     * Sets event interests.
+     *
+     * @param eventInterests the event interests
+     */
+    public void setEventInterests(Set<EventInterest> eventInterests) {
+        this.eventInterests = eventInterests;
     }
 
     @Override

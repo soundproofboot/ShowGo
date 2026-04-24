@@ -39,6 +39,9 @@ public class User implements Identifiable {
     private Set<VenueFollow> venueFollows = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<EventInterest> eventInterests = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Venue> venues = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
@@ -214,6 +217,24 @@ public class User implements Identifiable {
     }
 
     /**
+     * Gets event interests.
+     *
+     * @return the event interests
+     */
+    public Set<EventInterest> getEventInterests() {
+        return eventInterests;
+    }
+
+    /**
+     * Sets event interests.
+     *
+     * @param eventInterests the event interests
+     */
+    public void setEventInterests(Set<EventInterest> eventInterests) {
+        this.eventInterests = eventInterests;
+    }
+
+    /**
      * Gets venues.
      *
      * @return the venues
@@ -334,6 +355,15 @@ public class User implements Identifiable {
         System.out.println("venueFollows size after: " + venueFollows.size());
     }
 
+    public void addEventInterest(Event event) {
+        EventInterest eventInterest = new EventInterest(this, event);
+        eventInterests.add(eventInterest);
+        event.getEventInterests().add(eventInterest);
+    }
+
+    public void removeEventInterest(Event event) {
+//        TODO implement
+    }
     /**
      * Add venue.
      *
