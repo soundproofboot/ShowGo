@@ -30,14 +30,36 @@
                     <h2>${user.username}</h2>
                     <p>${user.city}, ${user.state}</p>
                     <h3>Upcoming events</h3>
-                    <p>...list events user followed order by most recent</p>
-                    <h3>Venues you follow</h3>
-                    <c:forEach items="${user.venues}" var="venue">
-                        <h4>${venue.name}</h4>
+                    <c:forEach items="${user.eventInterests}" var="eventInterest">
+                        <p><a href="${context}/events/${eventInterest.event.id}">${eventInterest.event.title}</a></p>
+                        <p>@<a href="${context}/venues/${eventInterest.event.venue.id}">${eventInterest.event.venue.name}</a></p>
+                        <p>Lineup</p>
+                        <c:forEach items="${eventInterest.event.performers}" var="eventPerformer">
+                            <p><a href="${context}/performers/${eventPerformer.performer.id}">${eventPerformer.performer.name}</a></p>
+                        </c:forEach>
                     </c:forEach>
-                    <p>...list venues user followed</p>
+                    <h3>Venues you follow</h3>
+                    <c:choose>
+                        <c:when test="${user.venueFollows.size() == 0}">
+                            <p>You don't follow any venues. <a href="${context}/venues">Discover some new venues.</a></p>
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach items="${user.venueFollows}" var="venueFollow">
+                                <h4><a href="${context}/venues/${venueFollow.venue.id}">${venueFollow.venue.name}</a></h4>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
                     <h3>Performers you follow</h3>
-                    <p>...list performers user followed</p>
+                    <c:choose>
+                        <c:when test="${user.performerFollows.size() == 0}">
+                            <p>You don't follow any performers.</p>
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach items="${user.performerFollows}" var="performerFollow">
+                                <h4><a href="${context}/performers/${performerFollow.performer.id}"></a></h4>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
                 </c:otherwise>
             </c:choose>
         </c:otherwise>

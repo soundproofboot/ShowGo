@@ -12,12 +12,12 @@
     <div>
         <c:choose>
             <c:when test="${empty user}">
-                <a href="login">Log in</a>
-                <a href="signup">Sign up</a>
+                <a href="${context}/login">Log in</a>
+                <a href="${context}/signup">Sign up</a>
             </c:when>
             <c:otherwise>
-                <a href="dashboard">Dashboard</a>
-                <a href="logout">Log Out</a>
+                <a href="${context}/dashboard">Dashboard</a>
+                <a href="${context}/logout">Log Out</a>
             </c:otherwise>
         </c:choose>
     </div>

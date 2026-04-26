@@ -97,3 +97,5 @@
 - Fix nav link context issue
 - Set up venue search by city state and showing local venues by default if logged in
 - Set up event search by city state and showing local events by default if logged in
+- Add EventInterest join table and button to add interest
+- Add events/venues/performers followed to dashboard
