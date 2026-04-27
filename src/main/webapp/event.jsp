@@ -15,9 +15,6 @@
             </c:if>
         </c:forEach>
     </c:when>
-    <c:otherwise>
-        <p>otherwise</p>
-    </c:otherwise>
 </c:choose>
 <c:choose>
     <c:when test="${isInterested}">

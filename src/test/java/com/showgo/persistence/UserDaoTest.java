@@ -170,29 +170,16 @@ public class UserDaoTest {
     //    user1 follows all venues in clean db so can remove venue1
     @Test
     void venueUnfollowSuccess() {
-//        TODO can't get this to pass, commented out for now to push working version
-//        User testUser = dao.getById(1);
-//        int initialVenueFollowSize = testUser.getVenueFollows().size();
-//
-//        GenericDao<Venue> venueDao = new GenericDao<>(Venue.class);
-//        Venue venueToUnfollow = venueDao.getById(1);
-//
-//        testUser.getVenueFollows().forEach(vf -> {
-//            System.out.println("VenueFollow id=" + vf.getId()
-//                    + " venue instance hashCode=" + System.identityHashCode(vf.getVenue())
-//                    + " venue name=" + vf.getVenue().getName());
-//        });
-//        System.out.println("venueToUnfollow instance hashCode=" + System.identityHashCode(venueToUnfollow));
-//
-//        testUser.removeVenueFollow(venueToUnfollow);
-////        System.out.println("venueFollows size after remove: " + testUser.getVenueFollows().size());
-////        System.out.println("venue followers size after remove: " + venueToUnfollow.getFollowers().size());
-//        dao.update(testUser);
-//
-//        User userAfterUpdate = dao.getById(testUser.getId());
-//        int afterUpdateVenueFollowsSize = userAfterUpdate.getVenueFollows().size();
-//
-//        assertEquals(initialVenueFollowSize - 1, afterUpdateVenueFollowsSize);
+        User testUser = dao.getById(1);
+        int initialVenueFollowsSize = testUser.getVenueFollows().size();
+
+        Venue venueToRemove = new GenericDao<>(Venue.class).getById(1);
+        testUser.removeVenueFollow(venueToRemove);
+        dao.update(testUser);
+
+        User userAfterUpdate = dao.getById(testUser.getId());
+        int venueFollowsAfterRemove = userAfterUpdate.getVenueFollows().size();
+        assertEquals(initialVenueFollowsSize - 1, venueFollowsAfterRemove);
     }
 //
 //    @Test

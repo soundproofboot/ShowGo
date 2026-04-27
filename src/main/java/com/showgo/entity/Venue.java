@@ -20,7 +20,7 @@ public class Venue implements Identifiable {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "venue", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "venue", fetch = FetchType.EAGER)
     private Set<VenueFollow> followers = new HashSet<>();
 
     @OneToMany(mappedBy = "venue", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
@@ -171,17 +171,6 @@ public class Venue implements Identifiable {
      */
     public void setEvents(List<Event> events) {
         this.events = events;
-    }
-
-    /**
-     * Add follower
-     *
-     * @param user the follower to add
-     */
-    public void addFollower(User user) {
-        VenueFollow venueFollow = new VenueFollow(user, this);
-        followers.add(venueFollow);
-        user.getVenueFollows().add(venueFollow);
     }
 
     /**

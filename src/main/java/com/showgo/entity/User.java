@@ -319,7 +319,6 @@ public class User implements Identifiable {
     public void addVenueFollow(Venue venue) {
         VenueFollow venueFollow = new VenueFollow(this, venue);
         venueFollows.add(venueFollow);
-        venue.getFollowers().add(venueFollow);
     }
 
     /**
@@ -328,31 +327,14 @@ public class User implements Identifiable {
      * @param venue the venue to stop following
      */
     public void removeVenueFollow(Venue venue) {
-        System.out.println("venueFollows size before: " + venueFollows.size());
-        System.out.println("Looking for venue: " + venue.getName());
-
-        for (Iterator<VenueFollow> iterator = venueFollows.iterator();
-             iterator.hasNext(); ) {
-            VenueFollow venueFollow = iterator.next();
-
-            System.out.println("Checking VenueFollow id=" + venueFollow.getId()
-                    + " venue=" + venueFollow.getVenue().getName()
-                    + " user=" + venueFollow.getUser().getId());
-            System.out.println("venue equals: " + venueFollow.getVenue().equals(venue));
-            System.out.println("user equals: " + venueFollow.getUser().equals(this));
-
-            if (venueFollow.getVenue().equals(venue) &&
-                    venueFollow.getUser().equals(this)) {
-                System.out.println("Match found - removing");
+        for (Iterator<VenueFollow> iterator = venueFollows.iterator(); iterator.hasNext(); ) {
+            VenueFollow vf = iterator.next();
+            if (vf.getVenue().equals(venue)) {
                 iterator.remove();
-                System.out.println("followers size before remove: " + venueFollow.getVenue().getFollowers().size());
-                venueFollow.getVenue().getFollowers().remove(venueFollow);
-                System.out.println("followers size after remove: " + venueFollow.getVenue().getFollowers().size());
-                venueFollow.setVenue(null);
-                venueFollow.setUser(null);
+                vf.setVenue(null);
+                vf.setUser(null);
             }
         }
-        System.out.println("venueFollows size after: " + venueFollows.size());
     }
 
     public void addEventInterest(Event event) {
