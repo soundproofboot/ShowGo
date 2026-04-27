@@ -13,31 +13,30 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Add user interest in event via post request
+ * Remove user interest in event
  */
 @WebServlet(
-        urlPatterns = { "/addEventInterest"}
+        urlPatterns = { "/removeEventInterest"}
 )
-public class AddEventInterest extends HttpServlet {
+public class RemoveEventInterest extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int eventId = Integer.parseInt(req.getParameter("event_id"));
 
         HttpSession session = req.getSession();
-        User userInSession =  (User) session.getAttribute("user");
-
+        User userInSession = (User) session.getAttribute("user");
         if (userInSession == null || eventId == 0) {
             resp.sendRedirect(req.getContextPath() + "/login");
             return;
-        }
-        else {
+        } else {
             User userFromDb = new GenericDao<>(User.class).getById(userInSession.getId());
             Event event = new GenericDao<>(Event.class).getById(eventId);
             if (event != null) {
-                userFromDb.addEventInterest(event);
+                userFromDb.removeEventInterest(event);
                 GenericDao<User> userDao = new GenericDao<>(User.class);
                 userDao.update(userFromDb);
 
-                User userAfterUpdate = userDao.getById(userFromDb.getId());
+                User userAfterUpdate = userDao.getById(userInSession.getId());
+
                 session.setAttribute("user", userAfterUpdate);
                 resp.sendRedirect(req.getContextPath() + "/events/" + eventId);
             } else {

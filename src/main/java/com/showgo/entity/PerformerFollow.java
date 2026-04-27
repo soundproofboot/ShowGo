@@ -100,7 +100,7 @@ public class PerformerFollow implements Serializable {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         PerformerFollow that = (PerformerFollow) o;
-        return Objects.equals(user, that.user) && Objects.equals(performer, that.performer);
+        return id != 0 && id == that.id;
     }
 
     @Override

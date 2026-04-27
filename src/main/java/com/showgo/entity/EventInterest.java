@@ -98,12 +98,12 @@ public class EventInterest {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         EventInterest that = (EventInterest) o;
-        return id == that.id && Objects.equals(user, that.user) && Objects.equals(event, that.event);
+        return id != 0 && id == that.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, event);
+        return Integer.hashCode(id);
     }
 
     @Override

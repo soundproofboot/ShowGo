@@ -100,12 +100,12 @@ public class EventPerformer implements Serializable {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         EventPerformer that = (EventPerformer) o;
-        return Objects.equals(event, that.event) && Objects.equals(performer, that.performer);
+        return id != 0 && id == that.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(event, performer);
+        return Integer.hashCode(id);
     }
 
     @Override

@@ -29,7 +29,7 @@ public class Event implements Identifiable {
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<EventPerformer> performers = new HashSet<>();
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "event", fetch = FetchType.EAGER)
     private Set<EventInterest> eventInterests = new HashSet<>();
 
     /**
@@ -175,11 +175,11 @@ public class Event implements Identifiable {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Event event = (Event) o;
-        return Objects.equals(title, event.title) && Objects.equals(venue, event.venue);
+        return id != 0 && id == event.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, venue);
+        return Integer.hashCode(id);
     }
 }

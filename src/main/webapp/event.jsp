@@ -22,6 +22,10 @@
 <c:choose>
     <c:when test="${isInterested}">
         <p>You're interested.</p>
+        <form action="${context}/removeEventInterest" method="POST">
+            <input type="hidden" name="event_id" id="event_id" value="${event.id}">
+            <input type="submit" value="Remove">
+        </form>
     </c:when>
     <c:otherwise>
         <form action="${context}/addEventInterest" method="POST">

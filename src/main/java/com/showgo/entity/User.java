@@ -358,12 +358,19 @@ public class User implements Identifiable {
     public void addEventInterest(Event event) {
         EventInterest eventInterest = new EventInterest(this, event);
         eventInterests.add(eventInterest);
-        event.getEventInterests().add(eventInterest);
     }
 
     public void removeEventInterest(Event event) {
-//        TODO implement
+        for (Iterator<EventInterest> iterator = eventInterests.iterator(); iterator.hasNext(); ) {
+            EventInterest ei = iterator.next();
+            if (ei.getEvent().equals(event)) {
+                iterator.remove();
+                ei.setUser(null);
+                ei.setEvent(null);
+            }
+        }
     }
+
     /**
      * Add venue.
      *
@@ -423,11 +430,11 @@ public class User implements Identifiable {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(username, user.username);
+        return id != 0 && id == user.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username);
+        return Integer.hashCode(id);
     }
 }

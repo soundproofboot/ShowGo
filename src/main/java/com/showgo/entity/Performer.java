@@ -138,11 +138,11 @@ public class Performer implements Identifiable {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Performer performer = (Performer) o;
-        return id == performer.id && Objects.equals(name, performer.name);
+        return id != 0 && id == performer.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Integer.hashCode(id);
     }
 }

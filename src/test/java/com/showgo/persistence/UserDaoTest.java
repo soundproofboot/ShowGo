@@ -213,6 +213,22 @@ public class UserDaoTest {
 //
 //    }
 
+    /**
+     * remove interest in event 1 from user 1
+     */
+    @Test
+    void removeEventInterestSuccess() {
+        User testUser = dao.getById(1);
+        int numInterestsBefore = testUser.getEventInterests().size();
+
+        Event eventToRemove = new GenericDao<>(Event.class).getById(1);
+        testUser.removeEventInterest(eventToRemove);
+        dao.update(testUser);
+
+        User userAfterUpdate = dao.getById(testUser.getId());
+        int numInterestsAfter = userAfterUpdate.getEventInterests().size();
+        assertEquals(numInterestsBefore - 1, numInterestsAfter);
+    }
 //    TODO ADDITIONAL TESTS
 //    follow a venue
 //    remove a performer follow

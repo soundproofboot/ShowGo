@@ -99,12 +99,12 @@ public class VenueFollow {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         VenueFollow that = (VenueFollow) o;
-        return Objects.equals(user, that.user) && Objects.equals(venue, that.venue);
+        return id != 0 && id == that.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user, venue);
+        return Integer.hashCode(id);
     }
 
     @Override
