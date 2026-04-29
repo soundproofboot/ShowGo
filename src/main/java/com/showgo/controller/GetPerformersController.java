@@ -22,8 +22,14 @@ public class GetPerformersController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         GenericDao<Performer> dao = new GenericDao<>(Performer.class);
-        req.setAttribute("allPerformers",  dao.getAll());
-        req.setAttribute("title", "Get Performers");
+        String performerName = req.getParameter("performerName");
+
+        if (performerName != null) {
+            req.setAttribute("searchTerm", performerName);
+            req.setAttribute("performers", dao.getByPropertyLike("name", performerName));
+        }
+
+        req.setAttribute("title", "Search Performers");
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/getAllPerformers.jsp");
         dispatcher.forward(req, resp);

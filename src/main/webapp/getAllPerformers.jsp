@@ -5,22 +5,39 @@
 <html>
     <body>
         <c:import url="nav.jsp" />
-        <h1>All performers and the users that follow them</h1>
-        <c:forEach items = "${allPerformers}" var="performer">
-            <h2><a href="${context}/performers/${performer.id}">${performer.name}</a></h2>
-            <p>manager: ${performer.user.username}</p>
-            <p>followers</p>
-            <ul>
-                <c:forEach items = "${performer.followers}" var="follow">
-                    <li>${follow.user.username}</li>
-                </c:forEach>
-            </ul>
-            <p>events</p>
-            <ul>
-                <c:forEach items = "${performer.events}" var="eventPerformer">
-                    <li>${eventPerformer.event.title}</li>
-                </c:forEach>
-            </ul>
-        </c:forEach>
+        <h1>Search performers</h1>
+        <c:choose>
+            <c:when test="${empty searchTerm}">
+                <form action="${context}/performers" method="GET">
+                    <label for="performerName">Name</label>
+                    <input type="text" name="performerName" id="performerName" value="${searchTerm}" required>
+                    <input type="submit">
+                </form>
+            </c:when>
+            <c:otherwise>
+                <c:choose>
+                    <c:when test="${empty performers}">
+                        <p>No results for ${searchTerm}</p>
+                        <form action="${context}/performers" method="GET">
+                            <label for="performerName">Name</label>
+                            <input type="text" name="performerName" id="performerName" value="${searchTerm}" required>
+                            <input type="submit">
+                        </form>
+                    </c:when>
+                    <c:otherwise>
+                        <p>Showing results for ${searchTerm}</p>
+                        <form action="${context}/performers" method="GET">
+                            <label for="performerName">Name</label>
+                            <input type="text" name="performerName" id="performerName" value="${searchTerm}" required>
+                            <input type="submit">
+                        </form>
+                        <c:forEach items="${performers}" var="performer">
+                            <h2><a href="${context}/performers/${performer.id}">${performer.name}</a></h2>
+                            <p>manager: ${performer.user.username}</p>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
+            </c:otherwise>
+        </c:choose>
     </body>
 </html>
