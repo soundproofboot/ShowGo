@@ -103,3 +103,4 @@
 # Week 14
 - Ability to remove event interests
 - Add/remove venue follows
+- Add performer search by name
