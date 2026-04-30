@@ -108,3 +108,6 @@
 - Add createdAt and eventStart fields to events, new methods
 - Rename index.jsp to home.jsp and set up servlet to fetch newest events or by user location
 - create eventSimple.jsp to reuse and pass event
+- Page to create new venue and new performer for logged in user
+- Set up venue page to check if logged in user is owner and show event form
+- Create form to create new event with date picker
