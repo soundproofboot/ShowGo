@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="head.jsp" />
-<c:set var="context" value="${pageContext.request.contextPath}" />
+<c:set var="context" value="${pageContext.request.contextPath}" scope="request"/>
 
 <html>
 <script>console.log('can I just write javascript like this')</script>
@@ -10,7 +10,7 @@
     <c:choose>
 <%--        redirect to home page if not logged in--%>
         <c:when test="${empty user}">
-            <c:redirect url="${context}/index.jsp"></c:redirect>
+            <c:redirect url="${context}/home.jsp"></c:redirect>
         </c:when>
         <c:otherwise>
             <c:choose>
@@ -29,14 +29,10 @@
                 <c:otherwise>
                     <h2>${user.username}</h2>
                     <p>${user.city}, ${user.state}</p>
-                    <h3>Upcoming events</h3>
+                    <h3>Your upcoming events</h3>
                     <c:forEach items="${user.eventInterests}" var="eventInterest">
-                        <p><a href="${context}/events/${eventInterest.event.id}">${eventInterest.event.title}</a></p>
-                        <p>@<a href="${context}/venues/${eventInterest.event.venue.id}">${eventInterest.event.venue.name}</a></p>
-                        <p>Lineup</p>
-                        <c:forEach items="${eventInterest.event.performers}" var="eventPerformer">
-                            <p><a href="${context}/performers/${eventPerformer.performer.id}">${eventPerformer.performer.name}</a></p>
-                        </c:forEach>
+                        <c:set var="event" value="${eventInterest.event}" scope="request"/>
+                        <jsp:include page="components/eventSimple.jsp"/>
                     </c:forEach>
                     <h3>Venues you follow</h3>
                     <c:choose>
@@ -56,7 +52,7 @@
                         </c:when>
                         <c:otherwise>
                             <c:forEach items="${user.performerFollows}" var="performerFollow">
-                                <h4><a href="${context}/performers/${performerFollow.performer.id}"></a></h4>
+                                <h4><a href="${context}/performers/${performerFollow.performer.id}">${performerFollow.performer.name}</a></h4>
                             </c:forEach>
                         </c:otherwise>
                     </c:choose>

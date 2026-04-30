@@ -1,7 +1,7 @@
 package com.showgo.controller;
 
+import com.showgo.entity.Performer;
 import com.showgo.entity.User;
-import com.showgo.entity.Venue;
 import com.showgo.persistence.GenericDao;
 
 import javax.servlet.ServletException;
@@ -13,34 +13,35 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Unfollow venue
+ * Add follow to performer for user
  */
 @WebServlet(
-        urlPatterns = { "/removeVenueFollow"}
+        urlPatterns = { "/addPerformerFollow"}
 )
-public class RemoveVenueFollow extends HttpServlet {
+public class AddPerformerFollow extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int venueId = Integer.parseInt(req.getParameter("venue_id"));
+        int performerId = Integer.parseInt(req.getParameter("performer_id"));
 
         HttpSession session = req.getSession();
         User userInSession = (User) session.getAttribute("user");
+
         if (userInSession == null) {
             resp.sendRedirect(req.getContextPath() + "/login");
             return;
         } else {
             GenericDao<User> userDao = new GenericDao<>(User.class);
-            Venue venue = new GenericDao<>(Venue.class).getById(venueId);
             User userFromDb = userDao.getById(userInSession.getId());
-            if (venue != null && userFromDb != null) {
-                userFromDb.removeVenueFollow(venue);
+            Performer performer = new GenericDao<>(Performer.class).getById(performerId);
+
+            if (performer != null) {
+                userFromDb.addPerformerFollow(performer);
                 userDao.update(userFromDb);
 
-                User userAfterUpdate = userDao.getById(userInSession.getId());
-
+                User userAfterUpdate = userDao.getById(userFromDb.getId());
                 session.setAttribute("user", userAfterUpdate);
             }
 
-            resp.sendRedirect(req.getContextPath() + "/venues/" + venueId);
+            resp.sendRedirect(req.getContextPath() + "/performers/" + performerId);
         }
     }
 }

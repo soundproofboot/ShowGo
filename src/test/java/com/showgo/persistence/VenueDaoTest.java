@@ -10,6 +10,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -102,7 +103,7 @@ public class VenueDaoTest {
         Venue testVenue = dao.getById(1);
         int initialEventCount = testVenue.getEvents().size();
 
-        Event testEvent = new Event("event4", testVenue);
+        Event testEvent = new Event("event4", testVenue, LocalDateTime.now());
         testVenue.addEvent(testEvent);
         dao.update(testVenue);
 

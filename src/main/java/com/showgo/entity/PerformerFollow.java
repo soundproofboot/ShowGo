@@ -105,7 +105,7 @@ public class PerformerFollow implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(user, performer);
+        return Integer.hashCode(id);
     }
 
     @Override

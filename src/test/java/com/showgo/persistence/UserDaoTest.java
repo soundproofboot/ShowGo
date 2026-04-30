@@ -128,24 +128,12 @@ public class UserDaoTest {
         User testUser = dao.getById(1);
         int initialPerformerFollowSize = testUser.getPerformerFollows().size();
 
-        GenericDao<Performer> performerDao = new GenericDao<>(Performer.class);
-        Performer performerToUnfollow = performerDao.getById(1);
-
-        testUser.getPerformerFollows().forEach(pf -> {
-            System.out.println("PerformerFollow id=" + pf.getId()
-                    + " performer instance hashCode=" + System.identityHashCode(pf.getPerformer())
-                    + " performer name=" + pf.getPerformer().getName());
-        });
-        System.out.println("performerToUnfollow instance hashCode=" + System.identityHashCode(performerToUnfollow));
-
-        testUser.removePerformerFollow(performerToUnfollow);
-//        System.out.println("performerFollows size after remove: " + testUser.getPerformerFollows().size());
-//        System.out.println("performer followers size after remove: " + performerToUnfollow.getFollowers().size());
+        Performer performerToRemove =  new GenericDao<>(Performer.class).getById(1);
+        testUser.removePerformerFollow(performerToRemove);
         dao.update(testUser);
 
         User userAfterUpdate = dao.getById(testUser.getId());
         int afterUpdatePerformerFollowsSize = userAfterUpdate.getPerformerFollows().size();
-
         assertEquals(initialPerformerFollowSize - 1, afterUpdatePerformerFollowsSize);
     }
 

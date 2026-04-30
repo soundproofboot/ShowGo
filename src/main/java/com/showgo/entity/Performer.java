@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -22,7 +21,7 @@ public class Performer implements Identifiable {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "performer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "performer", fetch = FetchType.EAGER)
     private Set<PerformerFollow> followers = new HashSet<>();
 
     @OneToMany(mappedBy = "performer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
@@ -112,17 +111,6 @@ public class Performer implements Identifiable {
 
     public void setEvents(Set<EventPerformer> events) {
         this.events = events;
-    }
-
-    /**
-     * Add follower
-     *
-     * @param user the follower to add
-     */
-    public void addFollower(User user) {
-        PerformerFollow performerFollow = new PerformerFollow(user, this);
-        followers.add(performerFollow);
-        user.getPerformerFollows().add(performerFollow);
     }
 
     @Override

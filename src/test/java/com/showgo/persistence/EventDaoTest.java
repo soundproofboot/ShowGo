@@ -10,6 +10,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -58,7 +60,8 @@ public class EventDaoTest {
         GenericDao<Venue> venueDao = new GenericDao<>(Venue.class);
         Venue venue = venueDao.getById(1);
 
-        Event testEvent = new Event("testEvent", venue);
+        LocalDateTime date = LocalDateTime.now();
+        Event testEvent = new Event("testEvent", venue, date);
 
 //        insert testEvent
         int insertedEventId = dao.insert(testEvent);
@@ -136,4 +139,23 @@ public class EventDaoTest {
 //        assertEquals(initialEventLineupSize - 1, lineupSizeAfterUpdate);
 //    }
 //    TODO test for getEventsByCityState
+
+    @Test
+    void getEventsByCityStateSuccess() {
+        EventDao eventDao = new EventDao();
+        List<Event> madisonWIEvents = eventDao.getEventsByCityState("Madison", "WI");
+        System.out.println(madisonWIEvents);
+
+    }
+
+    @Test
+    void getRecentEventsSuccess() {
+        EventDao eventDao = new EventDao();
+        List<Event> recentEvents = eventDao.getMostRecentEvents(20);
+
+        Timestamp mostRecent = recentEvents.get(0).getCreatedAt();
+        Timestamp secondMostRecent = recentEvents.get(1).getCreatedAt();
+
+        assertTrue(mostRecent.after(secondMostRecent));
+    }
 }

@@ -28,9 +28,26 @@ public class EventDao {
                         builder.equal(root.get("venue").get("city"), city),
                         builder.equal(root.get("venue").get("state"), state)
                 ));
+        query.orderBy(builder.asc(root.get("eventStart")));
+
         List<Event> events = session.createQuery(query).getResultList();
         session.close();
 
         return events;
+    }
+
+    public List<Event> getMostRecentEvents(int numResults) {
+        Session session = sessionFactory.openSession();
+        HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Event> query = builder.createQuery(Event.class);
+        Root<Event> root = query.from(Event.class);
+        query.orderBy(builder.desc(root.get("createdAt")));
+
+        List<Event> recentEvents = session.createQuery(query)
+                .setMaxResults(numResults)
+                .getResultList();
+
+        session.close();
+        return recentEvents;
     }
 }

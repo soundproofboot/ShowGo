@@ -278,7 +278,6 @@ public class User implements Identifiable {
     public void addPerformerFollow(Performer performer) {
         PerformerFollow performerFollow = new PerformerFollow(this, performer);
         performerFollows.add(performerFollow);
-        performer.getFollowers().add(performerFollow);
     }
 
     /**
@@ -287,28 +286,14 @@ public class User implements Identifiable {
      * @param performer the performer to stop following
      */
     public void removePerformerFollow(Performer performer) {
-        System.out.println("performerFollows size before: " + performerFollows.size());
-        System.out.println("Looking for performer: " + performer.getName());
-
-        for (Iterator<PerformerFollow> iterator = performerFollows.iterator();
-             iterator.hasNext(); ) {
-            PerformerFollow performerFollow = iterator.next();
-
-            System.out.println("Checking PerformerFollow id=" + performerFollow.getId()
-                    + " performer=" + performerFollow.getPerformer().getName()
-                    + " user=" + performerFollow.getUser().getId());
-            if (performerFollow.getPerformer().equals(performer) &&
-                    performerFollow.getUser().equals(this) ) {
-                System.out.println("Match found - removing");
+        for (Iterator<PerformerFollow> iterator = performerFollows.iterator(); iterator.hasNext(); ) {
+            PerformerFollow pf = iterator.next();
+            if (pf.getPerformer().equals(performer)) {
                 iterator.remove();
-                System.out.println("followers size before remove: " + performerFollow.getPerformer().getFollowers().size());
-                performerFollow.getPerformer().getFollowers().remove(performerFollow);
-                System.out.println("followers size after remove: " + performerFollow.getPerformer().getFollowers().size());
-                performerFollow.setPerformer(null);
-                performerFollow.setUser(null);
+                pf.setPerformer(null);
+                pf.setUser(null);
             }
         }
-        System.out.println("performerFollows size after: " + performerFollows.size());
     }
 
     /**

@@ -91,6 +91,8 @@ public class Auth extends HttpServlet {
         if (authCode == null) {
             logger.debug("authCode is null - set cognitoId in context to null and forward to home page?");
             session.setAttribute("user", null);
+            resp.sendRedirect(req.getContextPath() + "/");
+            return;
         } else {
             logger.debug("in else of doGet - authCode must exist");
             HttpRequest authRequest = buildAuthRequest(authCode);

@@ -3,7 +3,7 @@
 <c:set var="context" value="${pageContext.request.contextPath}" />
 <nav>
     <div>
-        <a href="${context}/index.jsp">Home</a> ||
+        <a href="${context}/">Home</a> ||
         <a href="${context}/users">Users</a> ||
         <a href="${context}/performers">Performers</a> ||
         <a href="${context}/venues">Venues</a> ||

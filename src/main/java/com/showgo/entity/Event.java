@@ -2,11 +2,14 @@ package com.showgo.entity;
 
 import com.showgo.persistence.Identifiable;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -22,6 +25,13 @@ public class Event implements Identifiable {
 
     @Column(name = "title")
     private String title;
+
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
+    private Timestamp createdAt;
+
+    @Column(name = "event_start")
+    private LocalDateTime eventStart;
 
     @ManyToOne
     private Venue venue;
@@ -41,12 +51,14 @@ public class Event implements Identifiable {
     /**
      * Instantiates a new Event.
      *
-     * @param title the title
-     * @param venue the venue
+     * @param title      the title
+     * @param venue      the venue
+     * @param eventStart the event start
      */
-    public Event(String title, Venue venue) {
+    public Event(String title, Venue venue, LocalDateTime eventStart) {
         this.title = title;
         this.venue = venue;
+        this.eventStart = eventStart;
     }
 
     public int getId() {
@@ -96,6 +108,52 @@ public class Event implements Identifiable {
      */
     public void setVenue(Venue venue) {
         this.venue = venue;
+    }
+
+    /**
+     * Gets created at.
+     *
+     * @return the created at
+     */
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    /**
+     * Sets created at.
+     *
+     * @param createdAt the created at
+     */
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    /**
+     * Gets event start.
+     *
+     * @return the event start
+     */
+    public LocalDateTime getEventStart() {
+        return eventStart;
+    }
+
+    /**
+     * Sets event start.
+     *
+     * @param eventStart the event start
+     */
+    public void setEventStart(LocalDateTime eventStart) {
+        this.eventStart = eventStart;
+    }
+
+    public String getDateString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM dd, yyyy");
+        return eventStart.format(formatter);
+    }
+
+    public String getTimeString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        return eventStart.format(formatter);
     }
 
     /**
@@ -168,6 +226,8 @@ public class Event implements Identifiable {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", venue=" + venue +
+                ", createdAt=" + createdAt +
+                ", eventStart=" + eventStart +
                 '}';
     }
 
