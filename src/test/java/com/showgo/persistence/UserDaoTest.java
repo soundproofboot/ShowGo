@@ -169,24 +169,24 @@ public class UserDaoTest {
         int venueFollowsAfterRemove = userAfterUpdate.getVenueFollows().size();
         assertEquals(initialVenueFollowsSize - 1, venueFollowsAfterRemove);
     }
-//
-//    @Test
-//    void addEventInterestSuccess() {
-//        User testUser = dao.getById(1);
-//        int initialEventInterestsSize = testUser.getEventInterests().size();
-//
-//        GenericDao<Event> eventDao = new GenericDao<>(Event.class);
-//        Event eventToAdd = eventDao.getById(3);
-//
-//        testUser.addEventInterest(eventToAdd);
-//        dao.update(testUser);
-//
-//        User userAfterUpdate = dao.getById(testUser.getId());
-//        int afterUpdateEventInterestSize = userAfterUpdate.getEventInterests().size();
-//
-//        assertEquals(initialEventInterestsSize + 1, afterUpdateEventInterestSize);
-//
-//    }
+
+    @Test
+    void addEventInterestSuccess() {
+        User testUser = dao.getById(1);
+        int initialEventInterestsSize = testUser.getEventInterests().size();
+
+        GenericDao<Event> eventDao = new GenericDao<>(Event.class);
+        Event eventToAdd = eventDao.getById(3);
+
+        testUser.addEventInterest(eventToAdd);
+        dao.update(testUser);
+
+        User userAfterUpdate = dao.getById(testUser.getId());
+        int afterUpdateEventInterestSize = userAfterUpdate.getEventInterests().size();
+
+        assertEquals(initialEventInterestsSize + 1, afterUpdateEventInterestSize);
+
+    }
 
     /**
      * remove interest in event 1 from user 1
@@ -204,11 +204,21 @@ public class UserDaoTest {
         int numInterestsAfter = userAfterUpdate.getEventInterests().size();
         assertEquals(numInterestsBefore - 1, numInterestsAfter);
     }
-//    TODO ADDITIONAL TESTS
-//    follow a venue
-//    remove a performer follow
-//    remove a venue follow
-//    add event interest
-//    remove event interest
 
+    @Test
+    void registerNewVenue() {
+        User testUser = dao.getById(1);
+        int numVenuesManaged = testUser.getVenues().size();
+
+        Venue newVenue = new Venue("testVenue", "TestCity", "AA", testUser);
+        testUser.addVenue(newVenue);
+        dao.update(testUser);
+
+        User userAfterUpdate = dao.getById(testUser.getId());
+        int numVenuesManagedAfter =  userAfterUpdate.getVenues().size();
+        assertEquals(numVenuesManagedAfter - 1, numVenuesManaged);
+    }
+
+//    TODO ADDITIONAL TESTS
+// remove a managed venue
 }

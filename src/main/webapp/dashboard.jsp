@@ -10,7 +10,7 @@
     <c:choose>
 <%--        redirect to home page if not logged in--%>
         <c:when test="${empty user}">
-            <c:redirect url="${context}/home.jsp"></c:redirect>
+            <c:redirect url="${context}/" />
         </c:when>
         <c:otherwise>
             <c:choose>
@@ -29,6 +29,15 @@
                 <c:otherwise>
                     <h2>${user.username}</h2>
                     <p>${user.city}, ${user.state}</p>
+                    <c:if test="${user.venues.size() > 0}">
+                        <p>Venues you manage...</p>
+                        <c:forEach items="${user.venues}" var="venue">
+                            <p><a href="${context}/venues/${venue.id}">${venue.name}</a></p>
+                        </c:forEach>
+                    </c:if>
+                    <c:if test="${user.performers.size() > 0}">
+                        <p>Performers you manage...</p>
+                    </c:if>
                     <h3>Your upcoming events</h3>
                     <c:forEach items="${user.eventInterests}" var="eventInterest">
                         <c:set var="event" value="${eventInterest.event}" scope="request"/>
@@ -58,6 +67,8 @@
                     </c:choose>
                 </c:otherwise>
             </c:choose>
+            <a href="${context}/newVenue">Register a new Venue</a>
+            <a href="${context}/newPerformer">Register a new Performer</a>
         </c:otherwise>
     </c:choose>
 </body>
