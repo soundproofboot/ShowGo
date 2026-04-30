@@ -104,3 +104,7 @@
 - Ability to remove event interests
 - Add/remove venue follows
 - Add performer search by name
+- Set up performer follow/unfollow
+- Add createdAt and eventStart fields to events, new methods
+- Rename index.jsp to home.jsp and set up servlet to fetch newest events or by user location
+- create eventSimple.jsp to reuse and pass event
