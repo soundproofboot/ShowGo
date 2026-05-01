@@ -3,7 +3,6 @@
 <c:set var="context" value="${pageContext.request.contextPath}" scope="request"/>
 
 <html>
-<script>console.log('can I just write javascript like this')</script>
 <body>
     <c:import url="nav.jsp" />
     <h1>Dashboard</h1>

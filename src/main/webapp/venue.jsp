@@ -3,6 +3,61 @@
 <c:set var="context" value="${pageContext.request.contextPath}" />
 
 <html>
+<script>
+
+    const performers = ${performersJson};
+    let lineupArr = [];
+
+    function addBandToLineup() {
+        let selectEl = document.querySelector("select");
+        let lineupInput = document.querySelector("#lineup");
+        let performerId = selectEl.value;
+        let performer = performers.find(p => p.id === Number.parseInt(performerId));
+        if (performer) {
+            if (!lineupArr.some(p => p.id === performer.id)) {
+                lineupArr.push(performer);
+            }
+            lineupInput.value = lineupArr.map(p => p.id).join(",");
+
+            updateLineupDisplayed();
+        }
+    }
+
+    function updateLineupDisplayed() {
+        let lineupList = document.querySelector("#lineupList");
+        lineupList.innerHTML = "";
+        for (let performer of lineupArr) {
+            let performerLi = document.createElement("li");
+            let performerNameEl = document.createElement("span");
+            performerNameEl.textContent = performer.name;
+
+            let removeBtn = document.createElement("button");
+            removeBtn.innerText = "X";
+            removeBtn.addEventListener("click", () => {
+                removePerformerFromLineup(performer.id);
+                updateLineupDisplayed();
+            })
+            performerLi.append(performerNameEl, removeBtn);
+
+            lineupList.appendChild(performerLi);
+        }
+    }
+
+    function removePerformerFromLineup(performerId) {
+        lineupArr = lineupArr.filter(p => p.id !== performerId);
+    }
+
+    window.onload = () => {
+        let selectEl = document.querySelector("select");
+
+        for (let p of performers) {
+            let performerOption = document.createElement("option");
+            performerOption.value = p.id;
+            performerOption.innerText = p.name;
+            selectEl.appendChild(performerOption);
+        }
+    }
+</script>
 <body>
 <c:import url="nav.jsp" />
 <c:choose>
@@ -30,6 +85,7 @@
                 <p>New Event</p>
                 <form action="${context}/newEvent" method="post">
                     <input type="hidden" name="venue_id" id="venue_id" value="${venue.id}">
+                    <input type="hidden" name="lineup" id="lineup" value="">
                     <label for="title">Event Title</label>
                     <input type="text" name="title" id="title" required>
                     <label for="event_start">Event start</label>
@@ -41,6 +97,19 @@
                     >
                     <input type="submit" value="Create Event">
                 </form>
+                <div>
+                    <p>Lineup</p>
+                    <ul id="lineupList">
+
+                    </ul>
+
+                </div>
+
+                <label for="selectBand">Select a band to add</label>
+                <select name="selectBand" id="selectBand">
+                    <option value="">--Select a performer and click add</option>
+                </select>
+                <button onclick="addBandToLineup()">Add</button>
             </c:when>
             <c:otherwise>
 <%--                NOT OWNER--%>
