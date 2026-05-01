@@ -111,3 +111,4 @@
 - Page to create new venue and new performer for logged in user
 - Set up venue page to check if logged in user is owner and show event form
 - Create form to create new event with date picker
+- Add dropdown to event form to add performers
