@@ -8,6 +8,11 @@
     <c:redirect url="/" />
 </c:if>
 <c:import url="nav.jsp" />
-<h1>add a performer</h1>
+<h1>Register a new performer</h1>
+<form action="newPerformer" method="post">
+    <label for="performer_name">Name</label>
+    <input type="text" name="performer_name" id="performer_name" required>
+    <input type="submit">
+</form>
 </body>
 </html>

@@ -36,6 +36,9 @@
                     </c:if>
                     <c:if test="${user.performers.size() > 0}">
                         <p>Performers you manage...</p>
+                        <c:forEach items="${user.performers}" var="performer">
+                            <p><a href="${context}/performers/${performer.id}">${performer.name}</a></p>
+                        </c:forEach>
                     </c:if>
                     <h3>Your upcoming events</h3>
                     <c:forEach items="${user.eventInterests}" var="eventInterest">
