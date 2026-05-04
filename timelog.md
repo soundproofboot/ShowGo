@@ -112,3 +112,7 @@
 - Set up venue page to check if logged in user is owner and show event form
 - Create form to create new event with date picker
 - Add dropdown to event form to add performers
+
+# Week 15
+- Set up api endpoint to send performers to new event page
+- Refactor venue.jsp to replace select el with all performers with performer search hitting performer api endpoint

@@ -3,3 +3,8 @@ nav {
     flex-flow: row nowrap;
     justify-content: space-between;
 }
+
+ul #performerList {
+    max-height: 300px;
+    overflow-y: scroll;
+}

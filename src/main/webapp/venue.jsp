@@ -5,22 +5,22 @@
 <html>
 <script>
 
-    const performers = ${performersJson};
+    let performerArr = [];
     let lineupArr = [];
 
-    function addBandToLineup() {
-        let selectEl = document.querySelector("select");
-        let lineupInput = document.querySelector("#lineup");
-        let performerId = selectEl.value;
-        let performer = performers.find(p => p.id === Number.parseInt(performerId));
+    function addPerformerToLineup(performer) {
         if (performer) {
             if (!lineupArr.some(p => p.id === performer.id)) {
                 lineupArr.push(performer);
             }
-            lineupInput.value = lineupArr.map(p => p.id).join(",");
-
+            setLineupInputValue();
             updateLineupDisplayed();
         }
+    }
+
+    function setLineupInputValue() {
+        let lineupInput = document.querySelector("#lineup");
+        lineupInput.value = lineupArr.map(p => p.id).join(",");
     }
 
     function updateLineupDisplayed() {
@@ -36,6 +36,8 @@
             removeBtn.addEventListener("click", () => {
                 removePerformerFromLineup(performer.id);
                 updateLineupDisplayed();
+                setLineupInputValue();
+                updatePerformerList();
             })
             performerLi.append(performerNameEl, removeBtn);
 
@@ -47,14 +49,41 @@
         lineupArr = lineupArr.filter(p => p.id !== performerId);
     }
 
-    window.onload = () => {
-        let selectEl = document.querySelector("select");
+    async function fetchPerformers() {
+        let searchTerm = document.querySelector("#performerSearch").value;
+        if (searchTerm) {
+            let performerResponse = await fetch("${context}/api/performers?name=" + searchTerm);
+            let data = await performerResponse.json();
+            performerArr = data;
+        }
 
-        for (let p of performers) {
-            let performerOption = document.createElement("option");
-            performerOption.value = p.id;
-            performerOption.innerText = p.name;
-            selectEl.appendChild(performerOption);
+        updatePerformerList();
+    }
+
+    function updatePerformerList() {
+        let performerList = document.querySelector("#performerList");
+        performerList.innerHTML = "";
+        if (performerArr.length > 0) {
+            for (let performer of performerArr) {
+                let liEl = document.createElement("li");
+                liEl.textContent = performer.name;
+
+
+                if (!lineupArr.some(p => p.id === performer.id)) {
+                    let buttonEl = document.createElement("button");
+                    buttonEl.textContent = "Add";
+                    buttonEl.addEventListener("click", () => {
+                        addPerformerToLineup(performer);
+                        updatePerformerList();
+                    })
+                    liEl.appendChild(buttonEl);
+                }
+                performerList.appendChild(liEl);
+            }
+        } else {
+            let liEl = document.createElement("li");
+            liEl.textContent = "No results";
+            performerList.appendChild(liEl);
         }
     }
 </script>
@@ -95,21 +124,19 @@
                             id="event_start"
                             required
                     >
+                    <div>
+                        <p>Lineup</p>
+                        <ul id="lineupList">
+
+                        </ul>
+
+                    </div>
+                    <p>Search for bands to add to lineup</p>
+                    <input type="text" id="performerSearch">
+                    <button type="button" onclick="fetchPerformers()">Search</button>
+                    <ul id="performerList"></ul>
                     <input type="submit" value="Create Event">
                 </form>
-                <div>
-                    <p>Lineup</p>
-                    <ul id="lineupList">
-
-                    </ul>
-
-                </div>
-
-                <label for="selectBand">Select a band to add</label>
-                <select name="selectBand" id="selectBand">
-                    <option value="">--Select a performer and click add</option>
-                </select>
-                <button onclick="addBandToLineup()">Add</button>
             </c:when>
             <c:otherwise>
 <%--                NOT OWNER--%>
