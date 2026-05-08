@@ -4,6 +4,8 @@
 
 <html>
 <body>
+<div class="container">
+
 <c:import url="nav.jsp" />
 <h2>${event.title}</h2>
 <c:set var="isInterested" value="false" />
@@ -38,5 +40,7 @@
         <li>${eventPerformer.performer.name}</li>
     </c:forEach>
 </ul>
+</div>
+
 </body>
 </html>

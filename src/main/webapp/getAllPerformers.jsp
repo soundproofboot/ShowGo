@@ -4,6 +4,8 @@
 
 <html>
     <body>
+    <div class="container">
+
         <c:import url="nav.jsp" />
         <h1>Search performers</h1>
         <c:choose>
@@ -39,5 +41,7 @@
                 </c:choose>
             </c:otherwise>
         </c:choose>
+    </div>
+
     </body>
 </html>

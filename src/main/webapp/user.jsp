@@ -3,6 +3,8 @@
 
 <html>
 <body>
+<div class="container">
+
 <c:import url="nav.jsp" />
 <c:choose>
     <c:when test="${empty thisUser}">
@@ -13,5 +15,7 @@
         <p>logged in user: ${user.username}</p>
     </c:otherwise>
 </c:choose>
+</div>
+
 </body>
 </html>

@@ -4,6 +4,8 @@
 
 <html>
 <body>
+<div class="container">
+
 <c:if test="${empty user}">
     <c:redirect url="/" />
 </c:if>
@@ -14,5 +16,7 @@
     <input type="text" name="performer_name" id="performer_name" required>
     <input type="submit">
 </form>
+</div>
+
 </body>
 </html>

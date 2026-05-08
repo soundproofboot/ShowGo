@@ -4,7 +4,6 @@
 <nav>
     <div>
         <a href="${context}/">Home</a> ||
-        <a href="${context}/users">Users</a> ||
         <a href="${context}/performers">Performers</a> ||
         <a href="${context}/venues">Venues</a> ||
         <a href="${context}/events">Events</a> ||

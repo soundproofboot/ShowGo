@@ -147,12 +147,12 @@ public class Event implements Identifiable {
     }
 
     public String getDateString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM dd, yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE MMMM d, yyyy");
         return eventStart.format(formatter);
     }
 
     public String getTimeString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
         return eventStart.format(formatter);
     }
 

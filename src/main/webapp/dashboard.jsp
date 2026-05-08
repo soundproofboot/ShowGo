@@ -4,6 +4,8 @@
 
 <html>
 <body>
+<div class="container">
+
     <c:import url="nav.jsp" />
     <h1>Dashboard</h1>
     <c:choose>
@@ -41,10 +43,13 @@
                         </c:forEach>
                     </c:if>
                     <h3>Your upcoming events</h3>
-                    <c:forEach items="${user.eventInterests}" var="eventInterest">
-                        <c:set var="event" value="${eventInterest.event}" scope="request"/>
-                        <jsp:include page="components/eventSimple.jsp"/>
-                    </c:forEach>
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gap-4">
+                        <c:forEach items="${user.eventInterests}" var="eventInterest">
+                            <c:set var="event" value="${eventInterest.event}" scope="request"/>
+                            <jsp:include page="components/eventSimple.jsp"/>
+                        </c:forEach>
+                    </div>
+
                     <h3>Venues you follow</h3>
                     <c:choose>
                         <c:when test="${user.venueFollows.size() == 0}">
@@ -73,5 +78,7 @@
             <a href="${context}/newPerformer">Register a new Performer</a>
         </c:otherwise>
     </c:choose>
+</div>
+
 </body>
 </html>

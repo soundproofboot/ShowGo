@@ -2,6 +2,8 @@
 <c:import url="head.jsp" />
 <html>
 <body>
+<div class="container">
+
     <c:import url="nav.jsp" />
     <h1>All users and performers they follow</h1>
     <c:forEach items = "${allUsers}" var="user">
@@ -40,5 +42,7 @@
             </ul>
         </c:if>
     </c:forEach>
+</div>
+
 </body>
 </html>

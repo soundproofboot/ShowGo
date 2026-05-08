@@ -4,6 +4,8 @@
 
 <html>
 <body>
+<div class="container">
+
     <c:import url="nav.jsp" />
     <c:choose>
         <c:when test="${empty citySearched && empty stateSearched}">
@@ -44,5 +46,7 @@
             </c:choose>
         </c:otherwise>
     </c:choose>
+</div>
+
 </body>
 </html>
