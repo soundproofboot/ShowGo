@@ -117,3 +117,5 @@
 - Set up api endpoint to send performers to new event page
 - Refactor venue.jsp to replace select el with all performers with performer search hitting performer api endpoint
 - Register new performer
+- Add more bootstrap styling
+- Add fields to performer
