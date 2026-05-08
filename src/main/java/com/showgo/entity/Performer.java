@@ -21,6 +21,12 @@ public class Performer implements Identifiable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "genre")
+    private String genre;
+
     @OneToMany(mappedBy = "performer", fetch = FetchType.EAGER)
     private Set<PerformerFollow> followers = new HashSet<>();
 
@@ -39,18 +45,32 @@ public class Performer implements Identifiable {
     /**
      * Instantiates a new Performer.
      *
-     * @param name the name
-     * @param user the user that manages this performer
+     * @param name        the name
+     * @param description the description
+     * @param genre       the genre
+     * @param user        the user that manages this performer
      */
-    public Performer(String name, User user) {
+    public Performer(String name, String description, String genre, User user) {
         this.name = name;
         this.user = user;
+        this.description = description;
+        this.genre = genre;
     }
 
+    /**
+     * Gets user.
+     *
+     * @return the user
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Sets user.
+     *
+     * @param user the user
+     */
     public void setUser(User user) {
         this.user = user;
     }
@@ -88,6 +108,42 @@ public class Performer implements Identifiable {
     }
 
     /**
+     * Gets description.
+     *
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Sets description.
+     *
+     * @param description the description
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * Gets genre.
+     *
+     * @return the genre
+     */
+    public String getGenre() {
+        return genre;
+    }
+
+    /**
+     * Sets genre.
+     *
+     * @param genre the genre
+     */
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    /**
      * Gets followers
      *
      * @return PerformerFollows related to this performer
@@ -105,10 +161,20 @@ public class Performer implements Identifiable {
         this.followers = followers;
     }
 
+    /**
+     * Gets events.
+     *
+     * @return the events
+     */
     public Set<EventPerformer> getEvents() {
         return events;
     }
 
+    /**
+     * Sets events.
+     *
+     * @param events the events
+     */
     public void setEvents(Set<EventPerformer> events) {
         this.events = events;
     }
@@ -118,7 +184,9 @@ public class Performer implements Identifiable {
         return "Performer{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", manager=" + user + '\'' +
+                ", description='" + description + '\'' +
+                ", genre='" + genre + '\'' +
+                ", manager=" + user.getUsername() + '\'' +
                 '}';
     }
 

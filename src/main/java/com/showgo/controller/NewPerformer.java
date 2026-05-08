@@ -28,12 +28,20 @@ public class NewPerformer extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String performerName = req.getParameter("performer_name");
+        String description = req.getParameter("description");
+        String genre = req.getParameter("genre");
+
         HttpSession session = req.getSession();
         User userInSession = (User) session.getAttribute("user");
-        if (userInSession != null && !performerName.isEmpty()) {
+        if (
+                userInSession != null
+                && !performerName.isEmpty()
+                && !description.isEmpty()
+                && !genre.isEmpty()
+        ) {
             GenericDao<User> userDao = new GenericDao<>(User.class);
             User userFromDb = userDao.getById(userInSession.getId());
-            userFromDb.addPerformer(new Performer(performerName, userFromDb));
+            userFromDb.addPerformer(new Performer(performerName, description, genre, userFromDb));
             userDao.update(userFromDb);
 
             User userAfterUpdate = userDao.getById(userInSession.getId());

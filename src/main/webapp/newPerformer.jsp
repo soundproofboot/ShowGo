@@ -14,6 +14,10 @@
 <form action="newPerformer" method="post">
     <label for="performer_name">Name</label>
     <input type="text" name="performer_name" id="performer_name" required>
+    <label for="description">Describe your act</label>
+    <input type="text" name="description" id="description" required>
+    <label for="genre">Genre</label>
+    <input type="text" name="genre" id="genre" required>
     <input type="submit">
 </form>
 </div>

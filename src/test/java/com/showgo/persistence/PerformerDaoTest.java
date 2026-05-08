@@ -58,7 +58,7 @@ public class PerformerDaoTest {
         User manager = userDao.getById(1);
         logger.debug("performer manager - {}", manager);
 
-        Performer testPerformer = new Performer("testPerformerName", manager);
+        Performer testPerformer = new Performer("testPerformerName", "This is a description of the testPerformer", "testGenre", manager);
         int insertedId = dao.insert(testPerformer);
         assertNotEquals(0, insertedId);
 
