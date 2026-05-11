@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:set var="context" value="${pageContext.request.contextPath}" />
+
 <div class="col">
     <div class="card h-100">
         <div class="card-body">

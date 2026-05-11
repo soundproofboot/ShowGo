@@ -119,3 +119,7 @@
 - Register new performer
 - Add more bootstrap styling
 - Add fields to performer
+- Add fields to event and venue
+- Create cards for performers
+- Update event page
+- 
