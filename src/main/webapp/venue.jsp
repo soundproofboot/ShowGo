@@ -119,6 +119,10 @@
                     <input type="hidden" name="lineup" id="lineup" value="">
                     <label for="title">Event Title</label>
                     <input type="text" name="title" id="title" required>
+                    <label for="description">Desription</label>
+                    <textarea name="description" id="description"></textarea>
+                    <label for="ticket_price">Ticket Price</label>
+                    <input type="number" step="any" min="0" name="ticket_price" id="ticket_price">
                     <label for="event_start">Event start</label>
                     <input
                             type="datetime-local"

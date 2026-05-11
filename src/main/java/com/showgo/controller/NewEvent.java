@@ -26,21 +26,28 @@ public class NewEvent extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int venueId = Integer.parseInt(req.getParameter("venue_id"));
         String title = req.getParameter("title");
+        String description = req.getParameter("description");
         String lineup = req.getParameter("lineup");
         LocalDateTime eventStart = LocalDateTime.parse(req.getParameter("event_start"));
+        String ticketPrice = req.getParameter("ticket_price");
 
         HttpSession session = req.getSession();
         User userInSession = (User) session.getAttribute("user");
         if (userInSession != null
             && venueId != 0
             && !title.isEmpty()
+            && !description.isEmpty()
         ) {
             GenericDao<Venue> venueDao = new GenericDao<>(Venue.class);
             Venue venueFromDb = venueDao.getById(venueId);
             if (userInSession.getId() != venueFromDb.getUser().getId()) {
                 throw new Error("Not allowed");
             } else {
-                Event newEvent = new Event(title, venueFromDb, eventStart);
+                Double priceToSet = null;
+                if (ticketPrice != null && !ticketPrice.isEmpty()) {
+                    priceToSet = Double.parseDouble(ticketPrice);
+                }
+                Event newEvent = new Event(title, description, venueFromDb, eventStart, priceToSet);
                 if (!lineup.isEmpty()) {
                     List<String> performerIdList = List.of(lineup.split(","));
                     for (String performerIdStr : performerIdList) {

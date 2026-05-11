@@ -61,7 +61,7 @@ public class EventDaoTest {
         Venue venue = venueDao.getById(1);
 
         LocalDateTime date = LocalDateTime.now();
-        Event testEvent = new Event("testEvent", venue, date);
+        Event testEvent = new Event("testEvent", "test description", venue, date, 20.5);
 
 //        insert testEvent
         int insertedEventId = dao.insert(testEvent);

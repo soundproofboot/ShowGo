@@ -210,7 +210,7 @@ public class UserDaoTest {
         User testUser = dao.getById(1);
         int numVenuesManaged = testUser.getVenues().size();
 
-        Venue newVenue = new Venue("testVenue", "TestCity", "AA", testUser);
+        Venue newVenue = new Venue("testVenue", "TestCity", "AA", "123 Test St", "Test description", testUser);
         testUser.addVenue(newVenue);
         dao.update(testUser);
 

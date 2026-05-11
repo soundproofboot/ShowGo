@@ -9,8 +9,8 @@
     <c:import url="nav.jsp" />
     <c:choose>
         <c:when test="${empty citySearched && empty stateSearched}">
-            <h1>Search for events</h1>
-            <form action="${context}/events" method="GET">
+            <h1 class="text-center">Search for events</h1>
+            <form action="${context}/events" method="GET" class="text-center">
                 <label for="city">City</label>
                 <input type="text" name="city" id="city" value="${citySearched}"required>
                 <label for="state">State</label>
@@ -19,8 +19,8 @@
             </form>
         </c:when>
         <c:otherwise>
-            <h1>Events in ${citySearched}, ${stateSearched}</h1>
-            <form action="${context}/events" method="GET">
+            <h1 class="text-center">Events in ${citySearched}, ${stateSearched}</h1>
+            <form action="${context}/events" method="GET" class="text-center">
                 <label for="city">City</label>
                 <input type="text" name="city" id="city" value="${citySearched}"required>
                 <label for="state">State</label>
@@ -29,19 +29,16 @@
             </form>
             <c:choose>
                 <c:when test="${allEvents.size() > 0}">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gap-4 justify-content-center">
+
                     <c:forEach items="${allEvents}" var="event">
-                        <h2><a href="${context}/events/${event.id}">${event.title}</a></h2>
-                        <a href="${context}/venues/${event.venue.id}">@ ${event.venue.name}</a>
-                        <p>Lineup</p>
-                        <ul>
-                            <c:forEach items="${event.performers}" var="eventPerformer">
-                                <li><a href="${context}/performers/${eventPerformer.performer.id}"></a>${eventPerformer.performer.name}</li>
-                            </c:forEach>
-                        </ul>
+                        <c:set var="event" value="${event}" scope="request"/>
+                        <jsp:include page="components/eventSimple.jsp"/>
                     </c:forEach>
+                    </div>
                 </c:when>
                 <c:otherwise>
-                    <p>No results for ${citySearched}, ${stateSearched}</p>
+                    <p class="text-center">No results for ${citySearched}, ${stateSearched}</p>
                 </c:otherwise>
             </c:choose>
         </c:otherwise>

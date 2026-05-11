@@ -26,12 +26,18 @@ public class Event implements Identifiable {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "description")
+    private String description;
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private Timestamp createdAt;
 
     @Column(name = "event_start")
     private LocalDateTime eventStart;
+
+    @Column(name = "ticket_price")
+    private Double ticketPrice;
 
     @ManyToOne
     private Venue venue;
@@ -52,13 +58,17 @@ public class Event implements Identifiable {
      * Instantiates a new Event.
      *
      * @param title      the title
+     * @param description the description
      * @param venue      the venue
      * @param eventStart the event start
+     * @param ticketPrice the ticket price
      */
-    public Event(String title, Venue venue, LocalDateTime eventStart) {
+    public Event(String title, String description, Venue venue, LocalDateTime eventStart, Double ticketPrice) {
         this.title = title;
+        this.description = description;
         this.venue = venue;
         this.eventStart = eventStart;
+        this.ticketPrice = ticketPrice;
     }
 
     public int getId() {
@@ -90,6 +100,22 @@ public class Event implements Identifiable {
      */
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Double getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(Double ticketPrice) {
+        this.ticketPrice = ticketPrice;
     }
 
     /**
@@ -225,9 +251,11 @@ public class Event implements Identifiable {
         return "Event{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
                 ", venue=" + venue +
                 ", createdAt=" + createdAt +
                 ", eventStart=" + eventStart +
+                ", ticketPrice=" + ticketPrice +
                 '}';
     }
 

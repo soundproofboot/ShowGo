@@ -30,14 +30,20 @@
                 <c:otherwise>
                     <h2>${user.username}</h2>
                     <p>${user.city}, ${user.state}</p>
+                    <c:if test="${user.venues.size() == 0}">
+                        <a class="btn btn-primary" href="${context}/newVenue">Register a Venue</a>
+                    </c:if>
                     <c:if test="${user.venues.size() > 0}">
-                        <p>Venues you manage...</p>
+                        <h3>Venues you manage <a class="btn btn-primary" href="${context}/newVenue">New</a></h3>
                         <c:forEach items="${user.venues}" var="venue">
                             <p><a href="${context}/venues/${venue.id}">${venue.name}</a></p>
                         </c:forEach>
                     </c:if>
+                    <c:if test="${user.performers.size() == 0}">
+                        <a href=${context}/newPerformer" class="btn btn-primary">Register a Performer</a>
+                    </c:if>
                     <c:if test="${user.performers.size() > 0}">
-                        <p>Performers you manage...</p>
+                        <h3>Performers you manage <a class="btn btn-primary" href=${context}/newPerformer">New</a></h3>
                         <c:forEach items="${user.performers}" var="performer">
                             <p><a href="${context}/performers/${performer.id}">${performer.name}</a></p>
                         </c:forEach>
@@ -74,8 +80,6 @@
                     </c:choose>
                 </c:otherwise>
             </c:choose>
-            <a href="${context}/newVenue">Register a new Venue</a>
-            <a href="${context}/newPerformer">Register a new Performer</a>
         </c:otherwise>
     </c:choose>
 </div>

@@ -28,6 +28,8 @@ CREATE TABLE `event` (
                          `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                          `title` varchar(250) NOT NULL,
                          `venue_id` int NOT NULL,
+                         `description` varchar(256) NOT NULL,
+                         `ticket_price` double DEFAULT NULL,
                          PRIMARY KEY (`id`),
                          KEY `event__venue_fk` (`venue_id`),
                          CONSTRAINT `event__venue_fk` FOREIGN KEY (`venue_id`) REFERENCES `venue` (`id`)
@@ -40,7 +42,7 @@ CREATE TABLE `event` (
 
 LOCK TABLES `event` WRITE;
 /*!40000 ALTER TABLE `event` DISABLE KEYS */;
-INSERT INTO `event` VALUES (1,'2026-05-01 17:55:23','2026-04-28 16:56:23','event1',1),(2,'2026-05-02 15:56:23','2026-04-29 16:56:23','event2',2),(3,'2026-05-03 11:56:23','2026-04-30 16:56:23','event3',3);
+INSERT INTO `event` VALUES (1,'2026-05-01 17:55:23','2026-04-28 16:56:23','event1',1,'event1 desc',10.5),(2,'2026-05-02 15:56:23','2026-04-29 16:56:23','event2',2,'event2 desc',20),(3,'2026-05-03 11:56:23','2026-04-30 16:56:23','event3',3,'event3 desc',NULL);
 /*!40000 ALTER TABLE `event` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -202,6 +204,8 @@ CREATE TABLE `venue` (
                          `name` varchar(100) NOT NULL,
                          `city` varchar(100) NOT NULL,
                          `state` char(2) DEFAULT NULL,
+                         `description` varchar(256) NOT NULL,
+                         `street_address` varchar(100) NOT NULL,
                          PRIMARY KEY (`id`),
                          UNIQUE KEY `name` (`name`),
                          KEY `venue_user_id_fk` (`user_id`),
@@ -215,7 +219,7 @@ CREATE TABLE `venue` (
 
 LOCK TABLES `venue` WRITE;
 /*!40000 ALTER TABLE `venue` DISABLE KEYS */;
-INSERT INTO `venue` VALUES (1,1,'venue1','Madison','WI'),(2,2,'venue2','Milwaukee','WI'),(3,3,'venue3','Chicago','IL');
+INSERT INTO `venue` VALUES (1,1,'venue1','Madison','WI','This is the venue description for venue1','123 Fake St'),(2,2,'venue2','Milwaukee','WI','This is the venue description for venue2','234 Ficticious Avenue'),(3,3,'venue3','Chicago','IL','This is the venue description for venue3','345 Imaginary Place');
 /*!40000 ALTER TABLE `venue` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -257,4 +261,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-05-08 11:44:39
+-- Dump completed on 2026-05-11 11:43:23

@@ -32,6 +32,12 @@ public class Venue implements Identifiable {
     @Column(name = "state")
     private String state;
 
+    @Column(name = "street_address")
+    private String streetAddress;
+
+    @Column(name = "description")
+    private String description;
+
     @ManyToOne
     private User user;
 
@@ -41,19 +47,22 @@ public class Venue implements Identifiable {
     public Venue() {
     }
 
-
     /**
      * Instantiates a new Venue.
      *
      * @param name  the name
      * @param city  the city
      * @param state the state
+     * @param streetAddress the street address
+     * @param description the description
      * @param user the user that manages this venue
      */
-    public Venue(String name, String city, String state, User user) {
+    public Venue(String name, String city, String state, String streetAddress, String description, User user) {
         this.name = name;
         this.city = city;
         this.state = state;
+        this.streetAddress = streetAddress;
+        this.description = description;
         this.user = user;
     }
 
@@ -137,6 +146,22 @@ public class Venue implements Identifiable {
         this.state = state;
     }
 
+    public String getStreetAddress() {
+        return streetAddress;
+    }
+
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     /**
      * Gets followers
      *
@@ -198,9 +223,11 @@ public class Venue implements Identifiable {
         return "Venue{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", streetAddress='" + streetAddress + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
-                ", manager=" + user + '\'' +
+                ", description='" + description + '\'' +
+                ", manager=" + user.getUsername() + '\'' +
                 '}';
     }
 

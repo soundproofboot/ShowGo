@@ -60,7 +60,7 @@ public class VenueDaoTest {
 
         logger.debug("venue manager - {}", manager);
 
-        Venue testVenue = new Venue("testVenue", "testCity", "AA", manager);
+        Venue testVenue = new Venue("testVenue", "testCity", "AA", "123 Test St", "Test description", manager);
         int insertedId = dao.insert(testVenue);
         assertNotEquals(0, insertedId);
 
@@ -103,7 +103,7 @@ public class VenueDaoTest {
         Venue testVenue = dao.getById(1);
         int initialEventCount = testVenue.getEvents().size();
 
-        Event testEvent = new Event("event4", testVenue, LocalDateTime.now());
+        Event testEvent = new Event("event4", "testDescription", testVenue, LocalDateTime.now(), 20.50);
         testVenue.addEvent(testEvent);
         dao.update(testVenue);
 

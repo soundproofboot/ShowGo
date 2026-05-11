@@ -30,28 +30,28 @@ public class NewVenue extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("hit post route");
         String venueName = req.getParameter("venue_name");
+        String streetAddress = req.getParameter("street_address");
         String city = req.getParameter("city");
         String state = req.getParameter("state");
+        String description = req.getParameter("description");
 
         HttpSession session = req.getSession();
         User userInSession = (User) session.getAttribute("user");
         if (userInSession != null
         && !venueName.isEmpty()
+        && !streetAddress.isEmpty()
         && !city.isEmpty()
-        && !state.isEmpty()) {
-            System.out.println("got all the data");
+        && !state.isEmpty()
+        && !description.isEmpty()) {
             GenericDao<User> userDao = new GenericDao<>(User.class);
             User userFromDb = userDao.getById(userInSession.getId());
-            System.out.println("adding venue");
-            userFromDb.addVenue(new Venue(venueName, city, state, userFromDb));
+            userFromDb.addVenue(new Venue(venueName, city, state, streetAddress, description, userFromDb));
             userDao.update(userFromDb);
 
             User userAfterUpdate =  userDao.getById(userInSession.getId());
             session.setAttribute("user", userAfterUpdate);
 
             resp.sendRedirect(req.getContextPath() + "/dashboard");
-
         }
-
     }
 }

@@ -25,8 +25,8 @@
                     <a href="dashboard.jsp">Tell us about yourself</a>
                 </c:when>
                 <c:otherwise>
-                    <h2>Upcoming events in ${user.city}, ${user.state}</h2>
-                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gap-4">
+                    <h2 class="text-center">Upcoming events in ${user.city}, ${user.state}</h2>
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gap-4 justify-content-center">
                         <c:forEach items="${events}" var="event">
                             <c:set var="event" value="${event}" scope="request"/>
                             <jsp:include page="components/eventSimple.jsp"/>
