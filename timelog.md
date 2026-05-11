@@ -122,4 +122,5 @@
 - Add fields to event and venue
 - Create cards for performers
 - Update event page
+- Update single performer page, show events
 - 

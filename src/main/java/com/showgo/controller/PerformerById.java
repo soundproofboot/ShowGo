@@ -23,6 +23,7 @@ public class PerformerById extends HttpServlet {
         int performerId = Integer.parseInt(path.substring(1));
         Performer performer = new GenericDao<>(Performer.class).getById(performerId);
         req.setAttribute("performer", performer);
+        req.setAttribute("title", performer.getName());
         RequestDispatcher dispatcher = req.getRequestDispatcher("/performer.jsp");
         dispatcher.forward(req, resp);
     }
