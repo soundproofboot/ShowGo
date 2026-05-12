@@ -126,4 +126,7 @@
 - Update event page
 - Update single performer page, show events
 - Set up edit venue
-- 
+- Set up edit performer
+- Set up edit event
+- Fix remove event performer
+- Break out event form js and refactor

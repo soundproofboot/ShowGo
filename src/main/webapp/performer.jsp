@@ -12,30 +12,41 @@
         <h1>Not found</h1>
     </c:when>
     <c:otherwise>
+        <c:set var="isOwner" value="${performer.user.id == user.id}" />
         <h1 class="text-center">${performer.name}</h1>
-        <c:set var="isFollowed" value="false" />
         <c:choose>
-            <c:when test="${not empty user}">
-                <c:forEach items="${user.performerFollows}" var="performerFollow">
-                    <c:if test="${performerFollow.performer.id == performer.id}">
-                        <c:set var="isFollowed" value="true" />
-                    </c:if>
-                </c:forEach>
-            </c:when>
-        </c:choose>
-        <c:choose>
-            <c:when test="${isFollowed}">
-                <p>Followed</p>
-                <form action="${context}/removePerformerFollow" method="POST" class="text-center">
-                    <input type="hidden" name="performer_id" id="performer_id" value="${performer.id}">
-                    <input type="submit" value="Remove">
-                </form>
+            <c:when test="${isOwner}">
+<%--                OWNER--%>
+                <div class="text-center">
+                    <a href="${context}/editPerformer/${performer.id}" class="btn btn-primary">Edit</a>
+                </div>
             </c:when>
             <c:otherwise>
-                <form action="${context}/addPerformerFollow" method="POST" class="text-center">
-                    <input type="hidden" name="performer_id" id="performer_id" value="${performer.id}">
-                    <input type="submit" value="Follow">
-                </form>
+                <c:set var="isFollowed" value="false" />
+                <c:choose>
+                    <c:when test="${not empty user}">
+                        <c:forEach items="${user.performerFollows}" var="performerFollow">
+                            <c:if test="${performerFollow.performer.id == performer.id}">
+                                <c:set var="isFollowed" value="true" />
+                            </c:if>
+                        </c:forEach>
+                    </c:when>
+                </c:choose>
+                <c:choose>
+                    <c:when test="${isFollowed}">
+                        <p>Followed</p>
+                        <form action="${context}/removePerformerFollow" method="POST" class="text-center">
+                            <input type="hidden" name="performer_id" id="performer_id" value="${performer.id}">
+                            <input type="submit" value="Remove">
+                        </form>
+                    </c:when>
+                    <c:otherwise>
+                        <form action="${context}/addPerformerFollow" method="POST" class="text-center">
+                            <input type="hidden" name="performer_id" id="performer_id" value="${performer.id}">
+                            <input type="submit" value="Follow">
+                        </form>
+                    </c:otherwise>
+                </c:choose>
             </c:otherwise>
         </c:choose>
         <p><strong>Manager:</strong> <a href="${context}/users/${performer.user.username}">${performer.user.username}</a></p>

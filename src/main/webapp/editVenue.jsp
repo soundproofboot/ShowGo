@@ -7,7 +7,7 @@
 <div class="container">
     <c:import url="nav.jsp" />
     <h1 class="text-center">Edit Venue Details</h1>
-    <form action="${context}/editVenue/${venue.id}" method="POST" class="container mt-4" style="max-width: 600px;">
+    <form action="${context}/editVenue/${venue.id}" method="POST" class="container mt-4">
         <h3 class="mb-4 text-center">Edit Venue</h3>
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>

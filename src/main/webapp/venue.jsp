@@ -4,97 +4,20 @@
 
 <html>
 <script>
-
-    let performerArr = [];
-    let lineupArr = [];
-
-    function addPerformerToLineup(performer) {
-        if (performer) {
-            if (!lineupArr.some(p => p.id === performer.id)) {
-                lineupArr.push(performer);
-            }
-            setLineupInputValue();
-            updateLineupDisplayed();
-        }
-    }
-
-    function setLineupInputValue() {
-        let lineupInput = document.querySelector("#lineup");
-        lineupInput.value = lineupArr.map(p => p.id).join(",");
-    }
-
-    function updateLineupDisplayed() {
-        let lineupList = document.querySelector("#lineupList");
-        lineupList.innerHTML = "";
-        for (let performer of lineupArr) {
-            let performerLi = document.createElement("li");
-            let performerNameEl = document.createElement("span");
-            performerNameEl.textContent = performer.name;
-
-            let removeBtn = document.createElement("button");
-            removeBtn.innerText = "X";
-            removeBtn.addEventListener("click", () => {
-                removePerformerFromLineup(performer.id);
-                updateLineupDisplayed();
-                setLineupInputValue();
-                updatePerformerList();
-            })
-            performerLi.append(performerNameEl, removeBtn);
-
-            lineupList.appendChild(performerLi);
-        }
-    }
-
-    function removePerformerFromLineup(performerId) {
-        lineupArr = lineupArr.filter(p => p.id !== performerId);
-    }
-
-    async function fetchPerformers() {
-        let searchTerm = document.querySelector("#performerSearch").value;
-        if (searchTerm) {
-            let performerResponse = await fetch("${context}/api/performers?name=" + searchTerm);
-            let data = await performerResponse.json();
-            performerArr = data;
-        }
-
-        updatePerformerList();
-    }
-
-    function updatePerformerList() {
-        let performerList = document.querySelector("#performerList");
-        performerList.innerHTML = "";
-        if (performerArr.length > 0) {
-            for (let performer of performerArr) {
-                let liEl = document.createElement("li");
-                liEl.textContent = performer.name;
-
-
-                if (!lineupArr.some(p => p.id === performer.id)) {
-                    let buttonEl = document.createElement("button");
-                    buttonEl.classList.add("btn", "btn-primary", "mx-2");
-                    buttonEl.textContent = "Add";
-                    buttonEl.addEventListener("click", () => {
-                        addPerformerToLineup(performer);
-                        updatePerformerList();
-                    })
-                    liEl.appendChild(buttonEl);
-                }
-                performerList.appendChild(liEl);
-            }
-        } else {
-            let liEl = document.createElement("li");
-            liEl.textContent = "No results";
-            performerList.appendChild(liEl);
-        }
-    }
+<%--
+    initialize empty array to avoid throwing error in js that's
+    used for new event and edit event forms
+--%>
+    const initialPerformers = [];
 </script>
+<script src="${context}/js/eventForm.js"></script>
 <style>
     li {
         width: fit-content;
         margin: .5em auto;
     }
 </style>
-<body>
+<body data-context="${context}">
 <div class="container">
 
 <c:import url="nav.jsp" />
@@ -113,7 +36,7 @@
                 <div class="text-center">
                     <a href="${context}/editVenue/${venue.id}" class="btn btn-primary">Edit</a>
                 </div>
-                <form action="${context}/newEvent" method="post" class="container mt-4" style="max-width: 600px;">
+                <form action="${context}/newEvent" method="post" class="container mt-4">
                     <input type="hidden" name="venue_id" id="venue_id" value="${venue.id}">
                     <input type="hidden" name="lineup" id="lineup" value="">
                     <h3 class="mb-4 text-center">Create New Event</h3>
