@@ -130,3 +130,5 @@
 - Set up edit event
 - Fix remove event performer
 - Break out event form js and refactor
+- Create cards for venues
+- Update styling

@@ -3,10 +3,10 @@
 <c:set var="context" value="${pageContext.request.contextPath}" />
 
 <div class="col">
-    <div class="card h-100">
+    <div class="card h-100 bg-info">
         <div class="card-body">
-            <div class="card-title h4 text-center"><a href="${context}/events/${event.id}">${event.title}</a></div>
-            <div class="card-subtitle h5 text-center">@<a href="${context}/venues/${event.venue.id}">${event.venue.name}</a></div>
+            <div class="card-title h5 text-center"><a href="${context}/events/${event.id}">${event.title}</a></div>
+            <div class="card-subtitle h6 text-center">@<a href="${context}/venues/${event.venue.id}">${event.venue.name}</a></div>
             <div class="card-text">
                 <p>${event.description}</p>
                 <p class="h6">Lineup</p>

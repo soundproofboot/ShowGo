@@ -53,7 +53,7 @@
         <p><strong>Genre: </strong>${performer.genre}</p>
         <p><strong>Description: </strong>${performer.description}</p>
         <h2 class="text-center">Upcoming Shows</h2>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gap-4 justify-content-center">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gap-3 justify-content-center">
             <c:choose>
                 <c:when test="${performer.events.size() == 0}">
                     <p>Nothing on the calendar.</p>

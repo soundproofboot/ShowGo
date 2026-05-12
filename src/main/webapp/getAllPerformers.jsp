@@ -26,13 +26,13 @@
                         </form>
                     </c:when>
                     <c:otherwise>
-                        <p class="text-center">Showing results for ${searchTerm}</p>
+                        <p class="text-center">Showing results for "${searchTerm}"</p>
                         <form action="${context}/performers" method="GET" class="text-center">
                             <label for="performerName">Name</label>
                             <input type="text" name="performerName" id="performerName" value="${searchTerm}" required>
                             <input type="submit">
                         </form>
-                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gap-4 justify-content-center">
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gap-3 justify-content-center my-3">
                             <c:forEach items="${performers}" var="performer">
                                 <c:set var="performer" value="${performer}" scope="request" />
                                 <jsp:include page="components/performerSimple.jsp" />

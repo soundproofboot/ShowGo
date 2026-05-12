@@ -29,7 +29,7 @@
             </form>
             <c:choose>
                 <c:when test="${allEvents.size() > 0}">
-                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gap-4 justify-content-center">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gap-3 justify-content-center my-3">
 
                     <c:forEach items="${allEvents}" var="event">
                         <c:set var="event" value="${event}" scope="request"/>
