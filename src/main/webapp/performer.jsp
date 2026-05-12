@@ -38,7 +38,7 @@
                 </form>
             </c:otherwise>
         </c:choose>
-        <p>Manager: <a href="${context}/users/${performer.user.username}">${performer.user.username}</a></p>
+        <p><strong>Manager:</strong> <a href="${context}/users/${performer.user.username}">${performer.user.username}</a></p>
         <p><strong>Genre: </strong>${performer.genre}</p>
         <p><strong>Description: </strong>${performer.description}</p>
         <h2 class="text-center">Upcoming Shows</h2>

@@ -31,26 +31,8 @@ public class VenueById extends HttpServlet {
         int venueId = Integer.parseInt(path.substring(1));
         Venue venue = new GenericDao<>(Venue.class).getById(venueId);
 
-        HttpSession session = req.getSession();
-        User userInSession = (User) session.getAttribute("user");
-        System.out.println("userInSession = " + userInSession);
-        System.out.println("venue id");
-        System.out.println(venue.getUser().getId());
-        if (userInSession != null && userInSession.getId() == venue.getUser().getId()) {
-            System.out.println("should return performers");
-            ObjectMapper mapper = new ObjectMapper();
-            List<Performer> allPerformers = new GenericDao<>(Performer.class).getAll();
-            System.out.println(allPerformers);
-            List<PerformerDto> performerDtos = allPerformers.stream()
-                    .map(p -> new PerformerDto(p.getId(), p.getName()))
-                    .collect(Collectors.toList());
-            System.out.println(performerDtos);
-            String performersJson = mapper.writeValueAsString(performerDtos);
-            System.out.println(performersJson);
-            req.setAttribute("performersJson", performersJson);
-        }
-
         req.setAttribute("venue", venue);
+        req.setAttribute("title", venue.getName());
         RequestDispatcher dispatcher = req.getRequestDispatcher("/venue.jsp");
         dispatcher.forward(req, resp);
     }
