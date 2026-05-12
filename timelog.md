@@ -119,8 +119,11 @@
 - Register new performer
 - Add more bootstrap styling
 - Add fields to performer
+
+# Week 16
 - Add fields to event and venue
 - Create cards for performers
 - Update event page
 - Update single performer page, show events
+- Set up edit venue
 - 
