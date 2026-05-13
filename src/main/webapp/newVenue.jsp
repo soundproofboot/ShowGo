@@ -4,7 +4,7 @@
 
 <html>
 <head>
-    <script src="js/fetchStates.js"></script>
+    <script src="${context}/js/fetchStates.js"></script>
 </head>
 <body data-context="${context}">
 <div class="container">

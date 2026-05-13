@@ -4,7 +4,7 @@
 
 <html>
 <head>
-    <script src="js/fetchStates.js"></script>
+    <script src="${context}/js/fetchStates.js"></script>
 </head>
 <body data-context="${context}">
 <div class="container">
@@ -55,7 +55,7 @@
                         <a href="${context}/newPerformer" class="btn btn-primary">Register a Performer</a>
                     </c:if>
                     <c:if test="${user.performers.size() > 0}">
-                        <h3 class="text-center">Performers you manage <a class="btn btn-primary" href=${context}/newPerformer">New</a></h3>
+                        <h3 class="text-center">Performers you manage <a class="btn btn-primary" href="${context}/newPerformer">New</a></h3>
                         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gap-3 justify-content-center my-3">
                             <c:forEach items="${user.performers}" var="performer">
                                 <c:set var="performer" value="${performer}" scope="request"/>

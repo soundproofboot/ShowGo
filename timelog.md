@@ -135,3 +135,4 @@
 - Cancel (delete) event
 - Delete performer
 - Add working delete tests
+- Create api endpoint for state list and change text input to select

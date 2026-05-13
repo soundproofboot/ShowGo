@@ -28,7 +28,7 @@ CREATE TABLE `event` (
                          `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                          `title` varchar(250) NOT NULL,
                          `venue_id` int NOT NULL,
-                         `description` varchar(256) NOT NULL,
+                         `description` text NOT NULL,
                          `ticket_price` double DEFAULT NULL,
                          PRIMARY KEY (`id`),
                          KEY `event__venue_fk` (`venue_id`),
@@ -204,7 +204,7 @@ CREATE TABLE `venue` (
                          `name` varchar(100) NOT NULL,
                          `city` varchar(100) NOT NULL,
                          `state` char(2) DEFAULT NULL,
-                         `description` varchar(256) NOT NULL,
+                         `description` text NOT NULL,
                          `street_address` varchar(100) NOT NULL,
                          PRIMARY KEY (`id`),
                          UNIQUE KEY `name` (`name`),
@@ -261,4 +261,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-05-12 12:31:09
+-- Dump completed on 2026-05-13 11:02:53
