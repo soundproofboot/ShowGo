@@ -3,9 +3,11 @@
 <c:set var="context" value="${pageContext.request.contextPath}" scope="request"/>
 
 <html>
-<body>
+<head>
+    <script src="js/fetchStates.js"></script>
+</head>
+<body data-context="${context}">
 <div class="container">
-
     <c:if test="${empty user}">
         <c:redirect url="/" />
     </c:if>
@@ -25,8 +27,10 @@
             <input type="text" name="city" class="form-control" required>
         </div>
         <div class="mb-3">
-            <label for="state" class="form-label">State</label>
-            <input type="text" name="state" id="state" class="form-control" required>
+            <label for="stateSelect" class="form-label">State</label>
+            <select name="state" id="stateSelect" required>
+                <option value="">State</option>
+            </select>
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Tell us about the venue...</label>

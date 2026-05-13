@@ -3,7 +3,10 @@
 <c:set var="context" value="${pageContext.request.contextPath}" />
 
 <html>
-<body>
+<head>
+    <script src="js/fetchStates.js"></script>
+</head>
+<body data-context="${context}">
 <div class="container">
     <c:import url="nav.jsp" />
     <h3 class="mb-4 text-center">Edit Venue</h3>
@@ -24,8 +27,10 @@
             <input type="text" name="city" id="city" value="${venue.city}" class="form-control">
         </div>
         <div class="mb-3">
-            <label for="state" class="form-label">State</label>
-            <input type="text" name="state" id="state" value="${venue.state}" class="form-control">
+            <label for="stateSelect" class="form-label">State</label>
+            <select name="state" id="stateSelect" required>
+                <option value="">State</option>
+            </select>
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>

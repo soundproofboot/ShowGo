@@ -3,7 +3,10 @@
 <c:set var="context" value="${pageContext.request.contextPath}" />
 
 <html>
-<body>
+<head>
+    <script src="js/fetchStates.js"></script>
+</head>
+<body data-context="${context}">
 <div class="container">
 
     <c:import url="nav.jsp" />
@@ -13,8 +16,10 @@
             <form action="${context}/events" method="GET" class="text-center">
                 <label for="city">City</label>
                 <input type="text" name="city" id="city" value="${citySearched}"required>
-                <label for="state">State</label>
-                <input type="text" name="state" id="state" value="${stateSearched}" required>
+                <label for="stateSelect">State</label>
+                <select name="state" id="stateSelect" required>
+                    <option value="">State</option>
+                </select>
                 <input type="submit">
             </form>
         </c:when>
@@ -23,8 +28,10 @@
             <form action="${context}/events" method="GET" class="text-center">
                 <label for="city">City</label>
                 <input type="text" name="city" id="city" value="${citySearched}"required>
-                <label for="state">State</label>
-                <input type="text" name="state" id="state" value="${stateSearched}" required>
+                <label for="stateSelect">State</label>
+                <select name="state" id="stateSelect" required>
+                    <option value="">State</option>
+                </select>
                 <input type="submit">
             </form>
             <c:choose>
