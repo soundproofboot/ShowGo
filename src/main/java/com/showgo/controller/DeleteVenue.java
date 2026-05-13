@@ -1,7 +1,7 @@
 package com.showgo.controller;
 
-import com.showgo.entity.Performer;
 import com.showgo.entity.User;
+import com.showgo.entity.Venue;
 import com.showgo.persistence.GenericDao;
 
 import javax.servlet.ServletException;
@@ -13,35 +13,36 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Delete a performer
+ * Delete a venue
  */
 @WebServlet(
-        urlPatterns = { "/deletePerformer/*" }
+        urlPatterns = { "/deleteVenue/*"}
 )
-public class DeletePerformer extends HttpServlet {
+public class DeleteVenue extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String pathInfo = req.getPathInfo();
-        int performerId = Integer.parseInt(pathInfo.substring(1));
-        GenericDao<Performer> performerDao = new GenericDao<>(Performer.class);
-        Performer performer =  performerDao.getById(performerId);
+        int venueId = Integer.parseInt(pathInfo.substring(1));
+        GenericDao<Venue> venueDao = new GenericDao<>(Venue.class);
+        Venue venue = venueDao.getById(venueId);
 
         HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
+        User user =  (User)session.getAttribute("user");
 
-        if (user == null || performer == null || user.getId() != performer.getUser().getId()) {
-            resp.sendRedirect(req.getContextPath() + "/performers/" + performerId);
+        if (user == null || venue == null || user.getId() != venue.getUser().getId()) {
+            resp.sendRedirect(req.getContextPath() + "/venues/" + venueId);
         } else {
             GenericDao<User> userDao = new GenericDao<>(User.class);
-            User userFromDb =  userDao.getById(user.getId());
+            User userFromDb = userDao.getById(user.getId());
             if (userFromDb != null) {
-                userFromDb.removePerformer(performer);
+                userFromDb.removeVenue(venue);
                 userDao.update(userFromDb);
 
                 User userAfterUpdate = userDao.getById(userFromDb.getId());
-                session.setAttribute("user", userAfterUpdate);
+                session.setAttribute("user",  userAfterUpdate);
 
                 resp.sendRedirect(req.getContextPath() + "/dashboard");
             }
         }
     }
+
 }
