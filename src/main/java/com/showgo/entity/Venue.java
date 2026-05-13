@@ -50,12 +50,12 @@ public class Venue implements Identifiable {
     /**
      * Instantiates a new Venue.
      *
-     * @param name  the name
-     * @param city  the city
-     * @param state the state
+     * @param name          the name
+     * @param city          the city
+     * @param state         the state
      * @param streetAddress the street address
-     * @param description the description
-     * @param user the user that manages this venue
+     * @param description   the description
+     * @param user          the user that manages this venue
      */
     public Venue(String name, String city, String state, String streetAddress, String description, User user) {
         this.name = name;
@@ -66,10 +66,20 @@ public class Venue implements Identifiable {
         this.user = user;
     }
 
+    /**
+     * Gets user.
+     *
+     * @return the user
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Sets user.
+     *
+     * @param user the user
+     */
     public void setUser(User user) {
         this.user = user;
     }
@@ -146,18 +156,38 @@ public class Venue implements Identifiable {
         this.state = state;
     }
 
+    /**
+     * Gets street address.
+     *
+     * @return the street address
+     */
     public String getStreetAddress() {
         return streetAddress;
     }
 
+    /**
+     * Sets street address.
+     *
+     * @param streetAddress the street address
+     */
     public void setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
     }
 
+    /**
+     * Gets description.
+     *
+     * @return the description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Sets description.
+     *
+     * @param description the description
+     */
     public void setDescription(String description) {
         this.description = description;
     }

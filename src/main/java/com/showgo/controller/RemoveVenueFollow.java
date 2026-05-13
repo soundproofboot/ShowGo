@@ -20,11 +20,13 @@ import java.io.IOException;
 )
 public class RemoveVenueFollow extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        get id from request params
         int venueId = Integer.parseInt(req.getParameter("venue_id"));
 
         HttpSession session = req.getSession();
         User userInSession = (User) session.getAttribute("user");
         if (userInSession == null) {
+//            if not logged in, redirect
             resp.sendRedirect(req.getContextPath() + "/login");
             return;
         } else {
@@ -32,6 +34,7 @@ public class RemoveVenueFollow extends HttpServlet {
             Venue venue = new GenericDao<>(Venue.class).getById(venueId);
             User userFromDb = userDao.getById(userInSession.getId());
             if (venue != null && userFromDb != null) {
+//                if valid user and venue, remove and update user
                 userFromDb.removeVenueFollow(venue);
                 userDao.update(userFromDb);
 

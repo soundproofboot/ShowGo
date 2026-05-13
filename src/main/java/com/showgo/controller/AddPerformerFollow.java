@@ -20,15 +20,17 @@ import java.io.IOException;
 )
 public class AddPerformerFollow extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        Get performer and user from session
         int performerId = Integer.parseInt(req.getParameter("performer_id"));
-
         HttpSession session = req.getSession();
         User userInSession = (User) session.getAttribute("user");
 
         if (userInSession == null) {
+//            if not logged in, redirect
             resp.sendRedirect(req.getContextPath() + "/login");
             return;
         } else {
+//            add performer follow to user from db, update, and reset in session
             GenericDao<User> userDao = new GenericDao<>(User.class);
             User userFromDb = userDao.getById(userInSession.getId());
             Performer performer = new GenericDao<>(Performer.class).getById(performerId);

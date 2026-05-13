@@ -18,6 +18,7 @@ import java.util.List;
         urlPatterns = { "/"}
 )
 public class Home extends HttpServlet {
+//    return 20 most recent events if not logged in, or upcoming events in user's location if logged in
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

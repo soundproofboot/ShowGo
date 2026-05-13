@@ -14,6 +14,7 @@ public class ShowGoApplication extends Application {
     public Set<Class<?>> getClasses() {
         HashSet h = new HashSet<Class<?>>();
         h.add(PerformerService.class);
+        h.add(StateService.class);
         return h;
     }
 }

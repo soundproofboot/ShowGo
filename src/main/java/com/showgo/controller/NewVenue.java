@@ -28,7 +28,7 @@ public class NewVenue extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("hit post route");
+//        get venue data from request params
         String venueName = req.getParameter("venue_name");
         String streetAddress = req.getParameter("street_address");
         String city = req.getParameter("city");
@@ -43,6 +43,7 @@ public class NewVenue extends HttpServlet {
         && !city.isEmpty()
         && !state.isEmpty()
         && !description.isEmpty()) {
+//            if data valid and user logged in, add venue and update user
             GenericDao<User> userDao = new GenericDao<>(User.class);
             User userFromDb = userDao.getById(userInSession.getId());
             userFromDb.addVenue(new Venue(venueName, city, state, streetAddress, description, userFromDb));

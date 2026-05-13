@@ -57,10 +57,10 @@ public class Event implements Identifiable {
     /**
      * Instantiates a new Event.
      *
-     * @param title      the title
+     * @param title       the title
      * @param description the description
-     * @param venue      the venue
-     * @param eventStart the event start
+     * @param venue       the venue
+     * @param eventStart  the event start
      * @param ticketPrice the ticket price
      */
     public Event(String title, String description, Venue venue, LocalDateTime eventStart, Double ticketPrice) {
@@ -102,18 +102,38 @@ public class Event implements Identifiable {
         this.title = title;
     }
 
+    /**
+     * Gets description.
+     *
+     * @return the description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Sets description.
+     *
+     * @param description the description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Gets ticket price.
+     *
+     * @return the ticket price
+     */
     public Double getTicketPrice() {
         return ticketPrice;
     }
 
+    /**
+     * Sets ticket price.
+     *
+     * @param ticketPrice the ticket price
+     */
     public void setTicketPrice(Double ticketPrice) {
         this.ticketPrice = ticketPrice;
     }
@@ -172,11 +192,21 @@ public class Event implements Identifiable {
         this.eventStart = eventStart;
     }
 
+    /**
+     * Gets date string.
+     *
+     * @return the date string
+     */
     public String getDateString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE MMMM d, yyyy");
         return eventStart.format(formatter);
     }
 
+    /**
+     * Gets time string.
+     *
+     * @return the time string
+     */
     public String getTimeString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
         return eventStart.format(formatter);

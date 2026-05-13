@@ -22,13 +22,7 @@ public class Dashboard extends HttpServlet {
 
         HttpSession session = req.getSession();
         if (session.getAttribute("user") != null) {
-            System.out.println("there is a user in session");
             User user = (User) session.getAttribute("user");
-            System.out.println(user);
-
-        } else {
-            System.out.println("there is not a user in session");
-
         }
         RequestDispatcher dispatcher = req.getRequestDispatcher("/dashboard.jsp");
         dispatcher.forward(req, resp);

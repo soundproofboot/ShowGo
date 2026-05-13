@@ -18,6 +18,12 @@ public class EventDao {
     private final Logger logger = LogManager.getLogger(this.getClass());
     SessionFactory sessionFactory = SessionFactoryProvider.getSessionFactory();
 
+    /**
+     * Get events only at venues in provided city and state
+     * @param city the city
+     * @param state the state
+     * @return list of events in city/state
+     */
     public List<Event> getEventsByCityState(String city, String state) {
         Session session = sessionFactory.openSession();
         HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
@@ -36,6 +42,11 @@ public class EventDao {
         return events;
     }
 
+    /**
+     * Get n number of events ordered by most recent creation date
+     * @param numResults number of events to return
+     * @return list of n events ordered by creation date desc
+     */
     public List<Event> getMostRecentEvents(int numResults) {
         Session session = sessionFactory.openSession();
         HibernateCriteriaBuilder builder = session.getCriteriaBuilder();

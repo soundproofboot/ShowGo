@@ -322,11 +322,21 @@ public class User implements Identifiable {
         }
     }
 
+    /**
+     * Add event interest.
+     *
+     * @param event the event
+     */
     public void addEventInterest(Event event) {
         EventInterest eventInterest = new EventInterest(this, event);
         eventInterests.add(eventInterest);
     }
 
+    /**
+     * Remove event interest.
+     *
+     * @param event the event
+     */
     public void removeEventInterest(Event event) {
         for (Iterator<EventInterest> iterator = eventInterests.iterator(); iterator.hasNext(); ) {
             EventInterest ei = iterator.next();

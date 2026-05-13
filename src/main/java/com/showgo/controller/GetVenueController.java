@@ -23,10 +23,12 @@ public class GetVenueController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         VenueDao dao = new VenueDao();
+//        get city and state from request params
         String city = req.getParameter("city");
         String state = req.getParameter("state");
 
         if (city == null || state == null) {
+//            if no location, set to logged in user's location
             HttpSession session = req.getSession();
             if (session.getAttribute("user") != null) {
                 User user = (User) session.getAttribute("user");
@@ -39,6 +41,7 @@ public class GetVenueController extends HttpServlet {
 
         req.setAttribute("allVenues", dao.getVenuesByCityState(city, state));
         if (city == null || state == null) {
+//            conditional page title based on search done or not
             req.setAttribute("title", "Venue Search");
         } else {
             req.setAttribute("title", "Venues in " + city + ", " + state);

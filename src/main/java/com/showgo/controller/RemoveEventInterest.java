@@ -20,17 +20,20 @@ import java.io.IOException;
 )
 public class RemoveEventInterest extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        get event id from request params
         int eventId = Integer.parseInt(req.getParameter("event_id"));
 
         HttpSession session = req.getSession();
         User userInSession = (User) session.getAttribute("user");
         if (userInSession == null || eventId == 0) {
+//            if not logged in or no event id, redirect
             resp.sendRedirect(req.getContextPath() + "/login");
             return;
         } else {
             User userFromDb = new GenericDao<>(User.class).getById(userInSession.getId());
             Event event = new GenericDao<>(Event.class).getById(eventId);
             if (event != null) {
+//                if event is valid, remove interest from user and update
                 userFromDb.removeEventInterest(event);
                 GenericDao<User> userDao = new GenericDao<>(User.class);
                 userDao.update(userFromDb);

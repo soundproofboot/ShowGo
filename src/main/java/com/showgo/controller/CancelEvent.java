@@ -21,6 +21,7 @@ import java.io.IOException;
 )
 public class CancelEvent extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        get event id from path and event from db
         String path = req.getPathInfo();
         int eventId = Integer.parseInt(path.substring(1));
         GenericDao<Event> eventDao = new GenericDao<>(Event.class);
@@ -30,8 +31,10 @@ public class CancelEvent extends HttpServlet {
         User user = (User) session.getAttribute("user");
 
         if (user == null || event == null || user.getId() != event.getVenue().getUser().getId()) {
+//            if user does not have permission to delete event, redirect
             resp.sendRedirect(req.getContextPath() + "/events/" + eventId);
         } else {
+//            get hosting venue and call remove event, update user in session
             Venue venue = event.getVenue();
             venue.removeEvent(event);
             new GenericDao<>(Venue.class).update(venue);
@@ -40,6 +43,5 @@ public class CancelEvent extends HttpServlet {
 
             resp.sendRedirect(req.getContextPath() + "/venues/" + venue.getId());
         }
-
     }
 }

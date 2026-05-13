@@ -19,6 +19,7 @@ import java.io.IOException;
 )
 public class EventById extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        get id from path and venue from db
         String path = req.getPathInfo();
         int eventId = Integer.parseInt(path.substring(1));
         Event event = new GenericDao<>(Event.class).getById(eventId);

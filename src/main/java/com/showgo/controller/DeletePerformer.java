@@ -20,6 +20,7 @@ import java.io.IOException;
 )
 public class DeletePerformer extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        get performer id from path and performer from db
         String pathInfo = req.getPathInfo();
         int performerId = Integer.parseInt(pathInfo.substring(1));
         GenericDao<Performer> performerDao = new GenericDao<>(Performer.class);
@@ -29,11 +30,13 @@ public class DeletePerformer extends HttpServlet {
         User user = (User) session.getAttribute("user");
 
         if (user == null || performer == null || user.getId() != performer.getUser().getId()) {
+//            if user does not have permission to delete, redirect
             resp.sendRedirect(req.getContextPath() + "/performers/" + performerId);
         } else {
             GenericDao<User> userDao = new GenericDao<>(User.class);
             User userFromDb =  userDao.getById(user.getId());
             if (userFromDb != null) {
+//                remove performer from user and update, reset in session
                 userFromDb.removePerformer(performer);
                 userDao.update(userFromDb);
 

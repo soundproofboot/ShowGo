@@ -18,6 +18,12 @@ public class VenueDao {
     private final Logger logger = LogManager.getLogger(this.getClass());
     SessionFactory sessionFactory = SessionFactoryProvider.getSessionFactory();
 
+    /**
+     * Search venues by location
+     * @param city the city
+     * @param state the state
+     * @return list of venues in location provided
+     */
     public List<Venue> getVenuesByCityState(String city, String state) {
         Session session = sessionFactory.openSession();
         HibernateCriteriaBuilder builder = session.getCriteriaBuilder();

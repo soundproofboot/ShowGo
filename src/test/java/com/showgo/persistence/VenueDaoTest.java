@@ -130,7 +130,6 @@ public class VenueDaoTest {
     void getVenueByCityStateSuccess() {
         VenueDao venueDao = new VenueDao();
         List<Venue> venuesInMadisonWI = venueDao.getVenuesByCityState("Madison", "WI");
-        System.out.println(venuesInMadisonWI);
         assertEquals(1, venuesInMadisonWI.size());
     }
 }

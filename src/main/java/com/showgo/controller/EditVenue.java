@@ -21,6 +21,7 @@ import java.io.IOException;
 )
 public class EditVenue extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        get id from path and venue from db
         String path = req.getPathInfo();
         int venueId = Integer.parseInt(path.substring(1));
         Venue venue = new GenericDao<>(Venue.class).getById(venueId);
@@ -28,8 +29,10 @@ public class EditVenue extends HttpServlet {
         User user = (User) session.getAttribute("user");
 
         if (user == null || user.getId() != venue.getUser().getId()) {
+//            if user does not have permission, redirect
             resp.sendRedirect(req.getContextPath() + "/venue/" + venueId);
         } else {
+//            set venue on request
             req.setAttribute("venue", venue);
             req.setAttribute("title", "Update " + venue.getName());
             RequestDispatcher dispatcher = req.getRequestDispatcher("/editVenue.jsp");
@@ -38,6 +41,7 @@ public class EditVenue extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        get id from path, venue from db, and venue data from params
         String path = req.getPathInfo();
         int venueId = Integer.parseInt(path.substring(1));
 
@@ -59,6 +63,7 @@ public class EditVenue extends HttpServlet {
                 && !description.isEmpty()
                 && userInSession.getId() == venue.getUser().getId()
         ) {
+//            if user has permission and required data exists, update venue and reset user in session
             venue.setName(venueName);
             venue.setStreetAddress(streetAddress);
             venue.setCity(city);

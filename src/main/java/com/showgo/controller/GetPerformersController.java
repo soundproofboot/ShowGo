@@ -22,9 +22,11 @@ public class GetPerformersController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         GenericDao<Performer> dao = new GenericDao<>(Performer.class);
+//        get name from request params
         String performerName = req.getParameter("performerName");
 
         if (performerName != null) {
+//            if a search was done, set performers list and name searched
             req.setAttribute("searchTerm", performerName);
             req.setAttribute("performers", dao.getByPropertyLike("name", performerName));
         }

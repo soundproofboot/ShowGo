@@ -24,6 +24,7 @@ import java.util.List;
 )
 public class NewEvent extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        get venue and event data from form
         int venueId = Integer.parseInt(req.getParameter("venue_id"));
         String title = req.getParameter("title");
         String description = req.getParameter("description");
@@ -38,26 +39,34 @@ public class NewEvent extends HttpServlet {
             && !title.isEmpty()
             && !description.isEmpty()
         ) {
+//            if user logged in, valid venue and valid data
             GenericDao<Venue> venueDao = new GenericDao<>(Venue.class);
             Venue venueFromDb = venueDao.getById(venueId);
             if (userInSession.getId() != venueFromDb.getUser().getId()) {
+//                if user does not have permission, throw
                 throw new Error("Not allowed");
             } else {
+//                set ticket price if provided
                 Double priceToSet = null;
                 if (ticketPrice != null && !ticketPrice.isEmpty()) {
                     priceToSet = Double.parseDouble(ticketPrice);
                 }
+//                create new event with event data
                 Event newEvent = new Event(title, description, venueFromDb, eventStart, priceToSet);
+//                if lineup contains performer ids
                 if (!lineup.isEmpty()) {
+//                    split into list of each performer id
                     List<String> performerIdList = List.of(lineup.split(","));
                     for (String performerIdStr : performerIdList) {
                         int performerId =  Integer.parseInt(performerIdStr);
                         Performer performer = new GenericDao<>(Performer.class).getById(performerId);
                         if (performer != null) {
+//                            add performer to lineup if they exist
                             newEvent.addEventPerformer(performer);
                         }
                     }
                 }
+//                add event and update user in session
                 venueFromDb.addEvent(newEvent);
                 venueDao.update(venueFromDb);
                 User userAfterUpdate = new GenericDao<>(User.class).getById(userInSession.getId());

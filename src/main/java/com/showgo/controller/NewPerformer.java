@@ -27,6 +27,7 @@ public class NewPerformer extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        get performer data from request params
         String performerName = req.getParameter("performer_name");
         String description = req.getParameter("description");
         String genre = req.getParameter("genre");
@@ -39,6 +40,7 @@ public class NewPerformer extends HttpServlet {
                 && !description.isEmpty()
                 && !genre.isEmpty()
         ) {
+//            if user logged in and valid data, add performer and update user in session
             GenericDao<User> userDao = new GenericDao<>(User.class);
             User userFromDb = userDao.getById(userInSession.getId());
             userFromDb.addPerformer(new Performer(performerName, description, genre, userFromDb));

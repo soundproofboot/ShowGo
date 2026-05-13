@@ -20,15 +20,17 @@ import java.io.IOException;
 )
 public class AddVenueFollow extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        Get venue and user in session
         int venueId = Integer.parseInt(req.getParameter("venue_id"));
-
         HttpSession session = req.getSession();
         User userInSession = (User) session.getAttribute("user");
 
         if (userInSession == null) {
+//            if not logged in, redirect
             resp.sendRedirect(req.getContextPath() + "/login");
             return;
         } else {
+//            add venue follow to user from db, update and reset in session
             GenericDao<User> userDao = new GenericDao<>(User.class);
             User userFromDb = userDao.getById(userInSession.getId());
             Venue venue = new GenericDao<>(Venue.class).getById(venueId);

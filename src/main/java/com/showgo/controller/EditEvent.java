@@ -31,6 +31,7 @@ import java.util.stream.Collectors;
 )
 public class EditEvent extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        get id from path and event from db
         String path = req.getPathInfo();
         int eventId = Integer.parseInt(path.substring(1));
         Event event = new GenericDao<>(Event.class).getById(eventId);
@@ -38,6 +39,7 @@ public class EditEvent extends HttpServlet {
         User user = (User) session.getAttribute("user");
 
         if (user == null || user.getId() != event.getVenue().getUser().getId()) {
+//            if user does not have permission, redirect
             resp.sendRedirect(req.getContextPath() + "/events/" + eventId);
         } else {
 //            set current performers list as json to populate form
@@ -54,6 +56,7 @@ public class EditEvent extends HttpServlet {
             String eventStart = event.getEventStart().format(formatter);
             req.setAttribute("eventStart", eventStart);
 
+//            set event on request
             req.setAttribute("event", event);
             req.setAttribute("title", "Update " + event.getTitle());
             RequestDispatcher dispatcher = req.getRequestDispatcher("/editEvent.jsp");
@@ -62,6 +65,7 @@ public class EditEvent extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        get id from path and event values from params
         String path = req.getPathInfo();
         int eventId = Integer.parseInt(path.substring(1));
         String title = req.getParameter("title");
@@ -81,8 +85,10 @@ public class EditEvent extends HttpServlet {
             && !title.isEmpty()
             && !description.isEmpty()
         ) {
+//            if user and required data is valid...
             Double priceToSet = null;
             if (ticketPrice != null && !ticketPrice.isEmpty()) {
+//                if price provided, set
                 priceToSet = Double.parseDouble(ticketPrice);
             }
             event.setTitle(title);
@@ -105,6 +111,7 @@ public class EditEvent extends HttpServlet {
                 }
             }
 
+//            update event and update user in session
             eventDao.update(event);
             User userAfterUpdate = new GenericDao<>(User.class).getById(userInSession.getId());
             session.setAttribute("user", userAfterUpdate);
