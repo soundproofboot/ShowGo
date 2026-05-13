@@ -136,3 +136,5 @@
 - Delete performer
 - Add working delete tests
 - Create api endpoint for state list and change text input to select
+- Clean up code and add comments
+- Update ERD and documentation

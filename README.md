@@ -16,25 +16,19 @@ My indie project will be for venues, artists, and concert goers to find each oth
     * Hibernate
 * Dependency Management
     * Maven
-* Web Services consumed using Java
-    * TBD
 * CSS
-    * TBD
-* Data Validation
-    * TBD
+    * Bootstrap
 * Logging
     * Log4J2
 * Hosting
     * AWS
-* Tech I'd like to explore as part of this work
-    * TBD
 * Unit Testing
     * JUnit
 * IDE: IntelliJ IDEA
 
 ### Design
 #### Database Design
-![Database ERD](DesignDocuments/showGoERD.svg)
+![Database ERD](DesignDocuments/showgo%20diagram.png)
 * [User Stories](DesignDocuments/userStories.md)
 * [Screen Design](DesignDocuments/screens.md)
 [Project Plan](https://github.com/users/soundproofboot/projects/2/views/1)
