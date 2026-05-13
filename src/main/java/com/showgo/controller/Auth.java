@@ -207,8 +207,6 @@ public class Auth extends HttpServlet {
         logger.debug("here's the email: " + email);
         logger.debug("here are all the available claims: " + jwt.getClaims());
 
-//        TODO what do I do with this
-        // for now, I'm just returning username for display back to the browser
         CognitoUser cognitoUser = new CognitoUser(cognitoId, email);
         return cognitoUser;
     }

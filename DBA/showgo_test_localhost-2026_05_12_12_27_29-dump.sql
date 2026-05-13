@@ -23,16 +23,16 @@ DROP TABLE IF EXISTS `event`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `event` (
-                         `id` int NOT NULL AUTO_INCREMENT,
-                         `event_start` datetime NOT NULL,
-                         `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                         `title` varchar(250) NOT NULL,
-                         `venue_id` int NOT NULL,
-                         `description` varchar(256) NOT NULL,
-                         `ticket_price` double DEFAULT NULL,
-                         PRIMARY KEY (`id`),
-                         KEY `event__venue_fk` (`venue_id`),
-                         CONSTRAINT `event__venue_fk` FOREIGN KEY (`venue_id`) REFERENCES `venue` (`id`)
+  `id` int NOT NULL AUTO_INCREMENT,
+  `event_start` datetime NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `title` varchar(250) NOT NULL,
+  `venue_id` int NOT NULL,
+  `description` varchar(256) NOT NULL,
+  `ticket_price` double DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `event__venue_fk` (`venue_id`),
+  CONSTRAINT `event__venue_fk` FOREIGN KEY (`venue_id`) REFERENCES `venue` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -54,14 +54,14 @@ DROP TABLE IF EXISTS `event_interest`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `event_interest` (
-                                  `id` int NOT NULL AUTO_INCREMENT,
-                                  `event_id` int NOT NULL,
-                                  `user_id` int NOT NULL,
-                                  PRIMARY KEY (`id`),
-                                  KEY `event_interest_event_id_fk` (`event_id`),
-                                  KEY `event_interest_user_id_fk` (`user_id`),
-                                  CONSTRAINT `event_interest_event_id_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON DELETE CASCADE,
-                                  CONSTRAINT `event_interest_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
+  `id` int NOT NULL AUTO_INCREMENT,
+  `event_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `event_interest_event_id_fk` (`event_id`),
+  KEY `event_interest_user_id_fk` (`user_id`),
+  CONSTRAINT `event_interest_event_id_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `event_interest_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -83,14 +83,14 @@ DROP TABLE IF EXISTS `event_performer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `event_performer` (
-                                   `id` int NOT NULL AUTO_INCREMENT,
-                                   `event_id` int NOT NULL,
-                                   `performer_id` int NOT NULL,
-                                   PRIMARY KEY (`id`),
-                                   KEY `event_performer_event_id_fk` (`event_id`),
-                                   KEY `event_performer_performer_id_fk` (`performer_id`),
-                                   CONSTRAINT `event_performer_event_id_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON DELETE CASCADE,
-                                   CONSTRAINT `event_performer_performer_id_fk` FOREIGN KEY (`performer_id`) REFERENCES `performer` (`id`) ON DELETE CASCADE
+  `id` int NOT NULL AUTO_INCREMENT,
+  `event_id` int NOT NULL,
+  `performer_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `event_performer_event_id_fk` (`event_id`),
+  KEY `event_performer_performer_id_fk` (`performer_id`),
+  CONSTRAINT `event_performer_event_id_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
+  CONSTRAINT `event_performer_performer_id_fk` FOREIGN KEY (`performer_id`) REFERENCES `performer` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -112,15 +112,15 @@ DROP TABLE IF EXISTS `performer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `performer` (
-                             `id` int NOT NULL AUTO_INCREMENT,
-                             `name` varchar(100) DEFAULT NULL,
-                             `description` text NOT NULL,
-                             `genre` varchar(30) NOT NULL,
-                             `user_id` int NOT NULL,
-                             PRIMARY KEY (`id`),
-                             UNIQUE KEY `name` (`name`),
-                             KEY `performer_user_id_fk` (`user_id`),
-                             CONSTRAINT `performer_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `description` text NOT NULL,
+  `genre` varchar(30) NOT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `performer_user_id_fk` (`user_id`),
+  CONSTRAINT `performer_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -142,14 +142,14 @@ DROP TABLE IF EXISTS `performer_follow`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `performer_follow` (
-                                    `id` int NOT NULL AUTO_INCREMENT,
-                                    `performer_id` int NOT NULL,
-                                    `user_id` int NOT NULL,
-                                    PRIMARY KEY (`id`),
-                                    KEY `performer_follow_performer_id_fk` (`performer_id`),
-                                    KEY `performer_follow_user_id_fk` (`user_id`),
-                                    CONSTRAINT `performer_follow_performer_id_fk` FOREIGN KEY (`performer_id`) REFERENCES `performer` (`id`) ON DELETE CASCADE,
-                                    CONSTRAINT `performer_follow_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+  `id` int NOT NULL AUTO_INCREMENT,
+  `performer_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `performer_follow_performer_id_fk` (`performer_id`),
+  KEY `performer_follow_user_id_fk` (`user_id`),
+  CONSTRAINT `performer_follow_performer_id_fk` FOREIGN KEY (`performer_id`) REFERENCES `performer` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `performer_follow_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -171,13 +171,13 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
-                        `id` int NOT NULL AUTO_INCREMENT,
-                        `username` varchar(45) DEFAULT NULL,
-                        `city` varchar(100) DEFAULT NULL,
-                        `state` char(2) DEFAULT NULL,
-                        `email` varchar(100) NOT NULL,
-                        `cognito_id` varchar(100) NOT NULL,
-                        PRIMARY KEY (`id`)
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) DEFAULT NULL,
+  `city` varchar(100) DEFAULT NULL,
+  `state` char(2) DEFAULT NULL,
+  `email` varchar(100) NOT NULL,
+  `cognito_id` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -199,17 +199,17 @@ DROP TABLE IF EXISTS `venue`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `venue` (
-                         `id` int NOT NULL AUTO_INCREMENT,
-                         `user_id` int NOT NULL,
-                         `name` varchar(100) NOT NULL,
-                         `city` varchar(100) NOT NULL,
-                         `state` char(2) DEFAULT NULL,
-                         `description` varchar(256) NOT NULL,
-                         `street_address` varchar(100) NOT NULL,
-                         PRIMARY KEY (`id`),
-                         UNIQUE KEY `name` (`name`),
-                         KEY `venue_user_id_fk` (`user_id`),
-                         CONSTRAINT `venue_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `city` varchar(100) NOT NULL,
+  `state` char(2) DEFAULT NULL,
+  `description` varchar(256) NOT NULL,
+  `street_address` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `venue_user_id_fk` (`user_id`),
+  CONSTRAINT `venue_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -231,14 +231,14 @@ DROP TABLE IF EXISTS `venue_follow`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `venue_follow` (
-                                `id` int NOT NULL AUTO_INCREMENT,
-                                `user_id` int NOT NULL,
-                                `venue_id` int NOT NULL,
-                                PRIMARY KEY (`id`),
-                                KEY `venue_follow_user_id_fk` (`user_id`),
-                                KEY `venue_follow_venue_id_fk` (`venue_id`),
-                                CONSTRAINT `venue_follow_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-                                CONSTRAINT `venue_follow_venue_id_fk` FOREIGN KEY (`venue_id`) REFERENCES `venue` (`id`) ON DELETE CASCADE
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `venue_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `venue_follow_user_id_fk` (`user_id`),
+  KEY `venue_follow_venue_id_fk` (`venue_id`),
+  CONSTRAINT `venue_follow_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `venue_follow_venue_id_fk` FOREIGN KEY (`venue_id`) REFERENCES `venue` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -261,4 +261,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-05-12 12:31:09
+-- Dump completed on 2026-05-12 12:27:30

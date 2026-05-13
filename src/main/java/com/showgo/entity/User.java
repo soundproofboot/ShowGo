@@ -387,9 +387,6 @@ public class User implements Identifiable {
                 ", email='" + email + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
-//                TODO are these causing an issue?
-//                ", performerFollows=" + performerFollows +
-//                ", venueFollows=" + venueFollows +
                 '}';
     }
 

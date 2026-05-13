@@ -18,9 +18,12 @@
 <body data-context="${context}">
 <div class="container">
     <c:import url="nav.jsp" />
+    <h3 class="mb-4 text-center">Edit Event</h3>
+    <form action="${context}/cancelEvent/${event.id}" method="POST" class="text-center">
+        <button type="submit" class="btn btn-danger">Cancel</button>
+    </form>
     <form action="${context}/editEvent/${event.id}" method="POST" class="container mt-4">
         <input type="hidden" name="lineup" id="lineup" value="">
-        <h3 class="mb-4 text-center">Edit Event</h3>
         <div class="mb-3">
             <label for="title" class="form-label">Event Title</label>
             <input type="text" class="form-control" id="title" name="title" value="${event.title}">

@@ -132,3 +132,6 @@
 - Break out event form js and refactor
 - Create cards for venues
 - Update styling
+- Cancel (delete) event
+- Delete performer
+- Add working delete tests

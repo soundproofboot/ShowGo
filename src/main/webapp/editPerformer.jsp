@@ -6,8 +6,11 @@
 <body>
 <div class="container">
     <c:import url="nav.jsp" />
+        <h3 class="mb-4 text-center">Edit Performer</h3>
+        <form action="${context}/deletePerformer/${performer.id}" method="POST" class="text-center">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
         <form action="${context}/editPerformer/${performer.id}" method="POST" class="container mt-4">
-            <h3 class="mb-4 text-center">Edit Performer</h3>
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" name="name" id="name" class="form-control" value="${performer.name}">

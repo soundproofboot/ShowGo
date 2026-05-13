@@ -121,31 +121,38 @@ public class EventDaoTest {
         assertEquals(initialEventLineupSize + 1, lineupSizeAfterUpdate);
     }
 
-//    TODO fix...
-//    @Test
-//    void removePerformerFromEvent() {
-//        Event testEvent = dao.getById(1);
-//        int initialEventLineupSize = testEvent.getPerformers().size();
-//
-//        GenericDao<Performer> performerDao = new GenericDao<>(Performer.class);
-//        Performer performerToRemove = performerDao.getById(1);
-//
-//        testEvent.removeEventPerformer(performerToRemove);
-//        dao.update(testEvent);
-//
-//        Event eventAfterUpdate = dao.getById(1);
-//        int lineupSizeAfterUpdate = eventAfterUpdate.getPerformers().size();
-//
-//        assertEquals(initialEventLineupSize - 1, lineupSizeAfterUpdate);
-//    }
-//    TODO test for getEventsByCityState
+    @Test
+    void removePerformerFromEvent() {
+        Event testEvent = dao.getById(1);
+        int initialEventLineupSize = testEvent.getPerformers().size();
+
+        GenericDao<Performer> performerDao = new GenericDao<>(Performer.class);
+        Performer performerToRemove = performerDao.getById(1);
+
+        testEvent.removeEventPerformer(performerToRemove);
+        dao.update(testEvent);
+
+        Event eventAfterUpdate = dao.getById(1);
+        int lineupSizeAfterUpdate = eventAfterUpdate.getPerformers().size();
+
+        assertEquals(initialEventLineupSize - 1, lineupSizeAfterUpdate);
+    }
 
     @Test
     void getEventsByCityStateSuccess() {
         EventDao eventDao = new EventDao();
         List<Event> madisonWIEvents = eventDao.getEventsByCityState("Madison", "WI");
-        System.out.println(madisonWIEvents);
+        boolean match = true;
 
+        for (Event event : madisonWIEvents) {
+            if (!event.getVenue().getCity().equals("Madison")
+            ||  !event.getVenue().getState().equals("WI")) {
+                match = false;
+                break;
+            }
+        }
+
+        assertTrue(match);
     }
 
     @Test

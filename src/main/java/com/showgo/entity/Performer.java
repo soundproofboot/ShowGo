@@ -30,10 +30,11 @@ public class Performer implements Identifiable {
     @OneToMany(mappedBy = "performer", fetch = FetchType.EAGER)
     private Set<PerformerFollow> followers = new HashSet<>();
 
-    @OneToMany(mappedBy = "performer", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "performer", fetch = FetchType.EAGER)
     private Set<EventPerformer> events = new HashSet<>();
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     /**

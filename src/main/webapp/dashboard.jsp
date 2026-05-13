@@ -46,12 +46,9 @@
                                 <jsp:include page="components/venueSimple.jsp"/>
                             </c:forEach>
                         </div>
-<%--                        <c:forEach items="${user.venues}" var="venue">--%>
-<%--                            <p><a href="${context}/venues/${venue.id}">${venue.name}</a></p>--%>
-<%--                        </c:forEach>--%>
                     </c:if>
                     <c:if test="${user.performers.size() == 0}">
-                        <a href=${context}/newPerformer" class="btn btn-primary">Register a Performer</a>
+                        <a href="${context}/newPerformer" class="btn btn-primary">Register a Performer</a>
                     </c:if>
                     <c:if test="${user.performers.size() > 0}">
                         <h3 class="text-center">Performers you manage <a class="btn btn-primary" href=${context}/newPerformer">New</a></h3>
@@ -61,10 +58,6 @@
                                 <jsp:include page="components/performerSimple.jsp"/>
                             </c:forEach>
                         </div>
-
-<%--                        <c:forEach items="${user.performers}" var="performer">--%>
-<%--                            <p><a href="${context}/performers/${performer.id}">${performer.name}</a></p>--%>
-<%--                        </c:forEach>--%>
                     </c:if>
                     <h3 class="text-center">Your upcoming events</h3>
                     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gap-3 justify-content-center my-3">
@@ -99,7 +92,7 @@
                         <c:otherwise>
                             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gap-3 justify-content-center my-3">
                                 <c:forEach items="${user.performerFollows}" var="performerFollow">
-                                    <c:set var="performer" value="${performerFollow.performer}"/>
+                                    <c:set var="performer" value="${performerFollow.performer}" scope="request"/>
                                     <jsp:include page="components/performerSimple.jsp"/>
                                 </c:forEach>
                             </div>
