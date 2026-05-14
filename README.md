@@ -26,6 +26,10 @@ My indie project will be for venues, artists, and concert goers to find each oth
     * JUnit
 * IDE: IntelliJ IDEA
 
+
+### Demo
+[![Screenshot of project demo](https://img.youtube.com/vi/V-P-GsNnFWo/0.jpg)](https://www.youtube.com/watch?v=V-P-GsNnFWo&list=PLHqu39Bdq7AJXvGSM6UhzOXPZFmRfclQA&index=4)
+
 ### Design
 #### Database Design
 ![Database ERD](DesignDocuments/showgo%20diagram.png)
